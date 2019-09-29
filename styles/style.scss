@@ -1,0 +1,111 @@
+*,
+::before,
+::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Raleway', sans-serif;
+  letter-spacing: 1.5px;
+  line-height: 30px;
+  padding: 0 7vw;
+  margin: auto;
+  width: 100%;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  height: 100vh;
+  padding: 0 5%;
+  overflow-x: hidden;
+}
+
+.headline {
+  font-size: 1.40rem;
+  width: 100%;
+  position: relative;
+  line-height: 1.5em;
+
+  .name {
+    font-size: 1.40rem;
+    letter-spacing: 1.25px;
+  }
+
+  .tagline {
+    font-size: 1.3rem;
+  }
+}
+
+// same issue
+
+
+// nav
+.link-nav {
+  font-size: .90rem;
+  list-style: none;
+  display: flex;
+  margin-top: 1em;
+
+  .link-nav-items {
+    text-decoration: none;
+    color: #9b9b9b;
+    margin-right: 2em;
+    transition: all 0.5s ease-in-out;
+
+    &:hover {
+      color: #000;
+      border-bottom: 1px solid #000;
+    }
+  }
+}
+
+.scroll-down {
+  position: absolute;
+  left: 11%;
+  bottom: 0;
+  transform: translateY(-100%);
+  text-decoration: none;
+  font-size: .85rem;
+  color: #9b9b9b;
+  cursor: pointer;
+  width: 30%;
+  transition: all 0.5s ease-in-out;
+
+  &:hover {
+    color: #000;
+  }
+}
+
+// project
+.project {
+
+  .project-featured {
+    cursor: pointer;
+    
+    img {
+      max-width: 100%;
+      filter: grayscale(100%);
+      transition: all 0.5s ease-in-out;
+
+      &:hover {
+        filter: grayscale(0%);
+      }
+    }
+
+    .project-title {
+      font-size: 1.1rem;
+      font-weight: 500;
+    }
+
+    .project-background {
+      font-size: .80rem;
+      color: #9b9b9b;
+      line-height: 1rem;
+    }
+  }
+}

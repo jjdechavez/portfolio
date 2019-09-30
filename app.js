@@ -1,4 +1,4 @@
-import jump from 'https://jjdechavez.netlify.com/node_modules/jump.js/dist/jump.module.js';
+import jump from 'https://cdnjs.cloudflare.com/ajax/libs/jump.js/1.0.2/jump.min.js';
 
 const project = document.querySelector('.project');
 const landing = document.querySelector('.landing');

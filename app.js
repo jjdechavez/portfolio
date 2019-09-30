@@ -1,4 +1,4 @@
-import jump from 'https://jjdechavez.netlify.com/node_modules/jump.js/dist/jump';
+import jump from '/node_modules/jump.js/dist/jump.js';
 
 const project = document.querySelector('.project');
 const landing = document.querySelector('.landing');

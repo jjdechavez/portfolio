@@ -1,4 +1,5 @@
-const jump = require('./node_modules/jump.js/dist/jump.js');
+// import jump from 'jump.js';
+jump();
 
 const project = document.querySelector('.project');
 const landing = document.querySelector('.landing');

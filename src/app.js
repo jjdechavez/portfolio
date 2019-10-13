@@ -1,6 +1,5 @@
 import jump from 'jump.js';
 import sal from 'sal.js';
-// import './node_modules/sal.js/dist/sal.css';
 import './styles/style.scss';
 
 const project = document.querySelector('.project');

@@ -117,13 +117,15 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"../node_modules/jump.js/dist/jump.module.js":[function(require,module,exports) {
+})({"script/jump.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
+
+function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof2 = function _typeof2(obj) { return typeof obj; }; } else { _typeof2 = function _typeof2(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof2(obj); }
 
 // Robert Penner's easeInOutQuad
 // find the rest of his easing functions here: http://robertpenner.com/easing/
@@ -135,10 +137,10 @@ var easeInOutQuad = function easeInOutQuad(t, b, c, d) {
   return -c / 2 * (t * (t - 2) - 1) + b;
 };
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
-  return typeof obj;
+var _typeof = typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol" ? function (obj) {
+  return _typeof2(obj);
 } : function (obj) {
-  return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+  return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : _typeof2(obj);
 };
 
 var jumper = function jumper() {
@@ -361,7 +363,7 @@ module.hot.accept(reloadCSS);
 },{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"app.js":[function(require,module,exports) {
 "use strict";
 
-var _jump = _interopRequireDefault(require("jump.js"));
+var _jump = _interopRequireDefault(require("./script/jump"));
 
 var _sal = _interopRequireDefault(require("sal.js"));
 
@@ -369,10 +371,10 @@ require("./styles/style.scss");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var project = document.querySelector('.project');
-var landing = document.querySelector('.landing');
-var btnScrollDown = document.querySelector('.scroll-down');
-var btnUpArrow = document.querySelector('.up-arrow');
+var project = document.querySelector('.project'); // const landing = document.querySelector('.landing');
+
+var btnScrollDown = document.querySelector('.scroll-down'); // const btnUpArrow = document.querySelector('.up-arrow');
+
 (0, _sal.default)({
   once: false
 });
@@ -383,16 +385,15 @@ btnScrollDown.addEventListener('click', function () {
     callback: undefined,
     a11y: false
   });
-});
-btnUpArrow.addEventListener('click', function () {
-  (0, _jump.default)(landing, {
-    duration: 1800,
-    offset: 0,
-    callback: undefined,
-    a11y: false
-  });
-});
-},{"jump.js":"../node_modules/jump.js/dist/jump.module.js","sal.js":"../node_modules/sal.js/dist/sal.js","./styles/style.scss":"styles/style.scss"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+}); // btnUpArrow.addEventListener('click', () => {
+//   jump(landing, {
+//     duration: 1800,
+//     offset: 0,
+//     callback: undefined,
+//     a11y: false 
+//   });
+// });
+},{"./script/jump":"script/jump.js","sal.js":"../node_modules/sal.js/dist/sal.js","./styles/style.scss":"styles/style.scss"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -420,7 +421,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "33633" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "35333" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

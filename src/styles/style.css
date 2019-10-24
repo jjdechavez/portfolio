@@ -310,5 +310,8 @@ footer a:hover::before {
   .project .project-flex-item {
     display: block;
   }
+  .project .project-detail {
+    width: 33em;
+  }
 }
 /*# sourceMappingURL=style.css.map */

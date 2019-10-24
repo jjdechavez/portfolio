@@ -136,7 +136,6 @@ a {
   }
 
   .project-featured {
-    cursor: pointer;
     margin-bottom: 5em;
   }
 
@@ -160,11 +159,6 @@ a {
 
   .project-background {
     color: #9b9b9b;
-  }
-
-  .project-detail,
-  .more-details {
-    cursor: pointer;
   }
 
   .project-detail {
@@ -296,10 +290,6 @@ footer {
     &:hover {
       filter: grayscale(0%);
     }
-  }
-
-  .project-grid-item {
-    cursor: pointer;
   }
 }
 

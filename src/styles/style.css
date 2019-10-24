@@ -131,17 +131,12 @@ a {
 .project .project-grid {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: (minmax(15rem, 1fr))[auto-fit];
-      grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
   grid-gap: 1.5em;
   overflow: hidden;
   -ms-flex-pack: distribute;
       justify-content: space-around;
-}
-
-.project .project-grid-item {
-  position: relative;
-  display: block;
 }
 
 .project .project-grid-item img .slide-in {
@@ -181,8 +176,11 @@ a {
 .project .project-background,
 .project .more-details {
   font-size: .80rem;
-  color: #9b9b9b;
   line-height: 1rem;
+}
+
+.project .project-background {
+  color: #9b9b9b;
 }
 
 .project .project-detail,
@@ -206,8 +204,7 @@ a {
 }
 
 .project .more-details {
-  line-height: 2.1rem;
-  height: 9.98em;
+  color: #323232;
   display: none;
 }
 
@@ -290,9 +287,6 @@ footer a:hover::before {
         -ms-flex-direction: column;
             flex-direction: column;
   }
-  .project .project-background {
-    display: none;
-  }
   .project .more-details {
     display: inherit;
     line-height: 1.2rem;
@@ -314,6 +308,16 @@ footer a:hover::before {
   }
   .project-grid-item {
     cursor: pointer;
+  }
+}
+
+@media screen and (min-width: 848px) {
+  .project .project-grid {
+    -ms-grid-columns: (minmax(15rem, 1fr))[auto-fit];
+        grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  }
+  .project .project-flex-item {
+    display: block;
   }
 }
 /*# sourceMappingURL=style.css.map */

@@ -19,29 +19,26 @@ const element = (element) => document.querySelector(element);
 //   });
 // });
 
-// if (window.matchMedia < 587) {
-//   console.log('hit')
 
-//   });
+// function viewportChange(x) {
+//   if (x.matches) { 
+//     let click = false;
+
+//     element('.open').addEventListener('click', () => {
+//       click = !click;
+//       if (click === false) {
+//         element('.detail-img').style.display = 'none';
+//         element('.more-details').style.display = 'inherit';
+//       } else {
+//         element('.detail-img').style.display = 'inherit';
+//         element('.more-details').style.display = 'none';
+//       }
+//     });
+//   } else {
+//     element('.open').removeEventListner('click');
+//   }
 // }
 
-function viewportChange(x) {
-  if (x.matches) { 
-    let click = false;
-
-    element('.open').addEventListener('click', () => {
-      click = !click;
-      if (click === false) {
-        element('.detail-img').style.display = 'none';
-        element('.more-details').style.display = 'inherit';
-      } else {
-        element('.detail-img').style.display = 'inherit';
-        element('.more-details').style.display = 'none';
-      }
-    });
-  }
-}
-
-var x = window.matchMedia("(max-width: 587px)")
-viewportChange(x) // Call listener function at run time
-x.addListener(myFunction) // Attach listener function on state changes
+// var x = window.matchMedia("(min-width: 587px)")
+// viewportChange(x) // Call listener function at run time
+// x.addListener(viewportChange) // Attach listener function on state changes

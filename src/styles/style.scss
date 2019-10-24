@@ -112,16 +112,12 @@ a {
 
   .project-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    grid-template-columns: 1fr;
     grid-gap: 1.5em;
     overflow: hidden;
     justify-content: space-around;
   }
 
-  .project-grid-item {
-    position: relative;
-    display: block;
-  }
 
   .project-grid-item img{
     .slide-in {
@@ -159,8 +155,11 @@ a {
   .project-background,
   .more-details {
     font-size: .80rem;
-    color: #9b9b9b;
     line-height: 1rem;
+  }
+
+  .project-background {
+    color: #9b9b9b;
   }
 
   .project-detail,
@@ -179,9 +178,7 @@ a {
   }
 
   .more-details {
-    line-height: 2.1rem;
-    height: 9.98em;
-    // max-height: 8.1em;
+    color: #323232;
     display: none;
   }
   
@@ -282,10 +279,6 @@ footer {
       flex-direction: column;
     }
 
-    .project-background {
-      display: none;
-    }
-
     .more-details {
       display: inherit;
       line-height: 1.2rem;
@@ -308,4 +301,16 @@ footer {
   .project-grid-item {
     cursor: pointer;
   }
+}
+
+@media screen and (min-width: 848px) {
+  .project {
+    .project-grid {
+      grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    }
+    .project-flex-item {
+      display: block;
+    }
+  }
+
 }

@@ -131,8 +131,8 @@ a {
 .project .project-grid {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: (minmax(15rem, 1fr))[auto-fit];
-      grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
   grid-gap: 1.5em;
   overflow: hidden;
   -ms-flex-pack: distribute;
@@ -167,16 +167,45 @@ a {
 }
 
 .project .project-featured > .project-title,
-.project .project-grid-item > .project-title {
+.project .project-detail > .project-title {
   font-size: .95rem;
   font-weight: 500;
 }
 
 .project .project-featured > .project-background,
-.project .project-grid-item > .project-background {
+.project .project-background,
+.project .more-details {
   font-size: .80rem;
-  color: #9b9b9b;
   line-height: 1rem;
+}
+
+.project .project-background {
+  color: #9b9b9b;
+}
+
+.project .project-detail,
+.project .more-details {
+  cursor: pointer;
+}
+
+.project .project-detail {
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+}
+
+.project .more-details,
+.project .detail-img {
+  -ms-grid-rows: auto;
+      grid-template-rows: auto;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.project .more-details {
+  color: #323232;
+  display: none;
 }
 
 footer {
@@ -234,6 +263,36 @@ footer a:hover::before {
   }
 }
 
+@media screen and (min-width: 587px) {
+  .project .project-grid {
+    -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
+  }
+  .project .project-flex-item {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    gap: 1em;
+  }
+  .project .detail-img,
+  .project .project-detail {
+    width: 30em;
+  }
+  .project .project-flex-about {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .project .more-details {
+    display: inherit;
+    line-height: 1.2rem;
+  }
+}
+
 @media screen and (min-width: 770px) {
   .project-featured img,
   .project-grid-item img {
@@ -249,6 +308,16 @@ footer a:hover::before {
   }
   .project-grid-item {
     cursor: pointer;
+  }
+}
+
+@media screen and (min-width: 848px) {
+  .project .project-grid {
+    -ms-grid-columns: (minmax(15rem, 1fr))[auto-fit];
+        grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  }
+  .project .project-flex-item {
+    display: block;
   }
 }
 /*# sourceMappingURL=style.css.map */

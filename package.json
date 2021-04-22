@@ -1,21 +1,16 @@
 {
-  "name": "v3.0",
-  "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
+  "name": "John-Jerald-De-Chavez-Portfolio",
+  "version": "0.1.0",
   "scripts": {
-    "dev": "parcel src/index.html",
-    "build": "parcel build src/index.html"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
-    "jump.js": "^1.0.2",
-    "sal.js": "^0.6.3"
+    "mongodb": "^3.5.9",
+    "next": "latest",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
   },
-  "devDependencies": {
-    "parcel-bundler": "^1.12.5",
-    "sass": "^1.23.0"
-  }
+  "license": "MIT"
 }

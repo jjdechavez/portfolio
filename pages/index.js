@@ -1,6 +1,6 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
-import { connectToDatabase } from '../util/mongodb'
+import Head from 'next/head';
+import styles from '../styles/Home.module.css';
+import { connectToDatabase } from '../util/mongodb';
 
 export default function Home({ isConnected }) {
   return (
@@ -18,11 +18,11 @@ export default function Home({ isConnected }) {
         {isConnected ? (
           <h2 className="subtitle">You are connected to MongoDB</h2>
         ) : (
-            <h2 className="subtitle">
-              You are NOT connected to MongoDB. Check the <code>README.md</code>{' '}
+          <h2 className="subtitle">
+            You are NOT connected to MongoDB. Check the <code>README.md</code>{' '}
             for instructions.
-            </h2>
-          )}
+          </h2>
+        )}
 
         <p className={styles.description}>
           Get started by editing{' '}
@@ -71,15 +71,15 @@ export default function Home({ isConnected }) {
         </a>
       </footer>
     </div>
-  )
+  );
 }
 
 export async function getServerSideProps(context) {
-  const { client } = await connectToDatabase()
+  const { client } = await connectToDatabase();
 
-  const isConnected = await client.isConnected()
+  const isConnected = await client.isConnected();
 
   return {
     props: { isConnected },
-  }
+  };
 }

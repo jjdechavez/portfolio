@@ -1,7 +1,7 @@
-import { withIronSession } from 'next-iron-session';
-import { connectToDatabase } from '../../util/mongodb';
+import { connectToDatabase } from 'util/mongodb';
+import withSession from 'lib/session';
 
-async function handler(req, res) {
+export default withSession(async (req, res) => {
   const { username, password } = req.body;
 
   try {
@@ -26,17 +26,6 @@ async function handler(req, res) {
 
     res.json({ login: true });
   } catch (error) {
-    res
-      .status(500)
-      .json({ login: false, message: error.message, err: error.data });
+    res.status(500).json({ login: false, message: error.message });
   }
-}
-
-export default withIronSession(handler, {
-  password: process.env.SECRET_COOKIE_PASSWORD,
-  cookieName: 'auth',
-  // if your localhost is served on http:// then disable the secure flag
-  cookieOptions: {
-    secure: process.env.NODE_ENV === 'production',
-  },
 });

@@ -4,16 +4,12 @@ import fetchJson from 'lib/fetchJson';
 import Form from 'components/Form';
 
 export default function Login() {
-  const { user, mutateUser } = useUser({
+  const { mutateUser } = useUser({
     redirectTo: '/dashboard',
     redirectIfFound: true,
   });
 
   const [errorMsg, setErrorMsg] = React.useState('');
-
-  React.useEffect(() => {
-    if (user) console.log('new user', user);
-  }, [user]);
 
   async function handleSubmit(e) {
     e.preventDefault();

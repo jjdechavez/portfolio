@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
-import useUser from 'lib/useUser';
-import fetchJson from 'lib/fetchJson';
+import useUser from '@/lib/useUser';
+import fetchJson from '@/lib/fetchJson';
 
 export default function Dashboard() {
   const { user, mutateUser } = useUser({ redirectTo: '/login' });

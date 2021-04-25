@@ -1,6 +1,6 @@
 import Head from 'next/head';
-import styles from '../styles/Home.module.css';
-import { connectToDatabase } from '../util/mongodb';
+import styles from '@/styles/Home.module.css';
+import { connectToDatabase } from '@/util/mongodb';
 
 export default function Home({ isConnected }) {
   return (

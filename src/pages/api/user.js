@@ -1,6 +1,6 @@
 import { ObjectId } from 'mongodb';
-import withSession from 'lib/session';
-import { connectToDatabase } from 'util/mongodb';
+import withSession from '@/lib/session';
+import { connectToDatabase } from '@/util/mongodb';
 
 export default withSession(async (req, res) => {
   const user = req.session.get('user');

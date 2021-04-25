@@ -1,7 +1,7 @@
 import React from 'react';
-import useUser from '../lib/useUser';
-import fetchJson from 'lib/fetchJson';
-import Form from 'components/Form';
+import useUser from '@/lib/useUser';
+import fetchJson from '@/lib/fetchJson';
+import Form from '@/components/Form';
 
 export default function Login() {
   const { mutateUser } = useUser({

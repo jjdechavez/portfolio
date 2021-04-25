@@ -1,5 +1,5 @@
 import { connectToDatabase } from 'util/mongodb';
-import withSession from 'lib/session';
+import withSession from '@/lib/session';
 
 export default withSession(async (req, res) => {
   const { username, password } = req.body;

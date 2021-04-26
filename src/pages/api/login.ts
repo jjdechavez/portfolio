@@ -1,7 +1,8 @@
 import type { NextApiResponse } from 'next';
-import withSession from '@/lib/session';
 import { makeLoginFactory } from '@/data/factories/auth';
-import { NextApiRequestWithSession } from '@/domain/common/auth';
+import withSession, {
+  NextApiRequestWithSession,
+} from '@/infra/session/iron-session';
 
 export default withSession(
   async (req: NextApiRequestWithSession, res: NextApiResponse) => {

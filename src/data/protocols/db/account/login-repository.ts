@@ -1,5 +1,5 @@
 import { User } from '@/domain/models';
 
-export interface GetUserByUsernameRepository {
+export interface LoginRepository {
   getUserByUsername: (username: string) => Promise<User>;
 }

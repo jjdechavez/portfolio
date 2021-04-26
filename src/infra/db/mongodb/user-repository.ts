@@ -1,10 +1,11 @@
-import { GetUserByUsernameRepository } from '@/data/protocols/db';
+import { Collection } from 'mongodb';
+import { LoginRepository } from '@/data/protocols/db';
 import { User } from '@/domain/models';
 
-export class UserRepository implements GetUserByUsernameRepository {
-  private userCollection: any;
+export class UserRepository implements LoginRepository {
+  private userCollection: Collection<User>;
 
-  constructor(userCollection: any) {
+  constructor(userCollection: Collection<User>) {
     this.userCollection = userCollection;
   }
 

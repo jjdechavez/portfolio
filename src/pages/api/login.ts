@@ -17,7 +17,7 @@ export default withSession(
     const isAuth = await loginUseCase.login(data);
 
     if (!isAuth.login) {
-      res.send(isAuth);
+      res.status(500).send(isAuth);
     }
 
     res.send(isAuth);

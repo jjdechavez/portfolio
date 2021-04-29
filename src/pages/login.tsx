@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { SyntheticEvent } from 'react';
 import useUser from '@/lib/useUser';
 import fetchJson from '@/lib/fetchJson';
 import Form from '@/components/Form';
@@ -11,13 +11,18 @@ export default function Login() {
 
   const [errorMsg, setErrorMsg] = React.useState('');
 
-  async function handleSubmit(e) {
+  async function handleSubmit(e: SyntheticEvent) {
     e.preventDefault();
     setErrorMsg('');
 
+    const target = e.target as typeof e.target & {
+      username: { value: string };
+      password: { value: string };
+    };
+
     const body = {
-      username: e.currentTarget.username.value,
-      password: e.currentTarget.password.value,
+      username: target.username.value,
+      password: target.password.value,
     };
 
     try {

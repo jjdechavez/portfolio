@@ -1,6 +1,6 @@
 import type { NextApiResponse } from 'next';
 import { ObjectId } from 'mongodb';
-import { connectToDatabase } from '@/util/mongodb';
+import { MongoHelper } from '@/infra/db';
 import withSession, {
   NextApiRequestWithSession,
 } from '@/infra/session/iron-session';
@@ -16,8 +16,7 @@ export default withSession(
     }
 
     try {
-      const { db } = await connectToDatabase();
-      const userCollection = db.collection('users');
+      const userCollection = await MongoHelper.getCollection('users');
       const [getUser] = await userCollection
         .find({ _id: new ObjectId(user._id) })
         .project({ username: 1 })

@@ -17,7 +17,8 @@
   },
   "devDependencies": {
     "@types/mongodb": "^3.6.12",
-    "@types/react": "^17.0.3",
+    "@types/node": "^15.0.1",
+    "@types/react": "^17.0.4",
     "eslint-config-prettier": "^8.2.0",
     "eslint-plugin-prettier": "^3.4.0",
     "husky": "^6.0.0",

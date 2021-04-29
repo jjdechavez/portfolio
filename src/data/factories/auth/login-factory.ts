@@ -1,12 +1,11 @@
 import { LoginUseCase } from '@/data/usecases/auth/login';
 import { Login } from '@/domain/usecases/common/auth';
-import { UserRepository, connectToDatabase } from '@/infra/db';
-// import {connectToDatabase} from "@/util/mongodb"
+import { UserRepository, MongoHelper } from '@/infra/db';
 
 export const makeLoginFactory = async (): Promise<Login> => {
-  const { db } = await connectToDatabase();
-  let userCollection = db.collection('users');
-  const userRepository = new UserRepository(userCollection);
+  await MongoHelper.connect();
+  const usersCollection = await MongoHelper.getCollection('users');
+  const userRepository = new UserRepository(usersCollection);
 
   return new LoginUseCase(userRepository);
 };

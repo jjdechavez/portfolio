@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import styles from '@/styles/Home.module.css';
-import { connectToDatabase } from '@/util/mongodb';
+import { MongoHelper } from '@/infra/db';
 
 export default function Home({ isConnected }) {
   return (
@@ -14,7 +14,6 @@ export default function Home({ isConnected }) {
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
-
         {isConnected ? (
           <h2 className="subtitle">You are connected to MongoDB</h2>
         ) : (
@@ -40,11 +39,8 @@ export default function Home({ isConnected }) {
 }
 
 export async function getServerSideProps() {
-  const { client } = await connectToDatabase();
-
-  const isConnected = await client.isConnected();
-  // const user = await db.collection('users').findOne();
-  // console.log(user);
+  await MongoHelper.connect();
+  const isConnected = MongoHelper.client.isConnected();
 
   return {
     props: { isConnected },

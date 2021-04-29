@@ -1,4 +1,4 @@
-import { LoginRepository } from '@/data/protocols/db/account/login-repository';
+import { LoginRepository } from '@/data/protocols/db/user/login-repository';
 import { User } from '@/domain/models';
 import { Login } from '@/domain/usecases/common/auth';
 
@@ -11,6 +11,9 @@ export class LoginUseCase implements Login {
 
   async login(data: Login.Params): Promise<Login.Payload> {
     const { username, password } = data.user;
+
+    this.hasUsername(username);
+    this.hasPassword(password);
 
     try {
       const user = await this.getUserByUsername(username);
@@ -42,5 +45,15 @@ export class LoginUseCase implements Login {
 
   async getUserByUsername(username: string): Promise<User> {
     return await this.userRepository.getUserByUsername(username);
+  }
+
+  hasUsername(username: string) {
+    if (!username) throw Error('Missing username');
+  }
+
+  hasPassword(password: string) {
+    if (!password) {
+      throw Error('Missing username');
+    }
   }
 }

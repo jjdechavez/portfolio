@@ -1,8 +1,9 @@
+import type { AppProps /*, AppContext */ } from 'next/app';
 import { SWRConfig } from 'swr';
 import fetch from 'lib/fetchJson';
 import 'styles/globals.css';
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps }: AppProps) {
   return (
     <SWRConfig
       value={{

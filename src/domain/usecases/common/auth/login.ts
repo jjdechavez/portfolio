@@ -1,9 +1,4 @@
-import { NextApiRequest } from 'next';
-import { Session } from 'next-iron-session';
-
-export interface NextApiRequestWithSession extends NextApiRequest {
-  session: Session;
-}
+import { NextApiRequestWithSession } from '@/infra/session/iron-session';
 
 export interface Login {
   login: (data: Login.Params) => Promise<Login.Payload>;

@@ -1,12 +1,15 @@
 import { LoginRepository } from '@/data/protocols/db/user/login-repository';
 import { User } from '@/domain/models';
 import { Login } from '@/domain/usecases/common/auth';
+import { AuthHelper } from '@/infra/auth';
 
 export class LoginUseCase implements Login {
   private userRepository: LoginRepository;
+  private authHelper: AuthHelper;
 
-  constructor(userRepository: LoginRepository) {
+  constructor(userRepository: LoginRepository, authHelper: AuthHelper) {
     this.userRepository = userRepository;
+    this.authHelper = authHelper;
   }
 
   async login(data: Login.Params): Promise<Login.Payload> {
@@ -22,7 +25,7 @@ export class LoginUseCase implements Login {
         throw Error('Invalid username or password');
       }
 
-      if (user.password !== password) {
+      if (!(await this.correctPassword(password, user.password))) {
         throw Error('Invalid username or password');
       }
 
@@ -45,6 +48,10 @@ export class LoginUseCase implements Login {
 
   async getUserByUsername(username: string): Promise<User> {
     return await this.userRepository.getUserByUsername(username);
+  }
+
+  async correctPassword(password: string, hash: string): Promise<boolean> {
+    return await this.authHelper.comparePassword(password, hash);
   }
 
   hasUsername(username: string) {

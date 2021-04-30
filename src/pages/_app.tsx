@@ -1,15 +1,15 @@
 import type { AppProps /*, AppContext */ } from 'next/app';
 import { SWRConfig } from 'swr';
-import fetch from 'lib/fetchJson';
+import fetchJson from '@/presentation/helpers/fetchJson';
 import 'styles/globals.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <SWRConfig
       value={{
-        fetcher: fetch,
+        fetcher: fetchJson,
         onError: (err) => {
-          console.error(err);
+          console.error('swrconfig Error:', err);
         },
       }}
     >

@@ -1,6 +1,6 @@
 import React, { SyntheticEvent } from 'react';
-import useUser from '@/lib/useUser';
-import fetchJson from '@/lib/fetchJson';
+import useUser from '@/hooks/useUser';
+import fetchJson from '@/presentation/helpers/fetchJson';
 import Form from '@/components/Form';
 
 export default function Login() {

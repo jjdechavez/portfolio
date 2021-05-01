@@ -9,11 +9,13 @@ export default function Login() {
     redirectIfFound: true,
   });
 
-  const [errorMsg, setErrorMsg] = React.useState('');
+  const [loading, setLoading] = React.useState(false);
+  const [error, setError] = React.useState('');
 
   async function handleSubmit(e: SyntheticEvent) {
     e.preventDefault();
-    setErrorMsg('');
+    setLoading(true);
+    setError('');
 
     const target = e.target as typeof e.target & {
       username: { value: string };
@@ -34,14 +36,18 @@ export default function Login() {
         })
       );
     } catch (error) {
-      setErrorMsg(error.data.message);
+      setError(error.data.message);
+    } finally {
+      setLoading(false);
     }
   }
+
+  let isDisabled = loading;
 
   return (
     <div className="container h-screen mx-auto px-4">
       <div className="w-full h-full flex flex-col justify-center items-center max-w-sm mx-auto my-auto">
-        {errorMsg && <Alert type="error" message={errorMsg} />}
+        {error && <Alert type="error" message={error} />}
         <form
           className="bg-white shadow-md px-8 pt-6 pb-8 mb-4"
           onSubmit={handleSubmit}
@@ -72,7 +78,10 @@ export default function Login() {
           <div className="flex items-center">
             <button
               type="submit"
-              className="block flex-1 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow"
+              disabled={isDisabled}
+              className={`block flex-1 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow ${
+                isDisabled && 'disabled:opacity-50 cursor-not-allowed'
+              }`}
             >
               Login
             </button>

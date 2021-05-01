@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import useUser from '@/hooks/useUser';
 import fetchJson from '@/presentation/helpers/fetchJson';
+import Navbar from '@/components/Navbar';
 
 export type HTMLButtonMouseEvent = MouseEvent<HTMLButtonElement>;
 
@@ -20,6 +21,7 @@ export default function Dashboard() {
 
   return (
     <div>
+      <Navbar />
       <p>LoggedIn as {user.username}</p>
       <Link href={`/dashboard/posts`}>
         <a>Posts</a>

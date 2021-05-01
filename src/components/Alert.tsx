@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBell } from '@fortawesome/free-solid-svg-icons';
 
 export type AlertProps = {
   type: string;
@@ -18,6 +20,7 @@ export default function Alert({ type, message }: AlertProps) {
     >
       <span className="text-xl inline-block mr-5 align-middle">
         <i className="fas fa-bell" />
+        <FontAwesomeIcon icon={faBell} />
       </span>
       <span className="inline-block align-middle mr-8">
         <b className="capitalize">{type === 'error' ? 'error' : 'success'}:</b>{' '}

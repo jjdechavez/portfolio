@@ -1,7 +1,7 @@
 import React, { SyntheticEvent } from 'react';
 import useUser from '@/hooks/useUser';
 import fetchJson from '@/presentation/helpers/fetchJson';
-import Form from '@/components/Form';
+import Alert from '@/components/Alert';
 
 export default function Login() {
   const { mutateUser } = useUser({
@@ -39,19 +39,46 @@ export default function Login() {
   }
 
   return (
-    <div>
-      <div className="login">
-        <Form errorMessage={errorMsg} onSubmit={handleSubmit} />
+    <div className="container h-screen mx-auto px-4">
+      <div className="w-full h-full flex flex-col justify-center items-center max-w-sm mx-auto my-auto">
+        {errorMsg && <Alert type="error" message={errorMsg} />}
+        <form
+          className="bg-white shadow-md px-8 pt-6 pb-8 mb-4"
+          onSubmit={handleSubmit}
+        >
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Username
+            </label>
+            <input
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:ring-2 focus:ring-blue-600"
+              type="text"
+              id="username"
+              name="username"
+              placeholder="Username"
+            />
+          </div>
+          <div className="mb-6">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Password
+            </label>
+            <input
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:ring-2 focus:ring-blue-600"
+              type="password"
+              name="password"
+              placeholder="Password"
+            />
+          </div>
+          <div className="flex items-center">
+            <button
+              type="submit"
+              className="block flex-1 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow"
+            >
+              Login
+            </button>
+          </div>
+        </form>
       </div>
-      <style jsx>{`
-        .login {
-          max-width: 21rem;
-          margin: 0 auto;
-          padding: 1rem;
-          border: 1px solid #ccc;
-          border-radius: 4px;
-        }
-      `}</style>
     </div>
   );
 }

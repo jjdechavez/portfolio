@@ -15,10 +15,10 @@ export class LoginUseCase implements Login {
   async login(data: Login.Params): Promise<Login.Payload> {
     const { username, password } = data.user;
 
-    this.hasUsername(username);
-    this.hasPassword(password);
-
     try {
+      this.hasUsername(username);
+      this.hasPassword(password);
+
       const user = await this.getUserByUsername(username);
 
       if (!user) {

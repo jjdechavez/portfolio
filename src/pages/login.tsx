@@ -46,10 +46,10 @@ export default function Login() {
 
   return (
     <div className="container h-screen mx-auto px-4">
-      <div className="w-full h-full flex flex-col justify-center items-center max-w-sm mx-auto my-auto">
+      <div className="w-full h-full flex flex-col justify-center items-center max-w-md mx-auto my-auto">
         {error && <Alert type="error" message={error} />}
         <form
-          className="bg-white shadow-md px-8 pt-6 pb-8 mb-4"
+          className="w-full bg-white shadow-md px-8 pt-6 pb-8 mb-4"
           onSubmit={handleSubmit}
         >
           <div className="mb-4">
@@ -62,6 +62,7 @@ export default function Login() {
               id="username"
               name="username"
               placeholder="Username"
+              required
             />
           </div>
           <div className="mb-6">
@@ -73,13 +74,14 @@ export default function Login() {
               type="password"
               name="password"
               placeholder="Password"
+              required
             />
           </div>
           <div className="flex items-center">
             <button
               type="submit"
               disabled={isDisabled}
-              className={`block flex-1 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow ${
+              className={`block flex-1 bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow focus:ring-4 focus:ring-gray-500 focus:ring-opacity-50 ${
                 isDisabled && 'disabled:opacity-50 cursor-not-allowed'
               }`}
             >

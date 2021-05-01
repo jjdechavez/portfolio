@@ -1,6 +1,7 @@
 import type { AppProps /*, AppContext */ } from 'next/app';
 import { SWRConfig } from 'swr';
 import fetchJson from '@/presentation/helpers/fetchJson';
+import 'tailwindcss/tailwind.css';
 import 'styles/globals.css';
 
 function MyApp({ Component, pageProps }: AppProps) {

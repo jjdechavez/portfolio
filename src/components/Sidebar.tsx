@@ -11,9 +11,11 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 import AccountDropdown from './AccountDropdown';
+import useLogout from '@/hooks/useLogout';
 
 export default function SideBar() {
   const [collapseShow, setCollapseShow] = React.useState('hidden');
+  const [{ logout }] = useLogout();
   return (
     <>
       <nav
@@ -129,10 +131,8 @@ export default function SideBar() {
           {/* Navigation */}
           <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
             <li className="inline-flex">
-              <div className="text-blueGray-700 hover:text-blueGray-500  text-sm block mb-4 no-underline font-semibold">
-                <Link href="/dashboard">
-                  <a>Logout</a>
-                </Link>
+              <div className="cursor-pointer text-blueGray-700 hover:text-gray-500  text-sm block mb-4 no-underline font-semibold">
+                <a onClick={(e) => logout(e)}>Logout</a>
               </div>
             </li>
           </ul>

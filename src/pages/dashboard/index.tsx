@@ -3,6 +3,7 @@ import useUser from '@/hooks/useUser';
 import Sidebar from '@/components/Sidebar';
 import Navbar from '@/components/Navbar';
 import Card from '@/components/Card';
+import Table, { SmallTable, TableWrapper } from '@/components/dashboard/Table';
 import { faChartBar, faHourglassHalf } from '@fortawesome/free-solid-svg-icons';
 
 export type HTMLElementMouseEvent = MouseEvent<any>;
@@ -38,6 +39,12 @@ export default function Dashboard() {
               </div>
             </div>
           </div>
+        </div>
+        <div className="px-4 md:px-10 mx-auto w-full -m-24">
+          <TableWrapper>
+            <Table />
+            <SmallTable />
+          </TableWrapper>
         </div>
       </div>
     </div>

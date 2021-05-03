@@ -1,10 +1,17 @@
 export function TableWrapper({ children }) {
-  return <div className="flex flex-wrap mt-4">{children}</div>;
+  return (
+    <div className="grid grid-cols-1 mt-4 md:grid-cols-3 col-span-full">
+      {children}
+    </div>
+  );
 }
 
+// flex flex-wrap mt-4
+
+// w-full xl:w-4/12 px-4 col-span-1
 export function SmallTable() {
   return (
-    <div className="w-full xl:w-4/12 px-4">
+    <div className="w-full px-4 col-span-1">
       <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
         <div className="rounded-t mb-0 px-4 py-3 border-0">
           <div className="flex flex-wrap items-center">
@@ -29,14 +36,14 @@ export function SmallTable() {
           <table className="items-center w-full bg-transparent border-collapse">
             <thead className="thead-light">
               <tr>
-                <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                <th className="px-6 bg-gray-50 text-blueGray-500 align-middle border border-solid border-gray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                   Referral
                 </th>
-                <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                <th className="px-6 bg-gray-50 text-blueGray-500 align-middle border border-solid border-gray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                   Visitors
                 </th>
                 <th
-                  className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                  className="px-6 bg-gray-50 text-blueGray-500 align-middle border border-solid border-gray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
                   style={{ minWidth: '140px' }}
                 ></th>
               </tr>
@@ -77,7 +84,7 @@ export function SmallTable() {
                       <div className="overflow-hidden h-2 text-xs flex rounded bg-emerald-200">
                         <div
                           style={{ width: '70%' }}
-                          className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-emerald-500"
+                          className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-500"
                         ></div>
                       </div>
                     </div>
@@ -119,7 +126,7 @@ export function SmallTable() {
                       <div className="overflow-hidden h-2 text-xs flex rounded bg-lightBlue-200">
                         <div
                           style={{ width: '75%' }}
-                          className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-lightBlue-500"
+                          className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500"
                         ></div>
                       </div>
                     </div>
@@ -140,7 +147,7 @@ export function SmallTable() {
                       <div className="overflow-hidden h-2 text-xs flex rounded bg-orange-200">
                         <div
                           style={{ width: '30%' }}
-                          className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-emerald-500"
+                          className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-500"
                         ></div>
                       </div>
                     </div>
@@ -155,9 +162,10 @@ export function SmallTable() {
   );
 }
 
+// w-full xl:w-8/12 mb-12 xl:mb-0 px-4 col-span-2
 export default function Table() {
   return (
-    <div className="w-full xl:w-8/12 mb-12 xl:mb-0 px-4">
+    <div className="w-full mb-12 xl:mb-0 px-4 col-span-2">
       <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
         <div className="rounded-t mb-0 px-4 py-3 border-0">
           <div className="flex flex-wrap items-center">
@@ -182,16 +190,16 @@ export default function Table() {
           <table className="items-center w-full bg-transparent border-collapse">
             <thead>
               <tr>
-                <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                <th className="px-6 bg-gray-50 text-blueGray-500 align-middle border border-solid border-gray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                   Page name
                 </th>
-                <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                <th className="px-6 bg-blueGray-50 text-gray-500 align-middle border border-solid border-gray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                   Visitors
                 </th>
-                <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                <th className="px-6 bg-gray-50 text-gray-500 align-middle border border-solid border-gray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                   Unique users
                 </th>
-                <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                <th className="px-6 bg-gray-50 text-gray-500 align-middle border border-solid border-gray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                   Bounce rate
                 </th>
               </tr>
@@ -208,7 +216,7 @@ export default function Table() {
                   340
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  <i className="fas fa-arrow-up text-emerald-500 mr-4"></i>
+                  <i className="fas fa-arrow-up text-green-500 mr-4"></i>
                   46,53%
                 </td>
               </tr>

@@ -1,5 +1,6 @@
 import { CreateProjectRepository } from '@/data/protocols/db/project';
 import { ProjectCollection } from '@/domain/models';
+import { CreateProject } from '@/domain/usecases/project';
 
 export class ProjectRepository implements CreateProjectRepository {
   private projectCollection: ProjectCollection;
@@ -8,11 +9,9 @@ export class ProjectRepository implements CreateProjectRepository {
     this.projectCollection = projectCollection;
   }
 
-  async create(
-    project: CreateProjectRepository.Params
-  ): Promise<CreateProjectRepository.Payload> {
-    const newProject = await this.projectCollection.insertOne(project);
-    console.log('Added Project:', newProject);
-    return project;
+  async create(project: CreateProject.Params): Promise<CreateProject.Payload> {
+    const cursor = await this.projectCollection.insertOne(project);
+    console.log('Added Project:', cursor);
+    return cursor.ops[0] !== null;
   }
 }

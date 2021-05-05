@@ -1,17 +1,24 @@
 import {
   CreateCompanyRepository,
   FetchCompaniesRepository,
+  FindCompanyByIdRepository,
   FindCompanyByNameRepository,
 } from '@/data/protocols/db/company';
-import { FetchCompanies } from '@/data/usecases/project';
 import { CompanyCollection } from '@/domain/models/company';
-import { CreateCompany, FindCompanyByName } from '@/domain/usecases/company';
+import {
+  CreateCompany,
+  FetchCompanies,
+  FindCompanyById,
+  FindCompanyByName,
+} from '@/domain/usecases/company';
+import { ObjectID } from 'bson';
 
 export class CompanyRepository
   implements
     FindCompanyByNameRepository,
     CreateCompanyRepository,
-    FetchCompaniesRepository {
+    FetchCompaniesRepository,
+    FindCompanyByIdRepository {
   private companyCollection: CompanyCollection;
 
   constructor(companyCollection: CompanyCollection) {
@@ -23,6 +30,17 @@ export class CompanyRepository
     return company;
   }
 
+  async findById(id: ObjectID): Promise<FindCompanyById.Payload> {
+    const companyCursor = this.companyCollection.find({ _id: id });
+    const company = await companyCursor.toArray();
+
+    if (company.length < 1) {
+      return null;
+    }
+
+    return company[0];
+  }
+
   async fetchCompanies({
     limit = 10,
   }: FetchCompanies.Params): Promise<FetchCompanies.Paylaod> {
@@ -32,7 +50,7 @@ export class CompanyRepository
 
   async create(company: CreateCompany.Params): Promise<CreateCompany.Payload> {
     const companyCursor = await this.companyCollection.insertOne(company);
-    console.log('insertOpt', companyCursor.ops[0]);
+    console.log('Created company:', companyCursor.ops[0]);
     return companyCursor.insertedCount === 1;
   }
 }

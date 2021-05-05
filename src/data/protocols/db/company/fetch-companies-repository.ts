@@ -1,4 +1,4 @@
-import { FetchCompanies } from '@/data/usecases/project';
+import { FetchCompanies } from '@/domain/usecases/company';
 
 export interface FetchCompaniesRepository {
   fetchCompanies: (

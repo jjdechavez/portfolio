@@ -33,7 +33,6 @@ export class CompanyRepository
   async create(company: CreateCompany.Params): Promise<CreateCompany.Payload> {
     const companyCursor = await this.companyCollection.insertOne(company);
     console.log('insertOpt', companyCursor.ops[0]);
-    console.log('New company inserted:', companyCursor.insertedId);
     return companyCursor.insertedCount === 1;
   }
 }

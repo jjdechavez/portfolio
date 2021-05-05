@@ -3,6 +3,7 @@ import {
   FetchCompaniesRepository,
   FindCompanyByIdRepository,
   FindCompanyByNameRepository,
+  ExistCompanyRepository,
 } from '@/data/protocols/db/company';
 import { CompanyCollection } from '@/domain/models/company';
 import {
@@ -18,7 +19,8 @@ export class CompanyRepository
     FindCompanyByNameRepository,
     CreateCompanyRepository,
     FetchCompaniesRepository,
-    FindCompanyByIdRepository {
+    FindCompanyByIdRepository,
+    ExistCompanyRepository {
   private companyCollection: CompanyCollection;
 
   constructor(companyCollection: CompanyCollection) {
@@ -52,5 +54,15 @@ export class CompanyRepository
     const companyCursor = await this.companyCollection.insertOne(company);
     console.log('Created company:', companyCursor.ops[0]);
     return companyCursor.insertedCount === 1;
+  }
+
+  async exist(id: ObjectID): Promise<boolean> {
+    const projection = { _id: 1 };
+    const companyCursor = this.companyCollection
+      .find({ _id: id })
+      .project(projection);
+    const company = await companyCursor.toArray();
+
+    return company[0]._id === id;
   }
 }

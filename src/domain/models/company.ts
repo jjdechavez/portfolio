@@ -6,7 +6,7 @@ export type Company = {
   about: string;
   location: string;
   url?: string;
-  projects: ObjectId[];
+  projects?: ObjectId[];
 };
 
 export type CompanyCollection = Collection<Company>;

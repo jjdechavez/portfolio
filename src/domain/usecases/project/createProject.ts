@@ -13,7 +13,7 @@ export namespace CreateProject {
     description?: string;
     publish: boolean;
     url?: string;
-    assignDate?: {
+    assignDate: {
       start: Date;
       end: Date;
       ongoing: boolean;
@@ -22,6 +22,7 @@ export namespace CreateProject {
     company: ObjectID;
   };
   type CreateError = {
+    created: boolean;
     message: string;
   };
   export type Payload = Boolean | CreateError;

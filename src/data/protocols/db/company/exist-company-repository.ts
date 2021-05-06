@@ -1,5 +1,5 @@
-import { ObjectID } from 'bson';
+import { ObjectId } from 'mongodb';
 
 export interface ExistCompanyRepository {
-  exist: (id: ObjectID) => Promise<boolean>;
+  exist: (id: ObjectId) => Promise<boolean>;
 }

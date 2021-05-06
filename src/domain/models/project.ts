@@ -7,8 +7,8 @@ export type Project = {
   description?: string;
   publish: boolean;
   url?: string;
-  assignDate?: {
-    start: Date;
+  assignDate: {
+    start: Date | string;
     end: Date;
     ongoing: boolean;
   };

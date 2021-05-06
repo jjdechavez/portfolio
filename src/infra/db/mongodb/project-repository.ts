@@ -1,6 +1,7 @@
 import { CreateProjectRepository } from '@/data/protocols/db/project';
 import { ProjectCollection } from '@/domain/models';
 import { CreateProject } from '@/domain/usecases/project';
+import { ObjectId } from 'mongodb';
 
 export class ProjectRepository implements CreateProjectRepository {
   private projectCollection: ProjectCollection;
@@ -10,8 +11,7 @@ export class ProjectRepository implements CreateProjectRepository {
   }
 
   async create(project: CreateProject.Params): Promise<CreateProject.Payload> {
-    const company = await this.projectCollection.insertOne(project);
-    console.log('Added Project:', company);
-    return company.ops[0] !== null;
+    const createdProject = await this.projectCollection.insertOne(project);
+    return createdProject.ops[0] !== null;
   }
 }

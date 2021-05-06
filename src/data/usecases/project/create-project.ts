@@ -25,6 +25,7 @@ export class CreateProjectUseCase implements CreateProject {
       return await this.projectRepository.create(project);
     } catch (error) {
       return {
+        created: false,
         message: error.message,
       };
     }

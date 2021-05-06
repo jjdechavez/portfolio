@@ -56,9 +56,10 @@ export class CompanyRepository
   }
 
   async exist(id: ObjectID): Promise<boolean> {
+    const query = { _id: id };
     const projection = { _id: 1 };
     const companyCursor = this.companyCollection
-      .find({ _id: id })
+      .find(query)
       .project(projection);
     const company = await companyCursor.toArray();
 

@@ -1,4 +1,7 @@
-import { makeCreateProjectFactory } from '@/data/factories/project';
+import {
+  makeCreateProjectFactory,
+  makeGetProjectsFactory,
+} from '@/data/factories/project';
 import withSession, {
   NextApiRequestWithSession,
 } from '@/infra/session/iron-session';
@@ -11,6 +14,10 @@ export default withSession(
 
     switch (method) {
       case 'GET':
+        const getProductsUseCase = await makeGetProjectsFactory();
+        const projects = await getProductsUseCase.projects();
+
+        res.json({ projects });
         break;
       case 'POST':
         const user = session.get('user');

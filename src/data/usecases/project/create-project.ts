@@ -1,11 +1,20 @@
-import { CreateProjectRepository } from '@/data/protocols/db';
+import {
+  CreateProjectRepository,
+  ExistCompanyRepository,
+} from '@/data/protocols/db';
 import { CreateProject } from '@/domain/usecases/project';
+import { ObjectID } from 'bson';
 
 export class CreateProjectUseCase implements CreateProject {
   private projectRepository: CreateProjectRepository;
+  private companyRepository: ExistCompanyRepository;
 
-  constructor(projectRepository: CreateProjectRepository) {
+  constructor(
+    projectRepository: CreateProjectRepository,
+    companyRepository: ExistCompanyRepository
+  ) {
     this.projectRepository = projectRepository;
+    this.companyRepository = companyRepository;
   }
 
   async createProject(
@@ -13,14 +22,13 @@ export class CreateProjectUseCase implements CreateProject {
   ): Promise<CreateProject.Payload> {
     try {
       this.validationProject(project);
+      return await this.projectRepository.create(project);
     } catch (error) {
       return {
         message: error.message,
       };
     }
   }
-
-  async findCompanyByName(company: string): Promise<any> {}
 
   validationProject({ name, role, company }: CreateProject.Params) {
     if (!name) {
@@ -29,8 +37,15 @@ export class CreateProjectUseCase implements CreateProject {
     if (!role) {
       throw new Error('Required project role');
     }
-    if (!company) {
+
+    const isCompanyExisted = this.isCompanyExist(company);
+
+    if (!isCompanyExisted) {
       throw new Error('Required project company');
     }
+  }
+
+  async isCompanyExist(id: ObjectID): Promise<any> {
+    return await this.companyRepository.exist(id);
   }
 }

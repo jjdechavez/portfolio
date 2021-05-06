@@ -10,8 +10,8 @@ export class ProjectRepository implements CreateProjectRepository {
   }
 
   async create(project: CreateProject.Params): Promise<CreateProject.Payload> {
-    const cursor = await this.projectCollection.insertOne(project);
-    console.log('Added Project:', cursor);
-    return cursor.ops[0] !== null;
+    const company = await this.projectCollection.insertOne(project);
+    console.log('Added Project:', company);
+    return company.ops[0] !== null;
   }
 }

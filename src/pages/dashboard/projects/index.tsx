@@ -1,6 +1,10 @@
 import Link from 'next/link';
+import { fetchServer } from '@/presentation/helpers/fetchServer';
 
-export default function Projects() {
+export default function Projects({ projects }) {
+  // const data = useProjectIds();
+
+  console.log('projects:', projects);
   return (
     <div>
       <h1>My Projects</h1>
@@ -9,4 +13,15 @@ export default function Projects() {
       </Link>
     </div>
   );
+}
+
+export async function getStaticProps() {
+  const res = await fetchServer('projects');
+  const projects = await res.json();
+
+  return {
+    props: {
+      projects,
+    },
+  };
 }

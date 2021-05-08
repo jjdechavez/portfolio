@@ -1,6 +1,8 @@
+import { makeGetProjectFactory } from '@/data/factories/project';
 import withSession, {
   NextApiRequestWithSession,
 } from '@/infra/session/iron-session';
+import { ObjectId } from 'mongodb';
 import { NextApiResponse } from 'next';
 
 export default withSession(
@@ -12,6 +14,12 @@ export default withSession(
 
     switch (method) {
       case 'GET':
+        const idParsed = new ObjectId(id as string);
+        const getProjectUseCase = await makeGetProjectFactory();
+        const project = await getProjectUseCase.getProject(idParsed);
+
+        res.json({ project });
+
         break;
       case 'PUT':
         break;

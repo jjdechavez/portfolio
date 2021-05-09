@@ -7,6 +7,7 @@ import { MongoHelper } from '@/infra/db';
 import withSession, {
   NextApiRequestWithSession,
 } from '@/infra/session/iron-session';
+import { projectDocumentParse } from '@/presentation/helpers';
 import { ObjectId } from 'mongodb';
 import { NextApiResponse } from 'next';
 
@@ -42,22 +43,11 @@ export default withSession(
           companyCollection
         );
 
-        const document = {
-          ...body,
-          company: new ObjectId(body.company),
-          assignDate: {
-            ...body.assignDate,
-            start: new Date(body.assignDate.start),
-            end:
-              typeof body.assignDate.end === 'string'
-                ? body.assignDate.end
-                : new Date(body.assignDate.end),
-          },
-        };
+        const projectDocumentParsed = projectDocumentParse(body);
 
         const hasUpdated = await updateProjectUseCase.updateProject(
           idParsed,
-          document
+          projectDocumentParsed
         );
 
         res.json({ updated: hasUpdated });

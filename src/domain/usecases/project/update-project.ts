@@ -9,6 +9,6 @@ export interface UpdateProject {
 }
 
 export namespace UpdateProject {
-  export type Params = Project;
+  export type Params = Omit<Project, '_id'>;
   export type Payload = boolean;
 }

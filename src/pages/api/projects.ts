@@ -5,6 +5,7 @@ import {
 import withSession, {
   NextApiRequestWithSession,
 } from '@/infra/session/iron-session';
+import { projectDocumentParse } from '@/presentation/helpers';
 import { ObjectID } from 'bson';
 import { NextApiResponse } from 'next';
 
@@ -27,22 +28,11 @@ export default withSession(
           return;
         }
 
-        const document = {
-          ...body,
-          company: new ObjectID(body.company),
-          assignDate: {
-            ...body.assignDate,
-            start: new Date(body.assignDate.start),
-            end:
-              typeof body.assignDate.end === 'string'
-                ? body.assignDate.end
-                : new Date(body.assignDate.end),
-          },
-        };
+        const projectDocumentParsed = projectDocumentParse(body);
 
         const createProjectUseCase = await makeCreateProjectFactory();
         const hasCreatedProject = await createProjectUseCase.createProject(
-          document
+          projectDocumentParsed
         );
 
         res

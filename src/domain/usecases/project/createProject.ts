@@ -1,3 +1,4 @@
+import { Project } from '@/domain/models';
 import { ObjectID } from 'mongodb';
 
 export interface CreateProject {
@@ -7,20 +8,7 @@ export interface CreateProject {
 }
 
 export namespace CreateProject {
-  export type Params = {
-    name: string;
-    role: string;
-    description?: string;
-    publish: boolean;
-    url?: string;
-    assignDate: {
-      start: Date;
-      end: Date;
-      ongoing: boolean;
-    };
-    technologies?: string[];
-    company: ObjectID;
-  };
+  export type Params = Omit<Project, '_id'>;
   type CreateError = {
     created: boolean;
     message: string;

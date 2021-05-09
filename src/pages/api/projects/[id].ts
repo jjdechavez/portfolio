@@ -17,6 +17,10 @@ export default withSession(
       session,
     } = req;
 
+    if (id.length > 0) {
+      res.status(400).send({ message: 'Bad Request' });
+    }
+
     const user = session.get('user');
     const projectCollection = await MongoHelper.getCollection('projects');
 

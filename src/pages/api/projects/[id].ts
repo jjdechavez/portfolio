@@ -11,8 +11,10 @@ export default withSession(
     const {
       query: { id },
       method,
+      session,
     } = req;
 
+    const user = session.get('user');
     const projectCollection = await MongoHelper.getCollection('projects');
 
     switch (method) {
@@ -24,8 +26,16 @@ export default withSession(
         res.json({ project });
         break;
       case 'PUT':
+        if (!user) {
+          res.status(403).send({ message: 'Invalid to access this method' });
+          return;
+        }
         break;
       case 'DELETE':
+        if (!user) {
+          res.status(403).send({ message: 'Invalid to access this method' });
+          return;
+        }
         break;
       default:
         res.setHeader('Allow', ['GET', 'PUT', 'DELETE']);

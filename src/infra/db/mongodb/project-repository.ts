@@ -68,6 +68,7 @@ export class ProjectRepository
       .project(projection);
     const project = await projectCursor.toArray();
 
-    return project[0]._id === id;
+    const { stringify } = JSON;
+    return stringify(project[0]._id) === stringify(id);
   }
 }

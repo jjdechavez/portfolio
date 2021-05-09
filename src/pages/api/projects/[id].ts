@@ -1,6 +1,7 @@
 import {
   makeDeleteProjectFactory,
   makeGetProjectFactory,
+  makeUpdateProjectFactory,
 } from '@/data/factories/project';
 import { MongoHelper } from '@/infra/db';
 import withSession, {
@@ -13,13 +14,10 @@ export default withSession(
   async (req: NextApiRequestWithSession, res: NextApiResponse) => {
     const {
       query: { id },
+      body,
       method,
       session,
     } = req;
-
-    if (id.length > 0) {
-      res.status(400).send({ message: 'Bad Request' });
-    }
 
     const user = session.get('user');
     const projectCollection = await MongoHelper.getCollection('projects');
@@ -38,6 +36,29 @@ export default withSession(
           res.status(403).send({ message: 'Invalid to access this method' });
           return;
         }
+        const updateProjectUseCase = makeUpdateProjectFactory(
+          projectCollection
+        );
+
+        const document = {
+          ...body,
+          company: new ObjectId(body.company),
+          assignDate: {
+            ...body.assignDate,
+            start: new Date(body.assignDate.start),
+            end:
+              typeof body.assignDate.end === 'string'
+                ? body.assignDate.end
+                : new Date(body.assignDate.end),
+          },
+        };
+
+        const hasUpdated = await updateProjectUseCase.updateProject(
+          idParsed,
+          document
+        );
+
+        res.json({ updated: hasUpdated });
         break;
       case 'DELETE':
         if (!user) {

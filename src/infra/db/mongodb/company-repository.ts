@@ -63,6 +63,7 @@ export class CompanyRepository
       .project(projection);
     const company = await companyCursor.toArray();
 
-    return company[0]._id === id;
+    const { stringify } = JSON;
+    return stringify(company[0]._id) === stringify(id);
   }
 }

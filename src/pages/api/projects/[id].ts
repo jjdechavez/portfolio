@@ -36,8 +36,10 @@ export default withSession(
           res.status(403).send({ message: 'Invalid to access this method' });
           return;
         }
+        const companyCollection = await MongoHelper.getCollection('companies');
         const updateProjectUseCase = makeUpdateProjectFactory(
-          projectCollection
+          projectCollection,
+          companyCollection
         );
 
         const document = {

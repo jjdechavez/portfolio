@@ -1,4 +1,7 @@
-import { makeGetProjectFactory } from '@/data/factories/project';
+import {
+  makeDeleteProjectFactory,
+  makeGetProjectFactory,
+} from '@/data/factories/project';
 import { MongoHelper } from '@/infra/db';
 import withSession, {
   NextApiRequestWithSession,
@@ -17,9 +20,10 @@ export default withSession(
     const user = session.get('user');
     const projectCollection = await MongoHelper.getCollection('projects');
 
+    const idParsed = new ObjectId(id as string);
+
     switch (method) {
       case 'GET':
-        const idParsed = new ObjectId(id as string);
         const getProjectUseCase = makeGetProjectFactory(projectCollection);
         const project = await getProjectUseCase.getProject(idParsed);
 
@@ -36,6 +40,12 @@ export default withSession(
           res.status(403).send({ message: 'Invalid to access this method' });
           return;
         }
+
+        const deleteProjectUseCase = makeDeleteProjectFactory(
+          projectCollection
+        );
+        const hasDeleted = await deleteProjectUseCase.deleteProject(idParsed);
+        res.json({ deleted: hasDeleted });
         break;
       default:
         res.setHeader('Allow', ['GET', 'PUT', 'DELETE']);

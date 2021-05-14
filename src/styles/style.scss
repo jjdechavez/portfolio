@@ -263,7 +263,7 @@ footer {
 
     .project-flex-item {
       display: grid;
-      grid-template-columns: repeat(2, auto);
+      grid-template-columns: repeat(2, 1fr);
       grid-gap: 1em;
     }
 
@@ -299,7 +299,7 @@ footer {
 @media screen and (min-width: 848px) {
   .project {
     .project-grid {
-      grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+      grid-template-columns: repeat(3, minmax(15rem, 1fr));
     }
     .project-flex-item {
       display: block;

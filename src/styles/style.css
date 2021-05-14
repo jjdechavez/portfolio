@@ -314,7 +314,7 @@ footer a:hover::before {
 @media screen and (min-width: 848px) {
   .project .project-grid {
     -ms-grid-columns: (minmax(15rem, 1fr))[auto-fit];
-        grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+        grid-template-columns: repeat(3, minmax(15rem, 1fr));
   }
   .project .project-flex-item {
     display: block;

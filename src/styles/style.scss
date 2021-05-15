@@ -110,7 +110,7 @@ a {
 
   .project-grid {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
     grid-gap: 1.5em;
     overflow: hidden;
     justify-content: space-around;
@@ -166,7 +166,6 @@ a {
 
   .more-details {
     color: #323232;
-    display: none;
   }
 
   .headline-container {
@@ -186,9 +185,6 @@ footer {
   background-color: #181818;
   height: 40vh;
   color: #fff;
-  // display: flex;
-  // justify-content: space-between;
-  // position: relative;
 
   a {
     font-size: 1rem;

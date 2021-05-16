@@ -1,3 +1,5 @@
+import { NextApiRequest, NextApiResponse } from 'next';
+import nc from 'next-connect';
 import {
   makeDeleteProjectFactory,
   makeGetProjectFactory,
@@ -8,65 +10,89 @@ import withSession, {
   NextApiRequestWithSession,
 } from '@/infra/session/iron-session';
 import { projectDocumentParse } from '@/presentation/helpers';
-import { ObjectId } from 'mongodb';
-import { NextApiResponse } from 'next';
 
-export default withSession(
-  async (req: NextApiRequestWithSession, res: NextApiResponse) => {
+const handler = nc();
+
+handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
+  const { id } = req.query;
+
+  if (!id) {
+    res.status(400).send({ message: 'Provide id' });
+    return;
+  }
+
+  const projectCollection = await MongoHelper.getCollection('projects');
+  const idParsed = MongoHelper.parseId(id as string);
+
+  const getProjectUseCase = makeGetProjectFactory(projectCollection);
+  const project = await getProjectUseCase.getProject(idParsed);
+
+  res.json({ project });
+});
+
+handler.put(
+  withSession(async (req: NextApiRequestWithSession, res: NextApiResponse) => {
     const {
-      query: { id },
-      body,
-      method,
       session,
+      body,
+      query: { id },
     } = req;
 
     const user = session.get('user');
+    if (!user) {
+      res.status(403).send({ message: 'Invalid to access this method' });
+      return;
+    }
+    if (!id) {
+      res.status(400).send({ message: 'Provide id' });
+      return;
+    }
+
+    const companyCollection = await MongoHelper.getCollection('companies');
     const projectCollection = await MongoHelper.getCollection('projects');
 
-    const idParsed = new ObjectId(id as string);
+    const updateProjectUseCase = makeUpdateProjectFactory(
+      projectCollection,
+      companyCollection
+    );
 
-    switch (method) {
-      case 'GET':
-        const getProjectUseCase = makeGetProjectFactory(projectCollection);
-        const project = await getProjectUseCase.getProject(idParsed);
+    const projectDocumentParsed = projectDocumentParse(body);
+    const idParsed = MongoHelper.parseId(id as string);
 
-        res.json({ project });
-        break;
-      case 'PUT':
-        if (!user) {
-          res.status(403).send({ message: 'Invalid to access this method' });
-          return;
-        }
-        const companyCollection = await MongoHelper.getCollection('companies');
-        const updateProjectUseCase = makeUpdateProjectFactory(
-          projectCollection,
-          companyCollection
-        );
+    const hasUpdated = await updateProjectUseCase.updateProject(
+      idParsed,
+      projectDocumentParsed
+    );
 
-        const projectDocumentParsed = projectDocumentParse(body);
-
-        const hasUpdated = await updateProjectUseCase.updateProject(
-          idParsed,
-          projectDocumentParsed
-        );
-
-        res.json({ updated: hasUpdated });
-        break;
-      case 'DELETE':
-        if (!user) {
-          res.status(403).send({ message: 'Invalid to access this method' });
-          return;
-        }
-
-        const deleteProjectUseCase = makeDeleteProjectFactory(
-          projectCollection
-        );
-        const hasDeleted = await deleteProjectUseCase.deleteProject(idParsed);
-        res.json({ deleted: hasDeleted });
-        break;
-      default:
-        res.setHeader('Allow', ['GET', 'PUT', 'DELETE']);
-        res.status(405).end(`Method ${method} Not Allowed`);
-    }
-  }
+    res.json({ updated: hasUpdated });
+  })
 );
+
+handler.delete(
+  withSession(async (req: NextApiRequestWithSession, res: NextApiResponse) => {
+    const {
+      session,
+      query: { id },
+    } = req;
+
+    const user = session.get('user');
+    if (!user) {
+      res.status(403).send({ message: 'Invalid to access this method' });
+      return;
+    }
+    if (!id) {
+      res.status(400).send({ message: 'Provide id' });
+      return;
+    }
+
+    const idParsed = MongoHelper.parseId(id as string);
+
+    const projectCollection = await MongoHelper.getCollection('projects');
+
+    const deleteProjectUseCase = makeDeleteProjectFactory(projectCollection);
+    const hasDeleted = await deleteProjectUseCase.deleteProject(idParsed);
+    res.json({ deleted: hasDeleted });
+  })
+);
+
+export default handler;

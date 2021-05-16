@@ -1,4 +1,4 @@
-import { MongoClient, Collection } from 'mongodb';
+import { MongoClient, Collection, ObjectId } from 'mongodb';
 const { MONGODB_URI, MONGODB_DB } = process.env;
 
 if (!MONGODB_URI) {
@@ -43,5 +43,9 @@ export const MongoHelper = {
 
   mapCollection: (collection: any[]): any[] => {
     return collection.map((c) => MongoHelper.map(c));
+  },
+
+  parseId(id: string): ObjectId {
+    return new ObjectId(id);
   },
 };

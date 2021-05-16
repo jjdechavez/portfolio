@@ -1,19 +1,17 @@
 import { NextApiResponse } from 'next';
 import nc from 'next-connect';
 import fs from 'fs';
-import { uploadMiddleware } from '@/infra/file-upload';
-import withSession, {
-  NextApiRequestWithSession,
-} from '@/infra/session/iron-session';
+import { NextApiRequestWithFiles, uploadMiddleware } from '@/infra/file-upload';
+import withSession from '@/infra/session/iron-session';
 
-const outputFolderName = './public/uploads/projects';
+const outputFolderName = `./public/uploads/projects`;
 const handler = nc();
 
 handler.use(uploadMiddleware);
 
 handler.post(
-  withSession(async (req: NextApiRequestWithSession, res: NextApiResponse) => {
-    const { session } = req;
+  withSession(async (req: NextApiRequestWithFiles, res: NextApiResponse) => {
+    const { session, files } = req;
 
     const user = session.get('user');
     if (!user) {
@@ -22,7 +20,14 @@ handler.post(
     }
 
     const filenames = fs.readdirSync(outputFolderName);
-    const images = filenames.map((name) => name);
+    const images = files.map((file) => {
+      if (filenames.includes(file.filename)) {
+        return {
+          filename: file.filename,
+          path: `${process.env.BASE_URL}/uploads/projects/${file.filename}`,
+        };
+      }
+    });
 
     res.json({ images });
   })

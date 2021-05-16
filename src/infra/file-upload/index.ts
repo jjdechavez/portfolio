@@ -1,10 +1,9 @@
-import multer, { Multer } from 'multer';
+import multer from 'multer';
 import { NextApiRequestWithSession } from '../session/iron-session';
 
-// export interface NextApiRequestWithFiles extends NextApiRequestWithSession {
-//   files: Multer.Request;
-// }
-// export type NextApiRequestWithFiles =
+export interface NextApiRequestWithFiles extends NextApiRequestWithSession {
+  files: any[];
+}
 
 function getExtType(mimetype: string) {
   switch (mimetype) {

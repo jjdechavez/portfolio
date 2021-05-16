@@ -17,7 +17,7 @@ function getExtType(mimetype: string) {
 const upload = multer({
   storage: multer.diskStorage({
     destination: './public/uploads/projects',
-    filename: (req, file, cb) => {
+    filename: (_, file, cb) => {
       const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
       cb(null, uniqueSuffix + getExtType(file.mimetype));
     },

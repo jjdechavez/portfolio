@@ -1,11 +1,16 @@
 import type { NextApiResponse } from 'next';
+import nc from 'next-connect';
 import withSession, {
   NextApiRequestWithSession,
 } from '@/infra/session/iron-session';
 
-export default withSession(
-  async (req: NextApiRequestWithSession, res: NextApiResponse) => {
+const handler = nc();
+
+handler.post(
+  withSession(async (req: NextApiRequestWithSession, res: NextApiResponse) => {
     req.session.destroy();
     res.json({ isLoggedIn: false });
-  }
+  })
 );
+
+export default handler;

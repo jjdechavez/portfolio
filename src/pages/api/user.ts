@@ -1,12 +1,15 @@
 import type { NextApiResponse } from 'next';
 import { ObjectId } from 'mongodb';
+import nc from 'next-connect';
 import { MongoHelper } from '@/infra/db';
 import withSession, {
   NextApiRequestWithSession,
 } from '@/infra/session/iron-session';
 
-export default withSession(
-  async (req: NextApiRequestWithSession, res: NextApiResponse) => {
+const handler = nc();
+
+handler.get(
+  withSession(async (req: NextApiRequestWithSession, res: NextApiResponse) => {
     const user = req.session.get('user');
 
     if (!user) {
@@ -36,5 +39,7 @@ export default withSession(
         message: error.message,
       });
     }
-  }
+  })
 );
+
+export default handler;

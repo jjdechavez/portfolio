@@ -10,6 +10,7 @@ import withSession, {
   NextApiRequestWithSession,
 } from '@/infra/session/iron-session';
 import { projectDocumentParse } from '@/presentation/helpers';
+import { uploadMiddleware } from '@/infra/file-upload';
 
 const handler = nc();
 
@@ -30,6 +31,8 @@ handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
   res.json({ project });
 });
 
+handler.use(uploadMiddleware);
+
 handler.put(
   withSession(async (req: NextApiRequestWithSession, res: NextApiResponse) => {
     const {
@@ -38,13 +41,20 @@ handler.put(
       query: { id },
     } = req;
 
+    console.log(req);
+
+    if (!id) {
+      res.status(400).send({ message: 'Provide id' });
+      return;
+    }
+    if (!body) {
+      res.status(400).send({ message: 'Provide data to update' });
+      return;
+    }
+
     const user = session.get('user');
     if (!user) {
       res.status(403).send({ message: 'Invalid to access this method' });
-      return;
-    }
-    if (!id) {
-      res.status(400).send({ message: 'Provide id' });
       return;
     }
 
@@ -96,3 +106,9 @@ handler.delete(
 );
 
 export default handler;
+
+// export const config = {
+//   api: {
+//     bodyParser: , // Disallow body parsing, consume as stream
+//   },
+// };

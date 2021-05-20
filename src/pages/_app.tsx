@@ -3,8 +3,15 @@ import { SWRConfig } from 'swr';
 import fetchJson from '@/presentation/helpers/fetchJson';
 import 'tailwindcss/tailwind.css';
 import 'styles/globals.css';
+import { Page } from '@/presentation/types/page';
 
-function MyApp({ Component, pageProps }: AppProps) {
+type Props = AppProps & {
+  Component: Page;
+};
+
+function MyApp({ Component, pageProps }: Props) {
+  const Layout = Component.layout || (({ children }) => <>{children}</>);
+
   return (
     <SWRConfig
       value={{
@@ -14,7 +21,9 @@ function MyApp({ Component, pageProps }: AppProps) {
         },
       }}
     >
-      <Component {...pageProps} />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </SWRConfig>
   );
 }

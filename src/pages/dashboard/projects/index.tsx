@@ -2,10 +2,12 @@ import Link from 'next/link';
 import { fetchServer } from '@/presentation/helpers/fetchServer';
 import Admin from '@/layouts/Admin';
 import ProjectForm from '@/components/dashboard/projects/Form';
+import Table from '@/components/dashboard/Table';
+import ProjectTable from '@/components/dashboard/projects/Table';
 
 export async function getStaticProps() {
   const res = await fetchServer('projects');
-  const projects = await res.json();
+  const { projects } = await res.json();
 
   return {
     props: {
@@ -15,9 +17,6 @@ export async function getStaticProps() {
 }
 
 export default function Projects({ projects }) {
-  // const data = useProjectIds();
-
-  console.log('projects:', projects);
   return (
     <div>
       <h1>My Projects</h1>
@@ -25,6 +24,9 @@ export default function Projects({ projects }) {
         <a>Dashboard</a>
       </Link>
       <div className="flex flex-wrap">
+        <div className="w-full mb-12 px-4">
+          <ProjectTable projects={projects} />
+        </div>
         <div className="w-full lg:w-8/12 px-4">
           <ProjectForm />
         </div>

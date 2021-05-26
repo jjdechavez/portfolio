@@ -21,6 +21,7 @@ handler.post(
 
     if (!isAuth.login) {
       res.status(500).send(isAuth);
+      return;
     }
 
     res.send(isAuth);

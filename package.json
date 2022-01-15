@@ -5,7 +5,7 @@
   "source": "src/index.html",
   "scripts": {
     "dev": "parcel",
-    "build": "parcel build"
+    "build": "rm -r dist/ && parcel build && cp src/_redirects dist/"
   },
   "keywords": [
     "Portfolio",

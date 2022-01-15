@@ -2,13 +2,16 @@
   "name": "JJDCPortfolio",
   "version": "1.0.0",
   "description": "Portfolio",
-  "main": "src/app.js",
+  "source": "src/index.html",
   "scripts": {
-    "dev": "parcel src/*.html",
-    "build": "parcel build src/*.html"
+    "dev": "parcel",
+    "build": "parcel build"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "Portfolio",
+    "Web Development"
+  ],
+  "author": "John Jerald E. De Chavez",
   "license": "ISC",
   "dependencies": {
     "jump.js": "^1.0.2",
@@ -16,7 +19,6 @@
   },
   "devDependencies": {
     "@parcel/transformer-sass": "^2.2.0",
-    "parcel": "^2.2.0",
-    "sass": "^1.23.0"
+    "parcel": "^2.2.0"
   }
 }

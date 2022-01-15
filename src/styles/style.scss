@@ -7,7 +7,7 @@
 }
 
 body {
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
   letter-spacing: 1.5px;
   line-height: 30px;
 }
@@ -34,7 +34,7 @@ a {
 }
 
 .headline {
-  font-size: 1.40rem;
+  font-size: 1.4rem;
   width: 100%;
   position: relative;
   line-height: 1.5em;
@@ -51,7 +51,7 @@ a {
 
 // nav
 .link-nav {
-  font-size: .80rem;
+  font-size: 0.8rem;
   list-style: none;
   display: flex;
   margin-top: 1em;
@@ -61,7 +61,7 @@ a {
     text-decoration: none;
     color: #9b9b9b;
     margin-right: 2em;
-    transition: color .5s ease-in-out;
+    transition: color 0.5s ease-in-out;
 
     &::before {
       content: "";
@@ -75,7 +75,7 @@ a {
       transform-origin: left;
       transition: transform 650ms;
     }
-  
+
     &:hover::before {
       transform: scaleX(1);
       background-color: #000;
@@ -93,7 +93,7 @@ a {
   bottom: 0;
   transform: translateY(-100%);
   text-decoration: none;
-  font-size: .80rem;
+  font-size: 0.8rem;
   color: #9b9b9b;
   cursor: pointer;
   width: 80%;
@@ -116,16 +116,16 @@ a {
     justify-content: space-around;
   }
 
-  .project-grid-item img{
+  .project-grid-item img {
     .slide-in {
       opacity: 0;
-      transition: all .5s;
+      transition: all 0.5s;
     }
-  
+
     .align-left.slide-in {
       transform: translateX(-30%) scale(0.95);
     }
-  
+
     .slide-in.active {
       opacity: 1;
       transform: translateX(0%) scale(1);
@@ -143,14 +143,14 @@ a {
 
   .project-featured > .project-title,
   .project-detail > .project-title {
-    font-size: .95rem;
+    font-size: 0.95rem;
     font-weight: 500;
   }
 
   .project-featured > .project-background,
   .project-background,
   .more-details {
-    font-size: .80rem;
+    font-size: 0.8rem;
     line-height: 1rem;
   }
 
@@ -174,13 +174,12 @@ a {
     align-items: center;
 
     h1 {
-      font-size: 1.40rem;
+      font-size: 1.4rem;
     }
   }
-  
 }
 
-// footer 
+// footer
 footer {
   background-color: #181818;
   height: 40vh;
@@ -198,7 +197,7 @@ footer {
       content: "";
       position: absolute;
       left: 0;
-      bottom: -.5rem;
+      bottom: -0.5rem;
       background: linear-gradient(to left, #9b9b9b, #9b9b9b);
       width: 100%;
       height: 2px;
@@ -224,7 +223,7 @@ footer {
 @media screen and (min-width: 380px) {
   .headline {
     .name {
-      font-size: 1.40rem;
+      font-size: 1.4rem;
     }
 
     .tagline {
@@ -233,11 +232,11 @@ footer {
   }
 
   .link-nav {
-    font-size: .90rem;
-  }  
+    font-size: 0.9rem;
+  }
 
   .scroll-down {
-    font-size: .85rem;
+    font-size: 0.85rem;
   }
 
   .project-featured > .project-title,
@@ -252,7 +251,6 @@ footer {
 
 @media screen and (min-width: 587px) {
   .project {
-
     .project-grid {
       grid-template-columns: 1fr;
     }
@@ -276,7 +274,6 @@ footer {
       display: inherit;
       line-height: 1.2rem;
     }
-
   }
 }
 
@@ -301,5 +298,4 @@ footer {
       display: block;
     }
   }
-
 }

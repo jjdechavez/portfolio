@@ -1,8 +1,8 @@
 {
-  "name": "v3.0",
+  "name": "JJDCPortfolio",
   "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
+  "description": "Portfolio",
+  "main": "src/app.js",
   "scripts": {
     "dev": "parcel src/*.html",
     "build": "parcel build src/*.html"
@@ -15,7 +15,8 @@
     "sal.js": "^0.6.3"
   },
   "devDependencies": {
-    "parcel-bundler": "^1.12.5",
+    "@parcel/transformer-sass": "^2.2.0",
+    "parcel": "^2.2.0",
     "sass": "^1.23.0"
   }
 }

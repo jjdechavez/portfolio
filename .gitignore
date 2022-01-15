@@ -5,3 +5,4 @@ dist
 .husky
 yarn-error.log
 .next
+.parcel-cache

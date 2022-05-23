@@ -8,11 +8,13 @@ sal({
   once: true,
 });
 
-btnScrollDown.addEventListener("click", () => {
-  jump(project, {
-    duration: 1800,
-    offset: 0,
-    callback: undefined,
-    a11y: false,
+if (btnScrollDown) {
+  btnScrollDown.addEventListener("click", () => {
+    jump(project, {
+      duration: 1800,
+      offset: 0,
+      callback: undefined,
+      a11y: false,
+    });
   });
-});
+}

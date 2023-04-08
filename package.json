@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "Portfolio",
   "source": "src/index.html",
+  "browserslist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
     "dev": "parcel",
-    "build": "rm -rf dist/ && parcel build --public-url ./ && cp src/_redirects dist/"
+    "build": "rm -rf dist/ && parcel build --public-url='./' && cp src/_redirects dist/"
   },
   "keywords": [
     "Portfolio",
@@ -19,7 +20,9 @@
     "sharp": "^0.29.1"
   },
   "devDependencies": {
-    "@parcel/transformer-sass": "^2.2.0",
-    "parcel": "^2.2.0"
+    "@parcel/config-default": "^2.8.3",
+    "@parcel/resolver-glob": "^2.8.3",
+    "@parcel/transformer-sass": "^2.8.3",
+    "parcel": "^2.8.3"
   }
 }

@@ -1,46 +1,46 @@
 [
   {
-    name: 'Santi',
-    slug: 'santi',
-    description: 'E-learning platform for Donbosco.',
-    technologies: ['ReactJs', 'NodeJs', 'DynamoDb'],
-    link: 'https://www.santi.edu.ph/',
-    coverImage: './static/Santi.webp',
-    startedAt: '2021-06',
-    endedAt: '2022-01',
-    type: 'EXPERCIENCE'
+    "name": "Santi",
+    "slug": "santi",
+    "description": "E-learning platform for Donbosco.",
+    "technologies": ["ReactJs", "NodeJs", "DynamoDb"],
+    "link": "https://www.santi.edu.ph/",
+    "coverImage": "Santi",
+    "startedAt": "2021-06",
+    "endedAt": "2022-01",
+    "type": "EXPERCIENCE"
   },
   {
-    name: 'Arsenal',
-    slug: 'arsenal',
-    link: 'http://arsenal.com.ph/',
-    coverImage: './static/Arsenal.webp',
-    description: 'Rental platform for filmakers in the Philippines.',
-    technologies: ['ReactJs', 'NodeJs', 'Graphql', 'Prisma'],
-    startedAt: '2019-11',
-    endedAt: '2021-06',
-    type: 'EXPERCIENCE'
+    "name": "Arsenal",
+    "slug": "arsenal",
+    "link": "http://arsenal.com.ph/",
+    "coverImage": "Arsenal",
+    "description": "Rental platform for filmakers in the Philippines.",
+    "technologies": ["ReactJs", "NodeJs", "Graphql", "Prisma"],
+    "startedAt": "2019-11",
+    "endedAt": "2021-06",
+    "type": "EXPERCIENCE"
   },
   {
-    name: 'Ecommerce Graph',
-    slug: 'ecommerce-graph',
-    link: 'https://ecommerce-graph.herokuapp.com/graphql',
-    coverImage: './static/EGraph.webp',
-    description: 'Backend provider for Ecommerce client.',
-    technologies: ['NodeJs', 'TypeGraphql', 'MongoDb', 'Redis'],
-    startedAt: '2020-09',
-    endedAt: '2021-06',
-    type: 'EXPERCIENCE'
+    "name": "Ecommerce Graph",
+    "slug": "ecommerce-graph",
+    "link": "https://ecommerce-graph.herokuapp.com/graphql",
+    "coverImage": "EGraph",
+    "description": "Backend provider for Ecommerce client.",
+    "technologies": ["NodeJs", "TypeGraphql", "MongoDb", "Redis"],
+    "startedAt": "2020-09",
+    "endedAt": "2021-06",
+    "type": "EXPERCIENCE"
   },
   {
-    name: 'Automart.ph',
-    slug: 'automart-ph',
-    link: 'https://automart.ph',
-    coverImage: './static/Automart.webp',
-    description: 'Used, second-hand and repossessed cars.',
-    technologies: ['Laravel', 'Blade'],
-    startedAt: '2020-01',
-    endedAt: '2020-03',
-    type: 'EXPERCIENCE'
+    "name": "Automart.ph",
+    "slug": "automart-ph",
+    "link": "https://automart.ph",
+    "coverImage": "Automart",
+    "description": "Used, second-hand and repossessed cars.",
+    "technologies": ["Laravel", "Blade"],
+    "startedAt": "2020-01",
+    "endedAt": "2020-03",
+    "type": "EXPERCIENCE"
   }
 ]

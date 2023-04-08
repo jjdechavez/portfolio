@@ -1,6 +1,7 @@
 import sal from 'sal.js';
 import jump from 'jump.js';
 import projects from './static/projects.json';
+import images from './static/*.webp'
 
 const jumpContainer = document.querySelector('.project');
 const btnScrollDown = document.querySelector('.scroll-down');
@@ -21,7 +22,6 @@ if (btnScrollDown) {
 }
 
 console.log(import.meta.url)
-console.log(new URL('./static/Arsenal.webp', import.meta.url))
 
 const projectList = document.querySelector('#projects');
 
@@ -37,7 +37,7 @@ projects
 
     tile.innerHTML = `
       <a href="${project.link}" target="_blank" rel="noopener">
-        <img class="detail-img" src="${new URL(project.coverImage, import.meta.url).href}" alt="${
+      <img class="detail-img" src="${images[project.coverImage]}" alt="${
       project.name
     }">
       </a>

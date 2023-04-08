@@ -5,7 +5,7 @@
   "source": "src/index.html",
   "scripts": {
     "dev": "parcel",
-    "build": "rm -rf dist/ && parcel build src/*.html && cp src/_redirects dist/"
+    "build": "rm -rf dist/ && parcel build --public-url ./ && cp src/_redirects dist/"
   },
   "keywords": [
     "Portfolio",
@@ -15,7 +15,8 @@
   "license": "ISC",
   "dependencies": {
     "jump.js": "^1.0.2",
-    "sal.js": "^0.6.3"
+    "sal.js": "^0.8.3",
+    "sharp": "^0.29.1"
   },
   "devDependencies": {
     "@parcel/transformer-sass": "^2.2.0",

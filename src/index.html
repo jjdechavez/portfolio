@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,10 +8,10 @@
   <meta name="description" content="John Jerald De Chavez Portfolio">
   <title>John Jerald De Chavez</title>
   <link rel="stylesheet" href="./styles/style.scss">
-  <link rel="shortcut icon" href="./img/logo.png" type="image/x-icon">
-  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet"> 
-  <link rel="stylesheet" href="./styles/sal.css">
+  <link rel="shortcut icon" href="./static/logo.png" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
 </head>
+
 <body>
   <div class="container">
     <div class="landing headline">
@@ -18,7 +19,7 @@
       <p class="tagline">Build & Design Websites</p>
       <nav>
         <ul class="link-nav">
-          <li><a class="link-nav-items" target="_blank" href="./resume/John-Jerald-De-Chavez-Resume.pdf">Resume</a></li>
+          <li><a class="link-nav-items" target="_blank" href="./static/John-Jerald-De-Chavez-Resume.pdf">Resume</a></li>
           <li><a class="link-nav-items" href="mailto:dechavezjohnjerald029@gmail.com">Gmail</a></li>
           <li><a class="link-nav-items" href="https://github.com/jjdechavez">Github</a></li>
         </ul>
@@ -26,73 +27,10 @@
     </div>
     <span class="scroll-down">↓ Scroll Down</span>
   </div>
-  
+
   <main class="container project">
-    <div class="other-projects project-grid">
-      <div 
-        class="project-grid-item project-flex-item"
-        data-sal-duration="1200"
-        data-sal="slide-up"
-        data-sal-delay="300"
-        data-sal-easing="ease-out-bounce"
-      >
-        <a href="https://www.santi.edu.ph/" target="_blank" rel="noopener">
-          <img class="detail-img" src="./img/Santi.webp" alt="Santi">
-        </a>
-        <div class="project-detail project-flex-about">
-            <p class="project-title">Santi</p>
-            <p class="more-details">E-learning platform for Donbosco.</p>
-            <p class="project-background">React, NodeJs, DynamoDb (July 2021 - January 2022)</p>
-        </div>
-      </div>
-      <div 
-        class="project-grid-item project-flex-item"
-        data-sal-duration="1200"
-        data-sal="slide-up"
-        data-sal-delay="300"
-        data-sal-easing="ease-out-bounce"
-      >
-        <a href="http://arsenal.com.ph/" target="_blank" rel="noopener">
-          <img class="detail-img" src="./img/Arsenal.webp" alt="Arsenal Ph">
-        </a>
-        <div class="project-detail project-flex-about">
-            <p class="project-title">Arsenal</p>
-            <p class="more-details">Rental platform for filmakers in the Philippines.</p>
-            <p class="project-background">React, NodeJs, Graphql (Nov 2019 - June 2021)</p>
-        </div>
-      </div>
-      <div 
-        class="project-grid-item project-flex-item"
-        data-sal-duration="1000"
-        data-sal="slide-up"
-        data-sal-delay="300"
-        data-sal-easing="ease-out-bounce"
-      >
-        <a href="https://ecommerce-graph.herokuapp.com/graphql" target="_blank" rel="noopener">
-          <img class="detail-img" src="./img/EGraph.webp" alt="Ecommerce-Graph">
-        </a>
-        <div class="project-detail project-flex-about">
-            <p class="project-title">Ecommerce Graph</p>
-            <p class="more-details">Backend provider for Ecommerce client.</p>
-            <p class="project-background">NodeJs, TypeGraphql, MongoDb, Redis (Sep 2020 - June 2021)</p>
-        </div>
-      </div>
-      <div 
-        class="project-grid-item project-flex-item"
-        data-sal-duration="1200"
-        data-sal="slide-up"
-        data-sal-delay="300"
-        data-sal-easing="ease-out-bounce"
-      >
-        <a href="https://automart.ph" target="_blank" rel="noopener">
-          <img class="detail-img" src="./img/Automart.webp" alt="Automart Ph">
-        </a>
-        <div class="project-detail project-flex-about">
-            <p class="project-title">Automart.ph</p>
-            <p class="more-details">Used, second-hand and repossessed cars.</p>
-            <p class="project-background">Laravel, Blade, Rest API (Jan 2020 - Mar 2020)</p>
-        </div>
-      </div>
+    <div id="projects" class="other-projects project-grid">
+    </div>
   </main>
 
   <footer>
@@ -100,4 +38,5 @@
   </footer>
   <script type="module" src="app.js"></script>
 </body>
+
 </html>

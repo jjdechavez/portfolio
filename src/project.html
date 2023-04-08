@@ -1,108 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <title>Other Projects</title>
-  <meta name="description" content="John Jerald De Chavez Portfolio - Other Projects">
-  <link rel="stylesheet" href="./styles/style.scss">
-  <link rel="shortcut icon" href="./img/logo.png" type="image/x-icon">
-  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet"> 
-  <link rel="stylesheet" href="./styles/sal.css">
+  <meta name="description" content="John Jerald De Chavez Portfolio - Other Projects" />
+  <link rel="stylesheet" href="./styles/style.scss" />
+  <link rel="shortcut icon" href="./static/logo.png" type="image/x-icon" />
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet" />
 </head>
+
 <body>
   <main class="container project">
     <div class="headline-container">
       <h1>Other Projects</h1>
     </div>
-    <div class="other-projects project-grid">
-      <div 
-        class="project-grid-item project-flex-item"
-        data-sal-duration="1200"
-        data-sal="slide-up"
-        data-sal-delay="300"
-        data-sal-easing="ease-out-bounce"
-      >
-        <a href="https://github.com/jjdechavez/hapi-typescript-template" target="_blank" rel="noopener">
-          <img class="detail-img" src="./img/HapiTypescript.webp" alt="Hapi Typescript Template">
-        </a>
-        <div class="project-detail project-flex-about">
-            <p class="project-title">Hapi Typescript Template</p>
-            <p class="more-details">Basic setup for HapiJs with Typescript.</p>
-            <p class="project-background">NodeJs, MongoDb (June 2021 - Ongoing)</p>
-        </div>
-      </div>
-      <div 
-        class="project-grid-item project-flex-item"
-        data-sal-duration="1200"
-        data-sal="slide-up"
-        data-sal-delay="300"
-        data-sal-easing="ease-out-bounce"
-      >
-        <a href="https://mrchicken-phoneshop.netlify.com" target="_blank" rel="noopener">
-          <img class="detail-img" src="./img/mrchicken.webp" alt="Mr. Chicken Phone Shop">
-        </a>
-        <div class="project-detail project-flex-about">
-            <p class="project-title">Mr. Chicken Phone Shop</p>
-            <p class="more-details">Webapp phone store with static api. Transaction method through Paypal.</p>
-            <p class="project-background">React (Oct 2019 - Oct 2019)</p>
-        </div>
-      </div>
-      <div 
-        class="project-grid-item project-flex-item"
-        data-sal-duration="1000"
-        data-sal="slide-up"
-        data-sal-delay="300"
-        data-sal-easing="ease-out-bounce"
-      >
-        <a href="https://blog-it.netlify.com" target="_blank" rel="noopener">
-          <img class="detail-img" src="./img/blog.webp" alt="Blog IT">
-        </a>
-        <div class="project-detail project-flex-about">
-          <p class="project-title">Blog IT</p>
-          <p class="more-details close">Webapp blogs. Read & share their blogs based on their experciences.</p>
-          <p class="project-background">React (Nov 2019 - Nov 2019)</p>
-        </div>
-      </div>
-      <div 
-        class="project-grid-item project-flex-item"
-        data-sal-duration="1200"
-        data-sal="slide-up"
-        data-sal-delay="300"
-        data-sal-easing="ease-out-bounce"
-      >
-        <a href="https://jjdechavez.github.io/ice-rwd/" target="_blank" rel="noopener">
-          <img class="detail-img" src="./img/ice.webp" alt="Ice RWD">
-        </a>
-        <div class="project-detail project-flex-about">
-            <p class="project-title">Ice</p>
-            <p class="more-details">A modern responsive web design with SCSS as css prepocessor</p>
-            <p class="project-background">HTML, CSS (Oct 2019 - Oct 2019)</p>
-        </div>
-      </div>
-      <div 
-        class="project-grid-item project-flex-item"
-        data-sal-duration="1000"
-        data-sal="slide-up"
-        data-sal-delay="300"
-        data-sal-easing="ease-out-bounce"
-      >
-        <a href="https://jjdechavez.github.io/gsap-convert-to-css/" target="_blank" rel="noopener">
-          <img class="detail-img" src="./img/tide.webp" alt="GSAP To CSS Animation">
-        </a>
-        <div class="project-detail project-flex-about">
-            <p class="project-title">Convert Gsap to CSS Animation</p>
-            <p class="more-details close">Convert some GSAP animation to CSS animation</p>
-            <p class="project-background">HTML, CSS, Animation (Oct 2019 - Oct 2019)</p>
-        </div>
-      </div>
-    </div>
-    </div>
+    <div id="projects" class="other-projects project-grid"></div>
   </main>
   <footer>
-      <a href="./">Back to home</a>
+    <a href="./">Back to home</a>
   </footer>
   <script type="module" src="app.js"></script>
 </body>
+
 </html>

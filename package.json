@@ -6,7 +6,7 @@
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
     "dev": "parcel",
-    "build": "rm -rf dist/ && parcel build --public-url='./' && cp src/_redirects dist/"
+    "build": "rm -rf dist/ && parcel build && cp src/_redirects dist/"
   },
   "keywords": [
     "Portfolio",
@@ -16,8 +16,7 @@
   "license": "ISC",
   "dependencies": {
     "jump.js": "^1.0.2",
-    "sal.js": "^0.8.3",
-    "sharp": "^0.29.1"
+    "sal.js": "^0.8.3"
   },
   "devDependencies": {
     "@parcel/config-default": "^2.8.3",

@@ -1,5 +1,14 @@
 @import '../../node_modules/sal.js/dist/sal.css';
 
+$seconday-color: #000;
+$tertiary-color: #9b9b9b;
+
+$spacing: 1rem;
+$typography-spacing-vertical: 2.5rem;
+
+$nav-element-spacing-vertical: 1rem;
+$nav-element-spacing-horizontal: 0.5rem;
+
 *,
 ::before,
 ::after {
@@ -9,14 +18,14 @@
 }
 
 body {
-  font-family: "Raleway", sans-serif;
+  font-family: 'Inter', sans-serif;
   letter-spacing: 1.5px;
   line-height: 30px;
 }
 
 a {
   text-decoration: none;
-  color: #000;
+  color: $seconday-color;
 }
 
 .container {
@@ -36,55 +45,75 @@ a {
 }
 
 .headline {
-  font-size: 1.4rem;
   width: 100%;
   position: relative;
-  line-height: 1.5em;
+  letter-spacing: 1.25px;
 
-  .name {
-    font-size: 1rem;
-    letter-spacing: 1.25px;
-  }
+  hgroup {
+    margin-bottom: $typography-spacing-vertical;
 
-  .tagline {
-    font-size: 0.95rem;
+    h1 {
+      font-size: 2.5rem;
+      line-height: 1.5;
+    }
+
+    h2 {
+      font-weight: unset;
+    }
   }
 }
 
-// nav
-.link-nav {
-  font-size: 0.8rem;
-  list-style: none;
+nav {
   display: flex;
-  margin-top: 1em;
+  justify-content: space-between;
 
-  .link-nav-items {
-    position: relative;
-    text-decoration: none;
-    color: #9b9b9b;
-    margin-right: 2em;
-    transition: color 0.5s ease-in-out;
+  ul {
+    align-items: center;
+    list-style: none;
 
-    &::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -1%;
-      background-color: #9b9b9b;
-      width: 100%;
-      height: 2px;
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 650ms;
+    display: flex;
+
+    &:first-of-type {
+      margin-left: calc($nav-element-spacing-horizontal * -1);
     }
 
-    &:hover::before {
-      transform: scaleX(1);
-      background-color: #000;
+    &:last-of-type {
+      margin-right: calc($nav-element-spacing-horizontal * -1);
     }
 
-    &:hover {
-      color: #000;
+    > li {
+      display: inline-block;
+      padding: $nav-element-spacing-vertical $nav-element-spacing-horizontal;
+
+      a {
+        position: relative;
+        text-decoration: none;
+        color: $tertiary-color;
+        transition: color 0.5s ease-in-out;
+        font-size: 1rem;
+
+        &::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          bottom: -1%;
+          background-color: $tertiary-color;
+          width: 100%;
+          height: 2px;
+          transform: scaleX(0);
+          transform-origin: left;
+          transition: transform 650ms;
+        }
+
+        &:hover::before {
+          transform: scaleX(1);
+          background-color: $seconday-color;
+        }
+
+        &:hover {
+          color: $seconday-color;
+        }
+      }
     }
   }
 }
@@ -96,13 +125,13 @@ a {
   transform: translateY(-100%);
   text-decoration: none;
   font-size: 0.8rem;
-  color: #9b9b9b;
+  color: $tertiary-color;
   cursor: pointer;
   width: 80%;
   transition: all 0.5s ease-in-out;
 
   &:hover {
-    color: #000;
+    color: $seconday-color;
   }
 }
 
@@ -196,7 +225,7 @@ footer {
     top: 50%;
 
     &::before {
-      content: "";
+      content: '';
       position: absolute;
       left: 0;
       bottom: -0.5rem;
@@ -223,19 +252,21 @@ footer {
 }
 
 @media screen and (min-width: 380px) {
-  .headline {
-    .name {
-      font-size: 1.4rem;
-    }
+  // .headline {
+  //   // .name {
+  //   //   // font-size: 1.4rem;
+  //   //   // font-size: 3rem;
+  //   //   // line-height: 1.125;
+  //   // }
+  //
+  //   // .tagline {
+  //   //   font-size: 1.3rem;
+  //   // }
+  // }
 
-    .tagline {
-      font-size: 1.3rem;
-    }
-  }
-
-  .link-nav {
-    font-size: 0.9rem;
-  }
+  // .link-nav {
+  //   font-size: 0.9rem;
+  // }
 
   .scroll-down {
     font-size: 0.85rem;

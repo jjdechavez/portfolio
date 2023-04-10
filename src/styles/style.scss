@@ -2,7 +2,7 @@
 
 $primary-color: #181818;
 $seconday-color: #000;
-$tertiary-color: #9b9b9b;
+$tertiary-color: #595959;
 $white-color: #fff;
 
 $spacing: 1rem;
@@ -169,7 +169,7 @@ main {
     }
 
     div.content {
-      h4 > small {
+      h3 > small {
         color: $tertiary-color;
         font-size: 0.75rem;
       }

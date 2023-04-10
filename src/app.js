@@ -47,12 +47,12 @@ if (projectList) {
        </a>
       </header>
       <div class="content">
-        <h4>
+        <h3>
           ${project.name}
           <small>
             ${new Date(project.endedAt).getFullYear().toString()}
           </small>
-        </h4>
+        </h3>
         <p class="description">${project.description}</p>
         <p class="technology">${project.technologies.join(', ')}</p>
       </div>

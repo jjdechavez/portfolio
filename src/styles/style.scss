@@ -216,6 +216,24 @@ footer {
   }
 }
 
+@media screen and (max-width: 576px) {
+  .headline {
+    hgroup {
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      h2 {
+        font-size: 20px;
+      }
+    }
+  }
+
+  header.section-header > h1 {
+    font-size: 1.8rem;
+  }
+}
+
 @media screen and (min-width: 770px) {
   article > header > a > img {
     filter: grayscale(100%);

@@ -32,24 +32,21 @@ a {
 
 .container {
   padding: 0 7vw;
-  // width: 100%; -- cause of overflow
-  // margin: auto; -- conflict on main tag margin-bottom
 }
 
 .landing {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   height: 100vh;
-  padding: 0 5%;
-  overflow-x: hidden;
 }
 
 .headline {
   width: 100%;
   position: relative;
   letter-spacing: 1.25px;
+  text-align: center;
 
   hgroup {
     margin-bottom: $typography-spacing-vertical;
@@ -67,7 +64,7 @@ a {
 
 nav {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 
   ul {
     align-items: center;
@@ -122,14 +119,11 @@ nav {
 
 .scroll-down {
   position: absolute;
-  left: 11%;
-  bottom: 0;
-  transform: translateY(-100%);
+  bottom: 10%;
   text-decoration: none;
   font-size: 0.8rem;
   color: $tertiary-color;
   cursor: pointer;
-  width: 80%;
   transition: all 0.5s ease-in-out;
 
   &:hover {
@@ -137,77 +131,50 @@ nav {
   }
 }
 
-// project
 main {
   margin-bottom: 8em;
 
-  .project-grid {
+  .grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(15rem, 1fr));
     grid-gap: 1.5rem;
     justify-content: space-around;
-    // overflow: hidden;
   }
 
-  .project-grid-item img {
-    .slide-in {
-      opacity: 0;
-      transition: all 0.5s;
+  article {
+    header > a > img {
+      max-width: 100%;
+
+      .slide-in {
+        opacity: 0;
+        transition: all 0.5s;
+      }
+
+      .align-left.slide-in {
+        transform: translateX(-30%) scale(0.95);
+      }
+
+      .slide-in.active {
+        opacity: 1;
+        transform: translateX(0%) scale(1);
+      }
     }
 
-    .align-left.slide-in {
-      transform: translateX(-30%) scale(0.95);
-    }
+    div.project-detail {
+      h4 > small {
+        color: $tertiary-color;
+        font-size: 0.75rem;
+      }
 
-    .slide-in.active {
-      opacity: 1;
-      transform: translateX(0%) scale(1);
-    }
-  }
+      p.more-details,
+      p.project-background {
+        font-size: 14px;
+        line-height: 24px;
+      }
 
-  .project-featured {
-    margin-bottom: 5em;
-  }
-
-  .project-featured img,
-  .project-grid-item img {
-    max-width: 100%;
-  }
-
-  .project-featured > .project-title,
-  .project-detail > .project-title {
-    font-size: 0.95rem;
-    font-weight: 500;
-  }
-
-  .project-featured > .project-background,
-  .project-background,
-  .more-details {
-    font-size: 0.8rem;
-    line-height: 1rem;
-  }
-
-  .project-background {
-    color: #9b9b9b;
-  }
-
-  .more-details,
-  .detail-img {
-    grid-template-rows: auto;
-    align-items: flex-start;
-  }
-
-  .more-details {
-    color: #323232;
-  }
-
-  .headline-container {
-    height: 30vh;
-    display: grid;
-    align-items: center;
-
-    h1 {
-      font-size: 1.4rem;
+      p.project-background {
+        color: $tertiary-color;
+      }
     }
   }
 }
@@ -242,68 +209,8 @@ footer {
   }
 }
 
-@media screen and (min-width: 380px) {
-  // .headline {
-  //   // .name {
-  //   //   // font-size: 1.4rem;
-  //   //   // font-size: 3rem;
-  //   //   // line-height: 1.125;
-  //   // }
-  //
-  //   // .tagline {
-  //   //   font-size: 1.3rem;
-  //   // }
-  // }
-
-  // .link-nav {
-  //   font-size: 0.9rem;
-  // }
-
-  .scroll-down {
-    font-size: 0.85rem;
-  }
-
-  .project-featured > .project-title,
-  .project-grid-item > .project-title {
-    font-size: 1.1rem;
-  }
-
-  a {
-    font-size: 1.1rem;
-  }
-}
-
-@media screen and (min-width: 587px) {
-  .project {
-    .project-grid {
-      // grid-template-columns: 1fr;
-    }
-
-    .project-flex-item {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      grid-gap: 1em;
-    }
-
-    .detail-img {
-      flex-grow: 1;
-    }
-
-    .project-flex-about {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .more-details {
-      display: inherit;
-      line-height: 1.2rem;
-    }
-  }
-}
-
 @media screen and (min-width: 770px) {
-  .project-featured img,
-  .project-grid-item img {
+  article > header > a > img {
     filter: grayscale(100%);
     transition: all 0.5s ease-in-out;
 
@@ -316,11 +223,8 @@ footer {
 // with max-width: 848 below trigger this screen
 @media screen and (max-width: 848px) {
   main {
-    .project-grid {
+    .grid {
       grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-    }
-    .project-flex-item {
-      display: block;
     }
   }
 }

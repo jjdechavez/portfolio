@@ -131,6 +131,14 @@ nav {
   }
 }
 
+// project.html
+header.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 30vh;
+}
+
 main {
   margin-bottom: 8em;
 
@@ -189,7 +197,7 @@ footer {
     color: $white-color;
     position: relative;
     top: 50%;
-    left: 11%;
+    left: 7%;
 
     &::before {
       content: '';

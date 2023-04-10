@@ -2,39 +2,45 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="description" content="John Jerald De Chavez Portfolio">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <meta name="description" content="John Jerald De Chavez Portfolio" />
   <title>John Jerald De Chavez</title>
-  <link rel="stylesheet" href="./styles/style.scss">
-  <link rel="shortcut icon" href="./static/logo.png" type="image/x-icon">
-  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles/style.scss" />
+  <link rel="shortcut icon" href="./static/logo.png" type="image/x-icon" />
+  <link rel="preconnect" href="https://rsms.me/" />
+  <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
 </head>
 
 <body>
-  <div class="container">
+  <header class="container">
     <div class="landing headline">
-      <h1 class="name">John Jerald De Chavez</h1>
-      <p class="tagline">Build & Design Websites</p>
+      <hgroup>
+        <h1>John Jerald De Chavez</h1>
+        <h2>Build & Design Websites</h2>
+      </hgroup>
       <nav>
-        <ul class="link-nav">
-          <li><a class="link-nav-items" target="_blank" href="./static/John-Jerald-De-Chavez-Resume.pdf">Resume</a></li>
-          <li><a class="link-nav-items" href="mailto:dechavezjohnjerald029@gmail.com">Gmail</a></li>
-          <li><a class="link-nav-items" href="https://github.com/jjdechavez">Github</a></li>
+        <ul>
+          <li>
+            <a target="_blank" href="./static/John-Jerald-De-Chavez-Resume.pdf">Resume</a>
+          </li>
+          <li>
+            <a href="mailto:dechavezjohnjerald029@gmail.com">Gmail</a>
+          </li>
+          <li><a href="https://github.com/jjdechavez">Github</a></li>
         </ul>
       </nav>
+      <span class="scroll-down">↓ Scroll Down</span>
     </div>
-    <span class="scroll-down">↓ Scroll Down</span>
-  </div>
+  </header>
 
-  <main class="container project">
-    <div id="projects" class="other-projects project-grid">
-    </div>
+  <main class="container">
+    <div id="projects" class="grid"></div>
   </main>
 
   <footer>
-    <a href="./project/">View other projects</a>
+    <a href="./project.html">View other projects</a>
   </footer>
   <script type="module" src="app.js"></script>
 </body>

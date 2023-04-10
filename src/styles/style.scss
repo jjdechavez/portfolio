@@ -160,19 +160,18 @@ main {
       }
     }
 
-    div.project-detail {
+    div.content {
       h4 > small {
         color: $tertiary-color;
         font-size: 0.75rem;
       }
 
-      p.more-details,
-      p.project-background {
+      p {
         font-size: 14px;
         line-height: 24px;
       }
 
-      p.project-background {
+      p.technology {
         color: $tertiary-color;
       }
     }

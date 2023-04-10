@@ -46,15 +46,15 @@ if (projectList) {
           <img class="detail-img" src="${images[project.coverImage]}" alt="${project.name}">
        </a>
       </header>
-      <div class="project-detail project-flex-about">
-        <h4 class="project-title">
+      <div class="content">
+        <h4>
           ${project.name}
-          <small class="project-background">
+          <small>
             ${new Date(project.endedAt).getFullYear().toString()}
           </small>
         </h4>
-        <p class="more-details">${project.description}</p>
-        <p class="project-background">${project.technologies.join(', ')}</p>
+        <p class="description">${project.description}</p>
+        <p class="technology">${project.technologies.join(', ')}</p>
       </div>
     `;
       projectList.appendChild(tile);

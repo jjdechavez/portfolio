@@ -1,13 +1,15 @@
 @import '../../node_modules/sal.js/dist/sal.css';
 
+$primary-color: #181818;
 $seconday-color: #000;
 $tertiary-color: #9b9b9b;
+$white-color: #fff;
 
 $spacing: 1rem;
 $typography-spacing-vertical: 2.5rem;
 
 $nav-element-spacing-vertical: 1rem;
-$nav-element-spacing-horizontal: 0.5rem;
+$nav-element-spacing-horizontal: 1.5rem;
 
 *,
 ::before,
@@ -30,8 +32,8 @@ a {
 
 .container {
   padding: 0 7vw;
-  margin: auto;
-  width: 100%;
+  // width: 100%; -- cause of overflow
+  // margin: auto; -- conflict on main tag margin-bottom
 }
 
 .landing {
@@ -136,15 +138,15 @@ nav {
 }
 
 // project
-.project {
+main {
   margin-bottom: 8em;
 
   .project-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-    grid-gap: 1.5em;
-    overflow: hidden;
+    grid-template-columns: repeat(3, minmax(15rem, 1fr));
+    grid-gap: 1.5rem;
     justify-content: space-around;
+    // overflow: hidden;
   }
 
   .project-grid-item img {
@@ -210,45 +212,34 @@ nav {
   }
 }
 
-// footer
 footer {
-  background-color: #181818;
+  background-color: $primary-color;
   height: 40vh;
-  color: #fff;
+  color: $white-color;
 
   a {
     font-size: 1rem;
     text-decoration: none;
-    color: #fff;
+    color: $white-color;
     position: relative;
-    left: 5%;
     top: 50%;
+    left: 11%;
 
     &::before {
       content: '';
       position: absolute;
       left: 0;
       bottom: -0.5rem;
-      background: linear-gradient(to left, #9b9b9b, #9b9b9b);
+      background: linear-gradient(to left, $tertiary-color, $tertiary-color);
       width: 100%;
       height: 2px;
       transition: all 650ms;
     }
 
     &:hover::before {
-      background: linear-gradient(to left, #fff, #fff);
+      background: linear-gradient(to left, $white-color, $white-color);
     }
   }
-
-  // .up-arrow {
-  //   max-width: 100%;
-  //   position: relative;
-  //   top: 70%;
-  //   // right: -7em;
-  //   right: -4em;
-  //   font-size: 1.4rem;
-  //   cursor: pointer;
-  // }
 }
 
 @media screen and (min-width: 380px) {
@@ -285,7 +276,7 @@ footer {
 @media screen and (min-width: 587px) {
   .project {
     .project-grid {
-      grid-template-columns: 1fr;
+      // grid-template-columns: 1fr;
     }
 
     .project-flex-item {
@@ -322,10 +313,11 @@ footer {
   }
 }
 
-@media screen and (min-width: 848px) {
-  .project {
+// with max-width: 848 below trigger this screen
+@media screen and (max-width: 848px) {
+  main {
     .project-grid {
-      grid-template-columns: repeat(3, minmax(15rem, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
     }
     .project-flex-item {
       display: block;

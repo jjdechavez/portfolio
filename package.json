@@ -8,8 +8,12 @@
     "node": ">= 12.22.12"
   },
   "scripts": {
-    "dev": "parcel",
-    "build": "rm -rf dist/ && parcel build ./src/*.html && cp src/_redirects dist/"
+    "dev": "concurrently \"npm:dev:*\"",
+    "dev:sass": "sass -w static/scss/main.scss static/dist/main.css",
+    "dev:elm-land": "elm-land server",
+    "build": "npm run build:sass && npm run build:elm-land",
+    "build:sass": "sass assets/scss/main.scss static/dist/main.css",
+    "build:elm-land": "elm-land build"
   },
   "keywords": [
     "Portfolio",
@@ -22,9 +26,7 @@
     "sal.js": "^0.8.3"
   },
   "devDependencies": {
-    "@parcel/config-default": "^2.8.3",
-    "@parcel/resolver-glob": "^2.8.3",
-    "@parcel/transformer-sass": "^2.8.3",
-    "parcel": "^2.8.3"
+    "concurrently": "^8.0.1",
+    "sass": "^1.62.0"
   }
 }

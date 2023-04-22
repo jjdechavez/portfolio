@@ -12,6 +12,7 @@ const Sal = sal({
 
 if (btnScrollDown) {
   btnScrollDown.addEventListener('click', () => {
+    console.log("clicked")
     jump(jumpContainer, {
       duration: 1800,
       offset: 0,

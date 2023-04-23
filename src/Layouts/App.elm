@@ -17,11 +17,11 @@ type alias Settings =
 
 
 layout : Settings -> Shared.Model -> Route () -> Layout Model Msg mainMsg
-layout settings shared route =
+layout settings _ _ =
     Layout.new
         { init = init
         , update = update
-        , view = view
+        , view = view settings
         , subscriptions = subscriptions
         }
 
@@ -59,7 +59,7 @@ update msg model =
 
 
 subscriptions : Model -> Sub Msg
-subscriptions model =
+subscriptions _ =
     Sub.none
 
 
@@ -67,24 +67,24 @@ subscriptions model =
 -- VIEW
 
 
-viewFooter : Html msg
-viewFooter =
+viewFooter : Settings -> Html msg
+viewFooter settings =
     let
-        projectsRoute : Route.Path.Path
-        projectsRoute =
-            Route.Path.Projects
+        route : Route.Path.Path
+        route =
+            settings.footerLink
     in
     Html.footer []
-        [ Html.a [ Route.Path.href projectsRoute ]
-            [ Html.text "View other projects" ]
+        [ Html.a [ Route.Path.href route ]
+            [ Html.text settings.footerName ]
         ]
 
 
-view : { fromMsg : Msg -> mainMsg, content : View mainMsg, model : Model } -> View mainMsg
-view { fromMsg, model, content } =
+view : Settings -> { fromMsg : Msg -> mainMsg, content : View mainMsg, model : Model } -> View mainMsg
+view settings { content } =
     { title = content.title
     , body =
         [ Html.div [ class "container" ] content.body
-        , viewFooter
+        , viewFooter settings
         ]
     }

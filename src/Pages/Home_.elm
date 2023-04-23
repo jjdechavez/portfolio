@@ -6,9 +6,11 @@ import Effect exposing (Effect)
 import Html exposing (Html)
 import Html.Attributes as Attr
 import Http
+import Layouts
 import List
 import Page exposing (Page)
 import Route exposing (Route)
+import Route.Path
 import Shared
 import View exposing (View)
 
@@ -20,6 +22,17 @@ page _ _ =
         , update = update
         , subscriptions = subscriptions
         , view = view
+        }
+        |> Page.withLayout layout
+
+
+layout : Model -> Layouts.Layout
+layout _ =
+    Layouts.App
+        { app =
+            { footerLink = Route.Path.Projects
+            , footerName = "View other projects"
+            }
         }
 
 
@@ -69,7 +82,7 @@ update msg model =
             )
 
         ProjectApiResponded (Err httpError) ->
-            ( model
+            ( { model | projects = Api.Failure httpError }
             , Effect.none
             )
 
@@ -93,7 +106,6 @@ view model =
     , body =
         [ viewHeader
         , viewBody model
-        , viewFooter
         ]
     }
 
@@ -101,8 +113,7 @@ view model =
 viewHeader : Html msg
 viewHeader =
     Html.header
-        [ Attr.class "container"
-        ]
+        []
         [ Html.div
             [ Attr.class "landing headline"
             ]
@@ -148,10 +159,11 @@ viewProject : Project -> Html msg
 viewProject project =
     Html.article
         [ Attr.class "project-grid-item"
-        , Attr.attribute "data-sal" "slide-up"
-        , Attr.attribute "data-sal-duration" "1200"
-        , Attr.attribute "data-sal-delay" "300"
-        , Attr.attribute "data-sal-easing" "ease-out-bounce"
+
+        -- , Attr.attribute "data-sal" "slide-up"
+        -- , Attr.attribute "data-sal-duration" "1200"
+        -- , Attr.attribute "data-sal-delay" "300"
+        -- , Attr.attribute "data-sal-easing" "ease-out-bounce"
         ]
         [ Html.header []
             [ Html.a
@@ -187,7 +199,7 @@ viewProjects listOfProjects =
 
 viewBody : Model -> Html msg
 viewBody model =
-    Html.main_ [ Attr.class "container" ]
+    Html.main_ []
         [ case model.projects of
             Api.Loading ->
                 Html.div [] [ Html.text "Loading..." ]
@@ -201,12 +213,4 @@ viewBody model =
 
             Api.Failure httpError ->
                 Html.div [] [ Html.text (Api.toUserFriendlyMessage httpError) ]
-        ]
-
-
-viewFooter : Html msg
-viewFooter =
-    Html.footer []
-        [ Html.a [ Attr.href "./project/" ]
-            [ Html.text "View other projects" ]
         ]

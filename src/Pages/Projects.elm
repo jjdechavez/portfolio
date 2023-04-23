@@ -103,7 +103,7 @@ subscriptions _ =
 
 view : Model -> View Msg
 view model =
-    { title = "Pages.Projects"
+    { title = "Projects"
     , body =
         [ viewBody model
         ]

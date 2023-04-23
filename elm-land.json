@@ -22,7 +22,7 @@
         { "rel": "shorcut icon", "href": "/logo.png", "type": "image/x-icon" }
       ],
       "script": [
-        { "type": "module", "src": "/app.js" }
+        { "type": "module", "src": "/js/app.js" }
       ]
     },
     "router": {

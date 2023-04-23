@@ -1,8 +1,14 @@
 module Pages.Projects exposing (Model, Msg, page)
 
+import Api
+import Api.ProjectList exposing (Project, ProjectType)
+import Components.ProjectCard exposing (viewProject)
 import Effect exposing (Effect)
-import Html
+import Html exposing (Html)
+import Html.Attributes as Attr
+import Http
 import Layouts
+import List
 import Page exposing (Page)
 import Route exposing (Route)
 import Route.Path
@@ -11,7 +17,7 @@ import View exposing (View)
 
 
 page : Shared.Model -> Route () -> Page Model Msg
-page shared route =
+page _ _ =
     Page.new
         { init = init
         , update = update
@@ -36,13 +42,18 @@ layout _ =
 
 
 type alias Model =
-    {}
+    { projects : Api.Data (List Project)
+    , showcase : ProjectType
+    }
 
 
 init : () -> ( Model, Effect Msg )
 init () =
-    ( {}
-    , Effect.none
+    ( { projects = Api.Loading
+      , showcase = Api.ProjectList.Personal
+      }
+    , Api.ProjectList.getProjectsByType
+        { onResponse = ProjectApiResponded }
     )
 
 
@@ -51,14 +62,28 @@ init () =
 
 
 type Msg
-    = ExampleMsgReplaceMe
+    = ProjectApiResponded (Result Http.Error (List Project))
 
 
 update : Msg -> Model -> ( Model, Effect Msg )
 update msg model =
     case msg of
-        ExampleMsgReplaceMe ->
-            ( model
+        ProjectApiResponded (Ok listOfProjects) ->
+            let
+                personalProject : Project -> Bool
+                personalProject project =
+                    project.projectType == model.showcase
+
+                projects : List Project
+                projects =
+                    List.filter personalProject listOfProjects
+            in
+            ( { model | projects = Api.Success projects }
+            , Effect.none
+            )
+
+        ProjectApiResponded (Err httpError) ->
+            ( { model | projects = Api.Failure httpError }
             , Effect.none
             )
 
@@ -68,7 +93,7 @@ update msg model =
 
 
 subscriptions : Model -> Sub Msg
-subscriptions model =
+subscriptions _ =
     Sub.none
 
 
@@ -79,5 +104,34 @@ subscriptions model =
 view : Model -> View Msg
 view model =
     { title = "Pages.Projects"
-    , body = [ Html.text "/projects" ]
+    , body =
+        [ viewBody model
+        ]
     }
+
+
+viewProjects : List Project -> List (Html msg)
+viewProjects listOfProjects =
+    List.map viewProject listOfProjects
+
+
+viewBody : Model -> Html msg
+viewBody model =
+    Html.main_ []
+        [ Html.header [ Attr.class "section-header" ]
+            [ Html.h1 [] [ Html.text "Other Projects" ]
+            ]
+        , case model.projects of
+            Api.Loading ->
+                Html.div [] [ Html.text "Loading..." ]
+
+            Api.Success listOfProjects ->
+                Html.div
+                    [ Attr.id "projects"
+                    , Attr.class "grid"
+                    ]
+                    (viewProjects listOfProjects)
+
+            Api.Failure httpError ->
+                Html.div [] [ Html.text (Api.toUserFriendlyMessage httpError) ]
+        ]

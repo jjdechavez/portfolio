@@ -1,7 +1,7 @@
 module Pages.Home_ exposing (Model, Msg, page)
 
 import Api
-import Api.ProjectList exposing (Project, ProjectType)
+import Api.ProjectList exposing (Project, ProjectType(..))
 import Effect exposing (Effect)
 import Html exposing (Html)
 import Html.Attributes as Attr
@@ -76,9 +76,33 @@ update msg model =
                 projects : List Project
                 projects =
                     List.filter expercienceProject listOfProjects
+
+                stringFromProjectType : ProjectType -> String
+                stringFromProjectType projectType =
+                    case projectType of
+                        Expercience ->
+                            "EXPERCIENCE"
+                        Personal ->
+                            "PERSONAL"
+                        _ ->
+                            "ALL"
             in
             ( { model | projects = Api.Success projects }
-            , Effect.none
+            , Effect.saveProjects
+                (List.map
+                    (\project ->
+                        { slug = project.slug
+                        , name = project.name
+                        , description = project.description
+                        , technologies = project.technologies
+                        , link = project.link
+                        , coverImage = project.coverImage
+                        , endedAt = project.endedAt
+                        , projectType = stringFromProjectType project.projectType
+                        }
+                    )
+                    listOfProjects
+                )
             )
 
         ProjectApiResponded (Err httpError) ->

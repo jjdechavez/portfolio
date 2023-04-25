@@ -53,7 +53,7 @@ init () =
     ( { projects = Api.Loading
       , showcase = Personal
       }
-    , Api.ProjectList.getProjectsByType
+    , Api.ProjectList.getProjects
         { onResponse = ProjectApiResponded }
     )
 

@@ -1,4 +1,4 @@
-module Api.ProjectList exposing (getProjectsByType)
+module Api.ProjectList exposing (getProjects)
 
 import Effect exposing (Effect)
 import Http
@@ -6,13 +6,11 @@ import Json.Decode
 import Shared.Model exposing (Project, ProjectType(..))
 
 
-getProjectsByType :
-    -- ProjectType
-    -- ->
+getProjects:
     { onResponse : Result Http.Error (List Project) -> msg
     }
     -> Effect msg
-getProjectsByType options =
+getProjects options =
     let
         -- currentProjectType : String
         -- currentProjectType =

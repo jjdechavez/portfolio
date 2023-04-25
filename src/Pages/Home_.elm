@@ -17,9 +17,9 @@ import View exposing (View)
 
 
 page : Shared.Model -> Route () -> Page Model Msg
-page _ _ =
+page shared _ =
     Page.new
-        { init = init
+        { init = init shared
         , update = update
         , subscriptions = subscriptions
         , view = view
@@ -47,14 +47,46 @@ type alias Model =
     }
 
 
-init : () -> ( Model, Effect Msg )
-init () =
-    ( { projects = Api.Loading
-      , showcase = Expercience
+init : Shared.Model -> () -> ( Model, Effect Msg )
+init shared () =
+    let
+        showcase : ProjectType
+        showcase =
+            Expercience
+
+        projects : Api.Data (List Project)
+        projects =
+            case shared.projects of
+                Just resultProjects ->
+                    Api.Success <|
+                        filterProjectByType resultProjects showcase
+
+                Nothing ->
+                    Api.Loading
+
+        effect : Effect Msg
+        effect =
+            case projects of
+                Api.Success _ ->
+                    Effect.none
+
+                Api.Loading ->
+                    Api.ProjectList.getProjects
+                        { onResponse = ProjectApiResponded }
+
+                Api.Failure _ ->
+                    Effect.none
+    in
+    ( { projects = projects
+      , showcase = showcase
       }
-    , Api.ProjectList.getProjectsByType
-        { onResponse = ProjectApiResponded }
+    , effect
     )
+
+
+filterProjectByType : List Project -> ProjectType -> List Project
+filterProjectByType projects projectType =
+    List.filter (\project -> project.projectType == projectType) projects
 
 
 
@@ -70,13 +102,9 @@ update msg model =
     case msg of
         ProjectApiResponded (Ok listOfProjects) ->
             let
-                expercienceProject : Project -> Bool
-                expercienceProject project =
-                    project.projectType == model.showcase
-
                 projects : List Project
                 projects =
-                    List.filter expercienceProject listOfProjects
+                    filterProjectByType listOfProjects model.showcase
             in
             ( { model | projects = Api.Success projects }
             , Effect.fetchProjects listOfProjects

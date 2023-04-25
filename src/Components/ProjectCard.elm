@@ -1,12 +1,12 @@
-module Components.ProjectCard exposing (viewProject)
+module Components.ProjectCard exposing (viewProjectCard)
 
 import Html exposing (Html)
 import Html.Attributes as Attr
 import Shared.Model exposing (Project)
 
 
-viewProject : Project -> Html msg
-viewProject project =
+viewProjectCard : Project -> Html msg
+viewProjectCard project =
     Html.article
         [ Attr.class "project-grid-item"
 

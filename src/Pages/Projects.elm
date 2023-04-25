@@ -2,7 +2,7 @@ module Pages.Projects exposing (Model, Msg, page)
 
 import Api
 import Api.ProjectList
-import Components.ProjectCard exposing (viewProject)
+import Components.ProjectCard exposing (viewProjectCard)
 import Effect exposing (Effect)
 import Html exposing (Html)
 import Html.Attributes as Attr
@@ -113,7 +113,7 @@ view model =
 
 viewProjects : List Project -> List (Html msg)
 viewProjects listOfProjects =
-    List.map viewProject listOfProjects
+    List.map viewProjectCard listOfProjects
 
 
 viewBody : Model -> Html msg

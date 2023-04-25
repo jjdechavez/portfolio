@@ -6,6 +6,7 @@ import Components.ProjectCard exposing (viewProjectCard)
 import Effect exposing (Effect)
 import Html exposing (Html)
 import Html.Attributes as Attr
+import Html.Events as Event
 import Http
 import Layouts
 import List
@@ -91,6 +92,7 @@ init shared () =
 
 type Msg
     = ProjectApiResponded (Result Http.Error (List Project))
+    | GotoProjects
 
 
 update : Msg -> Model -> ( Model, Effect Msg )
@@ -109,6 +111,11 @@ update msg model =
         ProjectApiResponded (Err httpError) ->
             ( { model | projects = Api.Failure httpError }
             , Effect.none
+            )
+
+        GotoProjects ->
+            ( model
+            , Effect.jumpToProjects True
             )
 
 
@@ -135,7 +142,7 @@ view model =
     }
 
 
-viewHeader : Html msg
+viewHeader : Html Msg
 viewHeader =
     Html.header
         []
@@ -154,6 +161,7 @@ viewHeader =
                 ]
             , Html.span
                 [ Attr.class "scroll-down"
+                , Event.onClick GotoProjects
                 ]
                 [ Html.text "↓ Scroll Down" ]
             ]

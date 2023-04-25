@@ -1,3 +1,5 @@
+import jump from 'jump.js'
+
 export const flags = ({ env }) => {
   // Called before our Elm application starts
   return {
@@ -7,9 +9,25 @@ export const flags = ({ env }) => {
 
 export const onReady = ({ env, app }) => {
   // Called after our Elm application starts
-  if (app.ports && app.ports.sendToLocalStorage) {
+  const ports = app.ports;
+  if (ports && ports.sendToLocalStorage) {
     app.ports.sendToLocalStorage.subscribe(({ key, value }) => {
       window.localStorage[key] = JSON.stringify(value);
+    })
+  }
+
+  if (ports && ports.scrollToProjects) {
+    app.ports.scrollToProjects.subscribe(jumping => {
+      const jumpContainer = document.querySelector('main');
+
+      if (jumping) {
+        jump(jumpContainer, {
+          duration: 1800,
+          offset: -100,
+          callback: undefined,
+          a11y: false,
+        });
+      }
     })
   }
 }

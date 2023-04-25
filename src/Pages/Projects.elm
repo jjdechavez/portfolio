@@ -13,14 +13,14 @@ import Page exposing (Page)
 import Route exposing (Route)
 import Route.Path
 import Shared
-import Shared.Model exposing (Project, ProjectType(..))
+import Shared.Model exposing (Project, ProjectType(..), filterProjectByType)
 import View exposing (View)
 
 
 page : Shared.Model -> Route () -> Page Model Msg
-page _ _ =
+page shared _ =
     Page.new
-        { init = init
+        { init = init shared
         , update = update
         , subscriptions = subscriptions
         , view = view
@@ -48,13 +48,40 @@ type alias Model =
     }
 
 
-init : () -> ( Model, Effect Msg )
-init () =
-    ( { projects = Api.Loading
-      , showcase = Personal
+init : Shared.Model -> () -> ( Model, Effect Msg )
+init shared () =
+    let
+        showcase : ProjectType
+        showcase =
+            Personal
+
+        projects : Api.Data (List Project)
+        projects =
+            case shared.projects of
+                Just resultProjects ->
+                    Api.Success <|
+                        filterProjectByType resultProjects showcase
+
+                Nothing ->
+                    Api.Loading
+
+        effect : Effect Msg
+        effect =
+            case projects of
+                Api.Success _ ->
+                    Effect.none
+
+                Api.Loading ->
+                    Api.ProjectList.getProjects
+                        { onResponse = ProjectApiResponded }
+
+                Api.Failure _ ->
+                    Effect.none
+    in
+    ( { projects = projects
+      , showcase = showcase
       }
-    , Api.ProjectList.getProjects
-        { onResponse = ProjectApiResponded }
+    , effect
     )
 
 

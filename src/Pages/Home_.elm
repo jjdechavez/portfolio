@@ -13,7 +13,7 @@ import Page exposing (Page)
 import Route exposing (Route)
 import Route.Path
 import Shared
-import Shared.Model exposing (Project, ProjectType(..))
+import Shared.Model exposing (Project, ProjectType(..), filterProjectByType)
 import View exposing (View)
 
 
@@ -83,11 +83,6 @@ init shared () =
       }
     , effect
     )
-
-
-filterProjectByType : List Project -> ProjectType -> List Project
-filterProjectByType projects projectType =
-    List.filter (\project -> project.projectType == projectType) projects
 
 
 

@@ -16,7 +16,7 @@ import Effect exposing (Effect)
 import Json.Decode
 import Route exposing (Route)
 import Route.Path
-import Shared.Model exposing (Project, ProjectType(..))
+import Shared.Model exposing (ProjectType(..))
 import Shared.Msg
 
 
@@ -99,11 +99,6 @@ type alias Msg =
 update : Route () -> Msg -> Model -> ( Model, Effect Msg )
 update route msg model =
     case msg of
-        Shared.Msg.ExampleMsgReplaceMe ->
-            ( model
-            , Effect.none
-            )
-
         Shared.Msg.FetchProjects projects ->
             ( { model | projects = Just projects }
             , Effect.saveProjects projects

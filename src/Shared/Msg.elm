@@ -11,5 +11,4 @@ own file, so they can be imported by `Effect.elm`
 
 -}
 type Msg
-    = ExampleMsgReplaceMe
-    | FetchProjects (List Project)
+    = FetchProjects (List Project)

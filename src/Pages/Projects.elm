@@ -2,6 +2,7 @@ module Pages.Projects exposing (Model, Msg, page)
 
 import Api
 import Api.ProjectList
+import Browser.Dom as Dom
 import Components.ProjectCard exposing (viewProjectCard)
 import Effect exposing (Effect)
 import Html exposing (Html)
@@ -14,6 +15,7 @@ import Route exposing (Route)
 import Route.Path
 import Shared
 import Shared.Model exposing (Project, ProjectType(..), filterProjectByType)
+import Task
 import View exposing (View)
 
 
@@ -81,7 +83,10 @@ init shared () =
     ( { projects = projects
       , showcase = showcase
       }
-    , effect
+    , Effect.batch
+        [ Effect.sendCmd (Task.perform (\_ -> NoOp) (Dom.setViewport 0 0))
+        , effect
+        ]
     )
 
 
@@ -91,6 +96,7 @@ init shared () =
 
 type Msg
     = ProjectApiResponded (Result Http.Error (List Project))
+    | NoOp
 
 
 update : Msg -> Model -> ( Model, Effect Msg )
@@ -112,6 +118,11 @@ update msg model =
 
         ProjectApiResponded (Err httpError) ->
             ( { model | projects = Api.Failure httpError }
+            , Effect.none
+            )
+
+        NoOp ->
+            ( model
             , Effect.none
             )
 

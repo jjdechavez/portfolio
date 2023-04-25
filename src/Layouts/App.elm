@@ -46,13 +46,13 @@ init _ =
 
 
 type Msg
-    = ReplaceMe
+    = NoOp
 
 
 update : Msg -> Model -> ( Model, Effect Msg )
 update msg model =
     case msg of
-        ReplaceMe ->
+        NoOp ->
             ( model
             , Effect.none
             )
@@ -67,7 +67,7 @@ subscriptions _ =
 -- VIEW
 
 
-viewFooter : Settings -> Html msg
+viewFooter : Settings -> Html mainMsg
 viewFooter settings =
     let
         route : Route.Path.Path

@@ -1,7 +1,7 @@
 module Pages.Home_ exposing (Model, Msg, page)
 
 import Api
-import Api.ProjectList exposing (Project, ProjectType(..))
+import Api.ProjectList
 import Effect exposing (Effect)
 import Html exposing (Html)
 import Html.Attributes as Attr
@@ -12,6 +12,7 @@ import Page exposing (Page)
 import Route exposing (Route)
 import Route.Path
 import Shared
+import Shared.Model exposing (Project, ProjectType(..))
 import View exposing (View)
 
 
@@ -49,7 +50,7 @@ type alias Model =
 init : () -> ( Model, Effect Msg )
 init () =
     ( { projects = Api.Loading
-      , showcase = Api.ProjectList.Expercience
+      , showcase = Expercience
       }
     , Api.ProjectList.getProjectsByType
         { onResponse = ProjectApiResponded }
@@ -76,33 +77,9 @@ update msg model =
                 projects : List Project
                 projects =
                     List.filter expercienceProject listOfProjects
-
-                stringFromProjectType : ProjectType -> String
-                stringFromProjectType projectType =
-                    case projectType of
-                        Expercience ->
-                            "EXPERCIENCE"
-                        Personal ->
-                            "PERSONAL"
-                        _ ->
-                            "ALL"
             in
             ( { model | projects = Api.Success projects }
-            , Effect.saveProjects
-                (List.map
-                    (\project ->
-                        { slug = project.slug
-                        , name = project.name
-                        , description = project.description
-                        , technologies = project.technologies
-                        , link = project.link
-                        , coverImage = project.coverImage
-                        , endedAt = project.endedAt
-                        , projectType = stringFromProjectType project.projectType
-                        }
-                    )
-                    listOfProjects
-                )
+            , Effect.fetchProjects listOfProjects
             )
 
         ProjectApiResponded (Err httpError) ->

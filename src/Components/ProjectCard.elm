@@ -1,8 +1,8 @@
 module Components.ProjectCard exposing (viewProject)
 
-import Api.ProjectList exposing (Project)
 import Html exposing (Html)
 import Html.Attributes as Attr
+import Shared.Model exposing (Project)
 
 
 viewProject : Project -> Html msg

@@ -4,7 +4,7 @@ port module Effect exposing
     , sendCmd, sendMsg
     , pushRoute, replaceRoute, loadExternalUrl
     , map, toCmd
-    , clearProjects, saveProjects
+    , clearProjects, fetchProjects, saveProjects
     )
 
 {-|
@@ -189,6 +189,17 @@ toCmd options effect =
             sendToLocalStorage value
 
 
+
+-- SHARED
+
+
+fetchProjects :
+    List Shared.Model.Project
+    -> Effect msg
+fetchProjects projects =
+    SendSharedMsg (Shared.Msg.FetchProjects projects)
+
+
 port sendToLocalStorage :
     { key : String
     , value : Json.Encode.Value
@@ -197,16 +208,7 @@ port sendToLocalStorage :
 
 
 saveProjects :
-    List
-        { slug : String
-        , name : String
-        , description : String
-        , technologies : List String
-        , link : String
-        , coverImage : String
-        , endedAt : String
-        , projectType : String
-        }
+    List Shared.Model.Project
     -> Effect msg
 saveProjects projects =
     SendToLocalStorage
@@ -216,16 +218,22 @@ saveProjects projects =
         }
 
 
+projectTypeEncoder : Shared.Model.ProjectType -> Json.Encode.Value
+projectTypeEncoder projectType =
+    Json.Encode.string <|
+        case projectType of
+            Shared.Model.Expercience ->
+                "EXPERCIENCE"
+
+            Shared.Model.Personal ->
+                "PERSONAL"
+
+            _ ->
+                "ALL"
+
+
 projectEncoder :
-    { slug : String
-    , name : String
-    , description : String
-    , technologies : List String
-    , link : String
-    , coverImage : String
-    , endedAt : String
-    , projectType : String
-    }
+    Shared.Model.Project
     -> Json.Encode.Value
 projectEncoder project =
     Json.Encode.object
@@ -236,7 +244,7 @@ projectEncoder project =
         , ( "link", Json.Encode.string project.link )
         , ( "coverImage", Json.Encode.string project.coverImage )
         , ( "endedAt", Json.Encode.string project.endedAt )
-        , ( "projectType", Json.Encode.string project.projectType )
+        , ( "projectType", projectTypeEncoder project.projectType )
         ]
 
 

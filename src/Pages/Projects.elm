@@ -1,7 +1,7 @@
 module Pages.Projects exposing (Model, Msg, page)
 
 import Api
-import Api.ProjectList exposing (Project, ProjectType)
+import Api.ProjectList
 import Components.ProjectCard exposing (viewProject)
 import Effect exposing (Effect)
 import Html exposing (Html)
@@ -13,6 +13,7 @@ import Page exposing (Page)
 import Route exposing (Route)
 import Route.Path
 import Shared
+import Shared.Model exposing (Project, ProjectType(..))
 import View exposing (View)
 
 
@@ -50,7 +51,7 @@ type alias Model =
 init : () -> ( Model, Effect Msg )
 init () =
     ( { projects = Api.Loading
-      , showcase = Api.ProjectList.Personal
+      , showcase = Personal
       }
     , Api.ProjectList.getProjectsByType
         { onResponse = ProjectApiResponded }

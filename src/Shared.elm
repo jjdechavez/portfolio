@@ -16,7 +16,7 @@ import Effect exposing (Effect)
 import Json.Decode
 import Route exposing (Route)
 import Route.Path
-import Shared.Model
+import Shared.Model exposing (Project, ProjectType(..))
 import Shared.Msg
 
 
@@ -25,12 +25,46 @@ import Shared.Msg
 
 
 type alias Flags =
-    {}
+    { projects : Maybe (List Shared.Model.Project)
+    }
 
 
 decoder : Json.Decode.Decoder Flags
 decoder =
-    Json.Decode.succeed {}
+    Json.Decode.map Flags
+        (Json.Decode.field "projects" (Json.Decode.maybe (Json.Decode.list projectDecoder)))
+
+
+initProjectType : String -> Shared.Model.ProjectType
+initProjectType projectType =
+    case projectType of
+        "EXPERCIENCE" ->
+            Shared.Model.Expercience
+
+        "PERSONAL" ->
+            Shared.Model.Personal
+
+        _ ->
+            Shared.Model.All
+
+
+projectTypeDecoder : Json.Decode.Decoder Shared.Model.ProjectType
+projectTypeDecoder =
+    Json.Decode.map initProjectType
+        (Json.Decode.field "type" Json.Decode.string)
+
+
+projectDecoder : Json.Decode.Decoder Shared.Model.Project
+projectDecoder =
+    Json.Decode.map8 Shared.Model.Project
+        (Json.Decode.field "slug" Json.Decode.string)
+        (Json.Decode.field "name" Json.Decode.string)
+        (Json.Decode.field "description" Json.Decode.string)
+        (Json.Decode.field "technologies" (Json.Decode.list Json.Decode.string))
+        (Json.Decode.field "link" Json.Decode.string)
+        (Json.Decode.field "coverImage" Json.Decode.string)
+        (Json.Decode.field "endedAt" Json.Decode.string)
+        projectTypeDecoder
 
 
 
@@ -43,7 +77,13 @@ type alias Model =
 
 init : Result Json.Decode.Error Flags -> Route () -> ( Model, Effect Msg )
 init flagsResult route =
-    ( { projects = Nothing }
+    let
+        flags : Flags
+        flags =
+            flagsResult
+                |> Result.withDefault { projects = Nothing }
+    in
+    ( { projects = flags.projects }
     , Effect.none
     )
 
@@ -66,7 +106,7 @@ update route msg model =
 
         Shared.Msg.FetchProjects projects ->
             ( { model | projects = Just projects }
-            , Effect.none
+            , Effect.saveProjects projects
             )
 
 

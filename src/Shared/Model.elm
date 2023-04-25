@@ -1,4 +1,4 @@
-module Shared.Model exposing (Model, Project)
+module Shared.Model exposing (Model, Project, ProjectType(..))
 
 {-| Normally, this value would live in "Shared.elm"
 but that would lead to a circular dependency import cycle.

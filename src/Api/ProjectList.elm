@@ -1,26 +1,9 @@
-module Api.ProjectList exposing (Project, ProjectType(..), getProjectsByType)
+module Api.ProjectList exposing (getProjectsByType)
 
 import Effect exposing (Effect)
 import Http
 import Json.Decode
-
-
-type ProjectType
-    = Expercience
-    | Personal
-    | All
-
-
-type alias Project =
-    { slug : String
-    , name : String
-    , description : String
-    , technologies : List String
-    , link : String
-    , coverImage : String
-    , endedAt : String
-    , projectType : ProjectType
-    }
+import Shared.Model exposing (Project, ProjectType(..))
 
 
 getProjectsByType :

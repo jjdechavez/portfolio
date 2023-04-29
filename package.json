@@ -13,7 +13,7 @@
     "dev:elm-land": "elm-land server",
     "build": "npm run build:sass && npm run build:elm-land",
     "build:sass": "sass static/scss/main.scss static/dist/main.css",
-    "build:elm-land": "elm-land build"
+    "build:elm-land": "npx elm-land build"
   },
   "keywords": [
     "Portfolio",
@@ -22,8 +22,7 @@
   "author": "John Jerald E. De Chavez",
   "license": "ISC",
   "dependencies": {
-    "jump.js": "^1.0.2",
-    "sal.js": "^0.8.3"
+    "jump.js": "^1.0.2"
   },
   "devDependencies": {
     "concurrently": "^8.0.1",

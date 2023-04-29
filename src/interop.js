@@ -1,4 +1,9 @@
 import jump from 'jump.js'
+import sal from 'sal.js'
+
+const Sal = sal({
+  once: true,
+})
 
 export const flags = ({ env }) => {
   // Called before our Elm application starts
@@ -28,6 +33,12 @@ export const onReady = ({ env, app }) => {
           a11y: false,
         });
       }
+    })
+  }
+
+  if (ports && ports.updateSal) {
+    app.ports.updateSal.subscribe(() => {
+      Sal.update();
     })
   }
 }

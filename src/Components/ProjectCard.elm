@@ -25,11 +25,10 @@ viewProjectCard project =
     in
     Html.article
         [ Attr.class "project-grid-item"
-
-        -- , Attr.attribute "data-sal" "slide-up"
-        -- , Attr.attribute "data-sal-duration" "1200"
-        -- , Attr.attribute "data-sal-delay" "300"
-        -- , Attr.attribute "data-sal-easing" "ease-out-bounce"
+        , Attr.attribute "data-sal" "slide-up"
+        , Attr.attribute "data-sal-duration" "1200"
+        , Attr.attribute "data-sal-delay" "300"
+        , Attr.attribute "data-sal-easing" "ease-out-bounce"
         ]
         [ Html.header []
             [ Html.a

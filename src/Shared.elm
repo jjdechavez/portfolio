@@ -101,7 +101,10 @@ update route msg model =
     case msg of
         Shared.Msg.FetchProjects projects ->
             ( { model | projects = Just projects }
-            , Effect.saveProjects projects
+            , Effect.batch
+                [ Effect.saveProjects projects
+                , Effect.invokeSal
+                ]
             )
 
 

@@ -4,7 +4,7 @@ port module Effect exposing
     , sendCmd, sendMsg
     , pushRoute, replaceRoute, loadExternalUrl
     , map, toCmd
-    , clearProjects, fetchProjects, jumpToProjects, saveProjects
+    , clearProjects, fetchProjects, invokeSal, jumpToProjects, saveProjects
     )
 
 {-|
@@ -43,6 +43,7 @@ type Effect msg
     | SendSharedMsg Shared.Msg.Msg
     | SendToLocalStorage { key : String, value : Json.Encode.Value }
     | ScrollToProjects Bool
+    | InvokeSal
 
 
 
@@ -152,6 +153,9 @@ map fn effect =
         ScrollToProjects scrolling ->
             ScrollToProjects scrolling
 
+        InvokeSal ->
+            InvokeSal
+
 
 {-| Elm Land depends on this function to perform your effects.
 -}
@@ -194,6 +198,9 @@ toCmd options effect =
 
         ScrollToProjects scrolling ->
             scrollToProjects scrolling
+
+        InvokeSal ->
+            updateSal ()
 
 
 
@@ -269,3 +276,11 @@ port scrollToProjects : Bool -> Cmd msg
 jumpToProjects : Bool -> Effect msg
 jumpToProjects jumping =
     ScrollToProjects jumping
+
+
+port updateSal : () -> Cmd msg
+
+
+invokeSal : Effect msg
+invokeSal =
+    InvokeSal

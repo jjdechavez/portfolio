@@ -72,7 +72,7 @@ init shared () =
         effect =
             case projects of
                 Api.Success _ ->
-                    Effect.none
+                    Effect.invokeSal
 
                 Api.Loading ->
                     Api.ProjectList.getProjects
@@ -114,7 +114,7 @@ update msg model =
                     List.filter personalProject listOfProjects
             in
             ( { model | projects = Api.Success projects }
-            , Effect.none
+            , Effect.fetchProjects listOfProjects
             )
 
         ProjectApiResponded (Err httpError) ->

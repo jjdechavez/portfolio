@@ -12,7 +12,7 @@
     "dev:sass": "sass -w static/scss/main.scss static/dist/main.css",
     "dev:elm-land": "elm-land server",
     "build": "npm run build:sass && npm run build:elm-land",
-    "build:sass": "sass assets/scss/main.scss static/dist/main.css",
+    "build:sass": "sass static/scss/main.scss static/dist/main.css",
     "build:elm-land": "elm-land build"
   },
   "keywords": [

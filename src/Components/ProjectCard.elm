@@ -3,6 +3,10 @@ module Components.ProjectCard exposing (viewProjectCard)
 import Html exposing (Html)
 import Html.Attributes as Attr
 import Shared.Model exposing (Project)
+import Simple.Animation as Animation exposing (Animation)
+import Simple.Animation.Animated as Animated
+import Simple.Animation.Property as P
+import Simple.Transition as Transition
 
 
 viewProjectCard : Project -> Html msg
@@ -23,12 +27,11 @@ viewProjectCard project =
                 Nothing ->
                     "Current"
     in
-    Html.article
-        [ Attr.class "project-grid-item"
-        , Attr.attribute "data-sal" "slide-up"
-        , Attr.attribute "data-sal-duration" "1200"
-        , Attr.attribute "data-sal-delay" "300"
-        , Attr.attribute "data-sal-easing" "ease-out-bounce"
+    Animated.div
+        slideUp
+        [ Attr.class "project-card project-grid-item"
+        , Transition.properties
+            [ Transition.opacity 500 [ Transition.delay 300 ] ]
         ]
         [ Html.header []
             [ Html.a
@@ -55,4 +58,14 @@ viewProjectCard project =
             , Html.p [ Attr.class "technology" ]
                 [ Html.text <| String.join ", " project.technologies ]
             ]
+        ]
+
+
+slideUp : Animation
+slideUp =
+    Animation.steps
+        { startAt = [ P.property "transform" "none", P.opacity 0 ]
+        , options = [ Animation.easeIn, Animation.delay 300 ]
+        }
+        [ Animation.step 800 [ P.opacity 1, P.y 20 ]
         ]

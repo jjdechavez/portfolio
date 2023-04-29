@@ -72,7 +72,7 @@ init shared () =
         effect =
             case projects of
                 Api.Success _ ->
-                    Effect.invokeSal
+                    Effect.none
 
                 Api.Loading ->
                     Api.ProjectList.getProjects

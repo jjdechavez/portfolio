@@ -18,7 +18,7 @@
         { "name": "viewport", "content": "width=device-width, initial-scale=1.0" }
       ],
       "link": [
-        { "rel": "stylesheet", "href": "/dist/main.css" },
+        { "rel": "stylesheet", "href": "/dist/main.css", "type": "text/css" },
         { "rel": "shorcut icon", "href": "/logo.png", "type": "image/x-icon" }
       ]
     },

@@ -1,4 +1,4 @@
-@import '../../node_modules/sal.js/dist/sal.css';
+@import './sal.scss';
 
 $primary-color: #181818;
 $seconday-color: #000;
@@ -21,7 +21,7 @@ $nav-element-spacing-horizontal: 1.5rem;
 
 body {
   font-family: 'Inter', sans-serif;
-  letter-spacing: 1.5px;
+  letter-spacing: 0.5px;
   line-height: 30px;
 }
 
@@ -45,7 +45,6 @@ a {
 .headline {
   width: 100%;
   position: relative;
-  letter-spacing: 1.25px;
   text-align: center;
 
   hgroup {
@@ -131,6 +130,13 @@ nav {
   }
 }
 
+.dot {
+  background-color: $primary-color;
+  border-radius: 100px;
+  width: 25px;
+  height: 25px;
+}
+
 // project.html
 header.section-header {
   display: flex;
@@ -149,7 +155,7 @@ main {
     justify-content: space-around;
   }
 
-  article {
+  .project-card {
     header > a > img {
       max-width: 100%;
 
@@ -235,7 +241,7 @@ footer {
 }
 
 @media screen and (min-width: 770px) {
-  article > header > a > img {
+  .project-card > header > a > img {
     filter: grayscale(100%);
     transition: all 0.5s ease-in-out;
 
@@ -253,3 +259,4 @@ footer {
     }
   }
 }
+

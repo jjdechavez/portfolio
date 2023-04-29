@@ -4,5 +4,11 @@
 
 [[redirects]]
   from = "/*"
-  to = "/"
+  to = "/index.html"
   status = 200
+
+
+[[redirects]]
+  from = "/index.html"
+  to = "/"
+  status = 301

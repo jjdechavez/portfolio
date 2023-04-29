@@ -7,6 +7,22 @@ import Shared.Model exposing (Project)
 
 viewProjectCard : Project -> Html msg
 viewProjectCard project =
+    let
+        yearFromString : String -> String
+        yearFromString string =
+            let
+                result : Maybe String
+                result =
+                    String.split "-" string
+                        |> List.head
+            in
+            case result of
+                Just value ->
+                    value
+
+                Nothing ->
+                    "-"
+    in
     Html.article
         [ Attr.class "project-grid-item"
 
@@ -32,7 +48,8 @@ viewProjectCard project =
         , Html.div [ Attr.class "content" ]
             [ Html.h3 []
                 [ Html.text project.name
-                , Html.small [] [ Html.text project.endedAt ]
+                , Html.text " "
+                , Html.small [] [ Html.text (yearFromString project.endedAt) ]
                 ]
             , Html.p [ Attr.class "description" ]
                 [ Html.text project.description ]

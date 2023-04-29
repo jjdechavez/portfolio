@@ -6,8 +6,8 @@
     "technologies": ["ReactJs", "NodeJs", "DynamoDb"],
     "link": "https://www.santi.edu.ph/",
     "coverImage": "/Santi.webp",
-    "startedAt": "2021-06",
-    "endedAt": "2022-01",
+    "startedAt": "2021-06-01",
+    "endedAt": "2022-01-01",
     "type": "EXPERCIENCE"
   },
   {
@@ -17,8 +17,8 @@
     "coverImage": "/Arsenal.webp",
     "description": "Rental platform for filmakers in the Philippines.",
     "technologies": ["ReactJs", "NodeJs", "Graphql", "Prisma"],
-    "startedAt": "2019-11",
-    "endedAt": "2021-06",
+    "startedAt": "2019-11-01",
+    "endedAt": "2021-06-01",
     "type": "EXPERCIENCE"
   },
   {
@@ -28,8 +28,8 @@
     "coverImage": "/EGraph.webp",
     "description": "Backend provider for Ecommerce client.",
     "technologies": ["NodeJs", "TypeGraphql", "MongoDb", "Redis"],
-    "startedAt": "2020-09",
-    "endedAt": "2021-06",
+    "startedAt": "2020-09-01",
+    "endedAt": "2021-06-01",
     "type": "EXPERCIENCE"
   },
   {
@@ -39,8 +39,8 @@
     "coverImage": "/Automart.webp",
     "description": "Used, second-hand and repossessed cars.",
     "technologies": ["Laravel", "Blade"],
-    "startedAt": "2020-01",
-    "endedAt": "2020-03",
+    "startedAt": "2020-01-01",
+    "endedAt": "2020-03-01",
     "type": "EXPERCIENCE"
   },
   {
@@ -50,8 +50,8 @@
     "coverImage": "/HapiTypescript.webp",
     "description": "Basic setup for HapiJs with Typescript.",
     "technologies": ["NodeJs", "MongoDb"],
-    "startedAt": "2021-06",
-    "endedAt": "2022-05",
+    "startedAt": "2021-06-01",
+    "endedAt": "2022-05-01",
     "type": "PERSONAL"
   },
   {
@@ -61,8 +61,8 @@
     "coverImage": "/mrchicken.webp",
     "description": "Webapp phone store with static api. Transaction method through Paypal.",
     "technologies": ["ReactJs"],
-    "startedAt": "2019-10",
-    "endedAt": "2019-10",
+    "startedAt": "2019-10-01",
+    "endedAt": "2019-10-01",
     "type": "PERSONAL"
   },
   {
@@ -72,8 +72,8 @@
     "coverImage": "/blog.webp",
     "description": "Webapp blogs. Read & share their blogs based on their experciences.",
     "technologies": ["ReactJs"],
-    "startedAt": "2019-11",
-    "endedAt": "2019-11",
+    "startedAt": "2019-11-01",
+    "endedAt": "2019-11-01",
     "type": "PERSONAL"
   },
   {
@@ -83,8 +83,8 @@
     "coverImage": "/ice.webp",
     "description": "A modern responsive web design with SCSS as css prepocessor.",
     "technologies": ["HTML", "CSS"],
-    "startedAt": "2019-10",
-    "endedAt": "2019-10",
+    "startedAt": "2019-10-01",
+    "endedAt": "2019-10-01",
     "type": "PERSONAL"
   },
   {
@@ -94,8 +94,8 @@
     "coverImage": "/tide.webp",
     "description": "Convert some GSAP animation to CSS animation.",
     "technologies": ["HTML", "CSS"],
-    "startedAt": "2019-10",
-    "endedAt": "2019-10",
+    "startedAt": "2019-10-01",
+    "endedAt": "2019-10-01",
     "type": "PERSONAL"
   }
 ]

@@ -19,7 +19,7 @@
           "property": "title",
           "content": "John Jerald De Chavez | Personal Website"
         },
-        { "name": "description", "content": "I am a Software Engineer at Adaca, specialising in Backend Development.  excel in creating scalable applications and delivering clean code that exceeds expectations. In my free time, I like to play around with Functional Programming; at the moment, I'm learning about Elm, Linux, and more on Backend stuff." },
+        { "name": "description", "content": "I am a Software Engineer at Adaca, specialising in Backend Development. I excel in creating scalable applications and delivering clean code that exceeds expectations. In my free time, I like to play around with Functional Programming; at the moment, I'm learning about Elm, Linux, and more on Backend stuff." },
          {
           "property": "twitter:card",
           "content": "summary_large_image"
@@ -34,7 +34,7 @@
         },
         {
           "property": "twitter:description",
-          "content": "I am a Software Engineer at Adaca, specialising in Backend Development.  excel in creating scalable applications and delivering clean code that exceeds expectations. In my free time, I like to play around with Functional Programming; at the moment, I'm learning about Elm, Linux, and more on Backend stuff."
+          "content": "I am a Software Engineer at Adaca, specialising in Backend Development. I excel in creating scalable applications and delivering clean code that exceeds expectations. In my free time, I like to play around with Functional Programming; at the moment, I'm learning about Elm, Linux, and more on Backend stuff."
         },
         {
           "property": "twitter:image",
@@ -53,7 +53,7 @@
         },
         {
           "property": "og:description",
-          "content": "I am a Software Engineer at Adaca, specialising in Backend Development.  excel in creating scalable applications and delivering clean code that exceeds expectations. In my free time, I like to play around with Functional Programming; at the moment, I'm learning about Elm, Linux, and more on Backend stuff."
+          "content": "I am a Software Engineer at Adaca, specialising in Backend Development. I excel in creating scalable applications and delivering clean code that exceeds expectations. In my free time, I like to play around with Functional Programming; at the moment, I'm learning about Elm, Linux, and more on Backend stuff."
         },
         {
           "property": "og:image",

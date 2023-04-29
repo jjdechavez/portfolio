@@ -3,6 +3,7 @@ module Pages.Projects exposing (Model, Msg, page)
 import Api
 import Api.ProjectList
 import Browser.Dom as Dom
+import Components.LoadingPulse exposing (loadingPulse)
 import Components.ProjectCard exposing (viewProjectCard)
 import Effect exposing (Effect)
 import Html exposing (Html)
@@ -162,7 +163,7 @@ viewBody model =
             ]
         , case model.projects of
             Api.Loading ->
-                Html.div [] [ Html.text "Loading..." ]
+                loadingPulse
 
             Api.Success listOfProjects ->
                 Html.div

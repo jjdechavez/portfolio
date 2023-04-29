@@ -21,7 +21,7 @@ viewProjectCard project =
                     value
 
                 Nothing ->
-                    "-"
+                    "Current"
     in
     Html.article
         [ Attr.class "project-grid-item"

@@ -1,9 +1,6 @@
 import jump from 'jump.js'
 import sal from 'sal.js'
 
-const Sal = sal({
-  once: true,
-})
 
 export const flags = ({ env }) => {
   // Called before our Elm application starts
@@ -14,6 +11,10 @@ export const flags = ({ env }) => {
 
 export const onReady = ({ env, app }) => {
   // Called after our Elm application starts
+  const Sal = sal({
+    once: true,
+  });
+
   const ports = app.ports;
   if (ports && ports.sendToLocalStorage) {
     app.ports.sendToLocalStorage.subscribe(({ key, value }) => {
@@ -38,7 +39,7 @@ export const onReady = ({ env, app }) => {
 
   if (ports && ports.updateSal) {
     app.ports.updateSal.subscribe(() => {
-      Sal.update();
+      Sal.reset();
     })
   }
 }

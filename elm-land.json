@@ -20,9 +20,6 @@
       "link": [
         { "rel": "stylesheet", "href": "/dist/main.css" },
         { "rel": "shorcut icon", "href": "/logo.png", "type": "image/x-icon" }
-      ],
-      "script": [
-        { "type": "module", "src": "/js/app.js" }
       ]
     },
     "router": {

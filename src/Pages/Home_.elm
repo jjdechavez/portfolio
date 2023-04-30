@@ -162,9 +162,6 @@ update shared msg model =
 
                         _ ->
                             filterProjectByType listOfProjects projectType
-
-                _ =
-                    Debug.log (Debug.toString projectType)
             in
             ( { model | projects = Api.Success projects, showcase = projectType }
             , Effect.none

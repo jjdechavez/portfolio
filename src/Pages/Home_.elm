@@ -25,7 +25,7 @@ page : Shared.Model -> Route () -> Page Model Msg
 page shared _ =
     Page.new
         { init = init shared
-        , update = update
+        , update = update shared
         , subscriptions = subscriptions
         , view = view
         }
@@ -49,6 +49,7 @@ layout _ =
 type alias Model =
     { projects : Api.Data (List Project)
     , showcase : ProjectType
+    , projectTypes : List String
     }
 
 
@@ -57,14 +58,19 @@ init shared () =
     let
         showcase : ProjectType
         showcase =
-            Expercience
+            All
 
         projects : Api.Data (List Project)
         projects =
             case shared.projects of
                 Just resultProjects ->
                     Api.Success <|
-                        filterProjectByType resultProjects showcase
+                        case showcase of
+                            All ->
+                                resultProjects
+
+                            _ ->
+                                filterProjectByType resultProjects showcase
 
                 Nothing ->
                     Api.Loading
@@ -84,6 +90,7 @@ init shared () =
     in
     ( { projects = projects
       , showcase = showcase
+      , projectTypes = [ "All", "Expercience", "Personal" ]
       }
     , Effect.batch
         [ Effect.sendCmd (Task.perform (\_ -> NoOp) (Dom.setViewport 0 0))
@@ -100,16 +107,22 @@ type Msg
     = ProjectApiResponded (Result Http.Error (List Project))
     | GotoProjects
     | NoOp
+    | FilterProject ProjectType
 
 
-update : Msg -> Model -> ( Model, Effect Msg )
-update msg model =
+update : Shared.Model -> Msg -> Model -> ( Model, Effect Msg )
+update shared msg model =
     case msg of
         ProjectApiResponded (Ok listOfProjects) ->
             let
                 projects : List Project
                 projects =
-                    filterProjectByType listOfProjects model.showcase
+                    case model.showcase of
+                        All ->
+                            listOfProjects
+
+                        _ ->
+                            filterProjectByType listOfProjects model.showcase
             in
             ( { model | projects = Api.Success projects }
             , Effect.fetchProjects listOfProjects
@@ -127,6 +140,33 @@ update msg model =
 
         NoOp ->
             ( model
+            , Effect.none
+            )
+
+        FilterProject projectType ->
+            let
+                listOfProjects : List Project
+                listOfProjects =
+                    case shared.projects of
+                        Just results ->
+                            results
+
+                        Nothing ->
+                            []
+
+                projects : List Project
+                projects =
+                    case projectType of
+                        All ->
+                            listOfProjects
+
+                        _ ->
+                            filterProjectByType listOfProjects projectType
+
+                _ =
+                    Debug.log (Debug.toString projectType)
+            in
+            ( { model | projects = Api.Success projects, showcase = projectType }
             , Effect.none
             )
 
@@ -200,25 +240,96 @@ viewCTA =
         ]
 
 
-viewProjects : List Project -> List (Html msg)
-viewProjects listOfProjects =
-    List.map viewProjectCard listOfProjects
-
-
-viewBody : Model -> Html msg
+viewBody : Model -> Html Msg
 viewBody model =
     Html.main_ []
-        [ case model.projects of
-            Api.Loading ->
-                loadingPulse
-
-            Api.Success listOfProjects ->
-                Html.div
-                    [ Attr.id "projects"
-                    , Attr.class "grid"
-                    ]
-                    (viewProjects listOfProjects)
-
-            Api.Failure httpError ->
-                Html.div [] [ Html.text (Api.toUserFriendlyMessage httpError) ]
+        [ Html.h2
+            [ Attr.style "padding" "1.75rem 0" ]
+            [ Html.text "Projects" ]
+        , projectTypeFilter model.projectTypes model.showcase
+        , viewProjects model.projects
         ]
+
+
+projectTypeFilter : List String -> ProjectType -> Html Msg
+projectTypeFilter projectTypes showcase =
+    Html.fieldset
+        []
+        (List.concat
+            [ [ Html.legend
+                    [ Attr.class "sr-only"
+                    ]
+                    [ Html.text "Project Type" ]
+              ]
+            , List.map (\option -> viewProjectTypeOption option showcase) projectTypes
+            ]
+        )
+
+
+viewProjectTypeOption : String -> ProjectType -> Html Msg
+viewProjectTypeOption option currentProjectType =
+    let
+        stringFromProjectType : String
+        stringFromProjectType =
+            case currentProjectType of
+                Expercience ->
+                    "Expercience"
+
+                Personal ->
+                    "Personal"
+
+                _ ->
+                    "All"
+
+        projectTypeFromString : ProjectType
+        projectTypeFromString =
+            case option of
+                "Expercience" ->
+                    Expercience
+
+                "Personal" ->
+                    Personal
+
+                _ ->
+                    All
+
+        isChecked : Bool
+        isChecked =
+            option == stringFromProjectType
+    in
+    Html.div []
+        [ Html.input
+            [ Attr.type_ "radio"
+            , Attr.name option
+            , Attr.value option
+            , Attr.id option
+            , Attr.class "peer"
+            , Attr.checked isChecked
+            , Event.onClick (FilterProject projectTypeFromString)
+            ]
+            []
+        , Html.label
+            [ Attr.for option
+            ]
+            [ Html.p
+                []
+                [ Html.text option ]
+            ]
+        ]
+
+
+viewProjects : Api.Data (List Project) -> Html msg
+viewProjects projectData =
+    case projectData of
+        Api.Loading ->
+            loadingPulse
+
+        Api.Success listOfProjects ->
+            Html.div
+                [ Attr.id "projects"
+                , Attr.class "grid"
+                ]
+                (List.map viewProjectCard listOfProjects)
+
+        Api.Failure httpError ->
+            Html.div [] [ Html.text (Api.toUserFriendlyMessage httpError) ]

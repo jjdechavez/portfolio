@@ -143,8 +143,69 @@ header.section-header {
   height: 30vh;
 }
 
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0,0,0,0);
+	white-space: nowrap;
+	border-width: 0;
+}
+
 main {
   margin-bottom: 8em;
+
+  fieldset {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .75rem;
+    border: 0;
+    padding: 1rem 0;
+    margin: 0;
+
+    div {
+      --text-opacity: 1;
+      --bg-opacity: 1;
+      --border-opacity: 1;
+
+      .peer:checked ~ label {
+        color: rgb(255 255 255/var(--text-opacity));
+        background-color: rgba($primary-color, var(--bg-opacity));
+      }
+
+      input[type="radio"] {
+        display: none;
+      }
+
+      label {
+        padding: .5rem .75rem;
+        color: rgb(17 24 39/var(--text-opacity));
+        background-color: rgb(255 255 255/var(--bg-opacity));
+        border-width: 1px;
+        border-color: rgb(243 244 246/var(--border-opacity));
+        border-radius: .375rem;
+        cursor: pointer;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &:hover {
+          background-color: rgba($primary-color, 0.2);
+        }
+
+        p {
+          margin: 0;
+          font-weight: 500;
+          font-size: .875rem;
+          line-height: 1.25rem;
+        }
+      }
+    }
+  }
 
   .grid {
     display: grid;

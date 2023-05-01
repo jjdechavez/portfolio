@@ -53,10 +53,15 @@ viewProjectCard project =
                 , Html.text " "
                 , Html.small [] [ Html.text (yearFromString project.endedAt) ]
                 ]
-            , Html.p [ Attr.class "description" ]
-                [ Html.text project.description ]
-            , Html.p [ Attr.class "technology" ]
-                [ Html.text <| String.join ", " project.technologies ]
+            , Html.div [ Attr.class "headings" ]
+                [ Html.p [ Attr.class "description" ]
+                    [ Html.text project.description ]
+                , Html.p [ Attr.class "technology" ]
+                    [ Html.text "Website"
+                    , Html.text " "
+                    , Html.text "Code"
+                    ]
+                ]
             ]
         ]
 

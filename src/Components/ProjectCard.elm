@@ -47,20 +47,18 @@ viewProjectCard project =
                     []
                 ]
             ]
-        , Html.div [ Attr.class "content" ]
-            [ Html.h3 []
-                [ Html.text project.name
+        , Html.h3 []
+            [ Html.text project.name
+            , Html.text " "
+            , Html.small [] [ Html.text (yearFromString project.endedAt) ]
+            ]
+        , Html.div [ Attr.class "headings" ]
+            [ Html.p [ Attr.class "description" ]
+                [ Html.text project.description ]
+            , Html.p [ Attr.class "technology" ]
+                [ Html.text "Website"
                 , Html.text " "
-                , Html.small [] [ Html.text (yearFromString project.endedAt) ]
-                ]
-            , Html.div [ Attr.class "headings" ]
-                [ Html.p [ Attr.class "description" ]
-                    [ Html.text project.description ]
-                , Html.p [ Attr.class "technology" ]
-                    [ Html.text "Website"
-                    , Html.text " "
-                    , Html.text "Code"
-                    ]
+                , Html.text "Code"
                 ]
             ]
         ]

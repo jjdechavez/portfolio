@@ -34,12 +34,12 @@ hgroup,
     margin-bottom: 0;
   }
 
-  > *:last-child {
-    --font-weight: unset;
-    font-size: 1rem;
-    font-family: unset;
-    color: $tertiary-color;
-  }
+  // > *:last-child {
+  //   --font-weight: unset;
+  //   font-size: 1rem;
+  //   font-family: unset;
+  //   color: $tertiary-color;
+  // }
 }
 
 body {
@@ -298,6 +298,14 @@ main {
       font-size: 1rem;
       font-family: unset;
       color: $tertiary-color;
+
+      &:hover {
+        --hover-color: rgba($seconday-color, 0.5);
+
+        border-bottom-width: 1px;
+        border-bottom-color: var(--hover-color);
+        color: var(--hover-color);
+      }
     }
   }
 }

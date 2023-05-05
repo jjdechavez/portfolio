@@ -24,7 +24,6 @@
   {
     "name": "Ecommerce Graph",
     "slug": "ecommerce-graph",
-    "websiteLink": "https://ecommerce-graph.herokuapp.com/graphql",
     "coverImage": "/EGraph.webp",
     "description": "Backend provider for Ecommerce client.",
     "technologies": ["NodeJs", "TypeGraphql", "MongoDb", "Redis"],

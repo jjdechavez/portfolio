@@ -208,7 +208,7 @@ viewHeader =
             , Html.nav []
                 [ viewCTA
                 ]
-            , Html.span
+            , Html.small
                 [ Attr.class "scroll-down"
                 , Event.onClick GotoProjects
                 ]

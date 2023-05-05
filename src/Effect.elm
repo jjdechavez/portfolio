@@ -239,6 +239,16 @@ projectTypeEncoder projectType =
                 "ALL"
 
 
+projectLinkEncoder : Maybe String -> Json.Encode.Value
+projectLinkEncoder maybeLink =
+    case maybeLink of
+        Just link ->
+            Json.Encode.string link
+
+        Nothing ->
+            Json.Encode.null
+
+
 projectEncoder :
     Shared.Model.Project
     -> Json.Encode.Value
@@ -248,7 +258,12 @@ projectEncoder project =
         , ( "name", Json.Encode.string project.name )
         , ( "description", Json.Encode.string project.description )
         , ( "technologies", Json.Encode.list Json.Encode.string project.technologies )
-        , ( "link", Json.Encode.string project.link )
+        , ( "links"
+          , Json.Encode.object
+                [ ( "website", projectLinkEncoder project.links.website )
+                , ( "sourceCode", projectLinkEncoder project.links.sourceCode )
+                ]
+          )
         , ( "coverImage", Json.Encode.string project.coverImage )
         , ( "endedAt", Json.Encode.string project.endedAt )
         , ( "projectType", projectTypeEncoder project.projectType )

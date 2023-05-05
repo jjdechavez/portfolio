@@ -1,4 +1,4 @@
-module Shared.Model exposing (Model, Project, ProjectType(..), filterProjectByType)
+module Shared.Model exposing (Model, Project, ProjectLinks, ProjectType(..), filterProjectByType)
 
 {-| Normally, this value would live in "Shared.elm"
 but that would lead to a circular dependency import cycle.
@@ -19,12 +19,18 @@ type ProjectType
     | All
 
 
+type alias ProjectLinks =
+    { website : Maybe String
+    , sourceCode : Maybe String
+    }
+
+
 type alias Project =
     { slug : String
     , name : String
     , description : String
     , technologies : List String
-    , link : String
+    , links : ProjectLinks
     , coverImage : String
     , endedAt : String
     , projectType : ProjectType

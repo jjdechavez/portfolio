@@ -6,20 +6,12 @@ import Json.Decode
 import Shared.Model exposing (Project, ProjectType(..))
 
 
-getProjects:
+getProjects :
     { onResponse : Result Http.Error (List Project) -> msg
     }
     -> Effect msg
 getProjects options =
     let
-        -- currentProjectType : String
-        -- currentProjectType =
-        --     case projectType of
-        --         Expercience ->
-        --             "EXPERCIENCE"
-        --
-        --         Personal ->
-        --             "PERSONAL"
         cmd : Cmd msg
         cmd =
             Http.get
@@ -54,6 +46,13 @@ projectTypeDecoder =
         (Json.Decode.field "type" Json.Decode.string)
 
 
+projectLinkDecoder : Json.Decode.Decoder Shared.Model.ProjectLinks
+projectLinkDecoder =
+    Json.Decode.map2 Shared.Model.ProjectLinks
+        (Json.Decode.maybe (Json.Decode.field "websiteLink" Json.Decode.string))
+        (Json.Decode.maybe (Json.Decode.field "sourceCodeLink" Json.Decode.string))
+
+
 projectDecoder : Json.Decode.Decoder Project
 projectDecoder =
     Json.Decode.map8 Project
@@ -61,7 +60,7 @@ projectDecoder =
         (Json.Decode.field "name" Json.Decode.string)
         (Json.Decode.field "description" Json.Decode.string)
         (Json.Decode.field "technologies" (Json.Decode.list Json.Decode.string))
-        (Json.Decode.field "link" Json.Decode.string)
+        projectLinkDecoder
         (Json.Decode.field "coverImage" Json.Decode.string)
         (Json.Decode.field "endedAt" Json.Decode.string)
         projectTypeDecoder

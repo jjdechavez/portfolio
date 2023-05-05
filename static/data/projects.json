@@ -4,7 +4,7 @@
     "slug": "santi",
     "description": "E-learning platform for Donbosco.",
     "technologies": ["ReactJs", "NodeJs", "DynamoDb"],
-    "link": "https://www.santi.edu.ph/",
+    "websiteLink": "https://www.santi.edu.ph/",
     "coverImage": "/Santi.webp",
     "startedAt": "2021-06-01",
     "endedAt": "2022-01-01",
@@ -13,7 +13,7 @@
   {
     "name": "Arsenal",
     "slug": "arsenal",
-    "link": "http://arsenal.com.ph/",
+    "websiteLink": "http://arsenal.com.ph/",
     "coverImage": "/Arsenal.webp",
     "description": "Rental platform for filmakers in the Philippines.",
     "technologies": ["ReactJs", "NodeJs", "Graphql", "Prisma"],
@@ -24,7 +24,7 @@
   {
     "name": "Ecommerce Graph",
     "slug": "ecommerce-graph",
-    "link": "https://ecommerce-graph.herokuapp.com/graphql",
+    "websiteLink": "https://ecommerce-graph.herokuapp.com/graphql",
     "coverImage": "/EGraph.webp",
     "description": "Backend provider for Ecommerce client.",
     "technologies": ["NodeJs", "TypeGraphql", "MongoDb", "Redis"],
@@ -35,7 +35,7 @@
   {
     "name": "Automart.ph",
     "slug": "automart-ph",
-    "link": "https://automart.ph",
+    "websiteLink": "https://automart.ph",
     "coverImage": "/Automart.webp",
     "description": "Used, second-hand and repossessed cars.",
     "technologies": ["Laravel", "Blade"],
@@ -46,7 +46,7 @@
   {
     "name": "Hapi Typescript Template",
     "slug": "hapi-typescript-template",
-    "link": "https://github.com/jjdechavez/hapi-typescript-template",
+    "sourceCodeLink": "https://github.com/jjdechavez/hapi-typescript-template",
     "coverImage": "/HapiTypescript.webp",
     "description": "Basic setup for HapiJs with Typescript.",
     "technologies": ["NodeJs", "MongoDb"],
@@ -57,7 +57,8 @@
   {
     "name": "Mr. Chicken Phone Shop",
     "slug": "mrchicken-phoneshop",
-    "link": "https://mrchicken-phoneshop.netlify.com",
+    "websiteLink": "https://mrchicken-phoneshop.netlify.com",
+    "sourceCodeLink": "https://github.com/jjdechavez/phone-store",
     "coverImage": "/mrchicken.webp",
     "description": "Webapp phone store with static api. Transaction method through Paypal.",
     "technologies": ["ReactJs"],
@@ -68,7 +69,8 @@
   {
     "name": "Blog IT",
     "slug": "blog-it",
-    "link": "https://blog-it.netlify.com",
+    "websiteLink": "https://blog-it.netlify.com",
+    "sourceCodeLink": "https://github.com/jjdechavez/blogger-app",
     "coverImage": "/blog.webp",
     "description": "Webapp blogs. Read & share their blogs based on their experciences.",
     "technologies": ["ReactJs"],
@@ -79,7 +81,8 @@
   {
     "name": "Ice",
     "slug": "ice-rwd",
-    "link": "https://jjdechavez.github.io/ice-rwd/",
+    "websiteLink": "https://jjdechavez.github.io/ice-rwd/",
+    "sourceCodeLink": "https://github.com/jjdechavez/ice-rwd",
     "coverImage": "/ice.webp",
     "description": "A modern responsive web design with SCSS as css prepocessor.",
     "technologies": ["HTML", "CSS"],
@@ -90,7 +93,8 @@
   {
     "name": "Convert Gsap to CSS Animation",
     "slug": "gsap-convert-to-css",
-    "link": "https://jjdechavez.github.io/gsap-convert-to-css/",
+    "websiteLink": "https://jjdechavez.github.io/gsap-convert-to-css/",
+    "sourceCodeLink": "https://github.com/jjdechavez/ice-rwd",
     "coverImage": "/tide.webp",
     "description": "Convert some GSAP animation to CSS animation.",
     "technologies": ["HTML", "CSS"],

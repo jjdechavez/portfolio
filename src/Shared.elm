@@ -54,6 +54,13 @@ projectTypeDecoder =
         (Json.Decode.field "type" Json.Decode.string)
 
 
+projectLinkDecoder : Json.Decode.Decoder Shared.Model.ProjectLinks
+projectLinkDecoder =
+    Json.Decode.map2 Shared.Model.ProjectLinks
+        (Json.Decode.maybe (Json.Decode.at [ "links", "website" ] Json.Decode.string))
+        (Json.Decode.maybe (Json.Decode.at [ "links", "sourceCode" ] Json.Decode.string))
+
+
 projectDecoder : Json.Decode.Decoder Shared.Model.Project
 projectDecoder =
     Json.Decode.map8 Shared.Model.Project
@@ -61,7 +68,7 @@ projectDecoder =
         (Json.Decode.field "name" Json.Decode.string)
         (Json.Decode.field "description" Json.Decode.string)
         (Json.Decode.field "technologies" (Json.Decode.list Json.Decode.string))
-        (Json.Decode.field "link" Json.Decode.string)
+        projectLinkDecoder
         (Json.Decode.field "coverImage" Json.Decode.string)
         (Json.Decode.field "endedAt" Json.Decode.string)
         projectTypeDecoder

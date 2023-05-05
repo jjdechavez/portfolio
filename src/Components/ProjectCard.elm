@@ -35,7 +35,7 @@ viewProjectCard project =
         ]
         [ Html.header []
             [ Html.a
-                [ Attr.href project.link
+                [ Attr.href (Maybe.withDefault "#" project.links.website)
                 , Attr.target "_blank"
                 , Attr.rel "noopener"
                 ]
@@ -53,14 +53,7 @@ viewProjectCard project =
             , Html.small [] [ Html.text (yearFromString project.endedAt) ]
             ]
         , Html.div [ Attr.class "headings" ]
-            [ Html.p [ Attr.class "description" ]
-                [ Html.text project.description ]
-            , Html.p [ Attr.class "technology" ]
-                [ Html.text "Website"
-                , Html.text " "
-                , Html.text "Code"
-                ]
-            ]
+            (description project)
         ]
 
 
@@ -72,3 +65,28 @@ slideUp =
         }
         [ Animation.step 800 [ P.opacity 1, P.y 20 ]
         ]
+
+
+description : Project -> List (Html msg)
+description project =
+    let
+        displayCTA : Maybe String -> String -> Html msg
+        displayCTA cta ctaType =
+            case cta of
+                Just action ->
+                    Html.a
+                        [ Attr.href action
+                        , Attr.target "_blank"
+                        ]
+                        [ Html.text ctaType
+                        ]
+
+                Nothing ->
+                    Html.text ""
+    in
+    [ Html.p [ Attr.class "description" ]
+        [ Html.text project.description ]
+    , displayCTA project.links.website "Website"
+    , Html.text " "
+    , displayCTA project.links.sourceCode "Code"
+    ]

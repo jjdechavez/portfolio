@@ -24,7 +24,7 @@ import Json.Encode
 import Route exposing (Route)
 import Route.Path
 import Route.Query
-import Shared.Model
+import Shared.Model exposing (projectEncoder)
 import Shared.Msg
 import Task
 import Url exposing (Url)
@@ -223,51 +223,6 @@ saveProjects projects =
         , value =
             Json.Encode.list projectEncoder projects
         }
-
-
-projectTypeEncoder : Shared.Model.ProjectType -> Json.Encode.Value
-projectTypeEncoder projectType =
-    Json.Encode.string <|
-        case projectType of
-            Shared.Model.Expercience ->
-                "EXPERCIENCE"
-
-            Shared.Model.Personal ->
-                "PERSONAL"
-
-            _ ->
-                "ALL"
-
-
-projectLinkEncoder : Maybe String -> Json.Encode.Value
-projectLinkEncoder maybeLink =
-    case maybeLink of
-        Just link ->
-            Json.Encode.string link
-
-        Nothing ->
-            Json.Encode.null
-
-
-projectEncoder :
-    Shared.Model.Project
-    -> Json.Encode.Value
-projectEncoder project =
-    Json.Encode.object
-        [ ( "slug", Json.Encode.string project.slug )
-        , ( "name", Json.Encode.string project.name )
-        , ( "description", Json.Encode.string project.description )
-        , ( "technologies", Json.Encode.list Json.Encode.string project.technologies )
-        , ( "links"
-          , Json.Encode.object
-                [ ( "website", projectLinkEncoder project.links.website )
-                , ( "sourceCode", projectLinkEncoder project.links.sourceCode )
-                ]
-          )
-        , ( "coverImage", Json.Encode.string project.coverImage )
-        , ( "endedAt", Json.Encode.string project.endedAt )
-        , ( "projectType", projectTypeEncoder project.projectType )
-        ]
 
 
 clearProjects : Effect msg

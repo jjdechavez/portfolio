@@ -1,4 +1,5 @@
 import jump from 'jump.js'
+import autosize from 'autosize'
 
 export const flags = ({ env }) => {
   // Called before our Elm application starts
@@ -30,5 +31,7 @@ export const onReady = ({ env, app }) => {
       }
     })
   }
+
+  autosize(document.querySelectorAll('textarea'));
 }
 

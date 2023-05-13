@@ -4,7 +4,8 @@ module Shared.Model exposing
     , ProjectLinks
     , ProjectType(..)
     , filterProjectByType
-    , projectEncoder, projectDecoder
+    , projectDecoder
+    , projectEncoder
     )
 
 {-| Normally, this value would live in "Shared.elm"
@@ -21,6 +22,10 @@ import Json.Encode
 
 type alias Model =
     { projects : Maybe (List Project) }
+
+
+
+-- Project
 
 
 type ProjectType
@@ -142,3 +147,7 @@ projectLinkDecoder =
     Json.Decode.map2 ProjectLinks
         (Json.Decode.maybe (Json.Decode.at [ "links", "website" ] Json.Decode.string))
         (Json.Decode.maybe (Json.Decode.at [ "links", "sourceCode" ] Json.Decode.string))
+
+
+
+-- Notes

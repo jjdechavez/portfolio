@@ -23,7 +23,7 @@ import View exposing (View)
 page : Shared.Model -> Route () -> Page Model Msg
 page shared _ =
     Page.new
-        { init = init shared
+        { init = init shared.projects
         , update = update
         , subscriptions = subscriptions
         , view = view
@@ -51,7 +51,7 @@ type alias Model =
     }
 
 
-init : Shared.Model -> () -> ( Model, Effect Msg )
+init : Maybe (List Shared.Model.Project) -> () -> ( Model, Effect Msg )
 init shared () =
     let
         showcase : ProjectType
@@ -60,10 +60,10 @@ init shared () =
 
         projects : Api.Data (List Project)
         projects =
-            case shared.projects of
-                Just resultProjects ->
+            case shared of
+                Just maybeProjects ->
                     Api.Success <|
-                        filterProjectByType resultProjects showcase
+                        filterProjectByType maybeProjects showcase
 
                 Nothing ->
                     Api.Loading

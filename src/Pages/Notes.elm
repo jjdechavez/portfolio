@@ -87,17 +87,23 @@ update msg model =
 
                     else
                         model.notes ++ [ { id = model.currentIndex, content = newContent } ]
+
+                updatedModel : Model
+                updatedModel =
+                    { model | currentNote = newContent, notes = entries }
             in
-            ( { model
-                | currentNote = newContent
-                , notes = entries
-              }
-            , Effect.none
+            ( updatedModel
+            , Effect.changeNote updatedModel
             )
 
         DeleteNote noteId ->
-            ( { model | notes = List.filter (\note -> noteId /= note.id) model.notes }
-            , Effect.none
+            let
+                updatedModel : Model
+                updatedModel =
+                    { model | notes = List.filter (\note -> noteId /= note.id) model.notes }
+            in
+            ( updatedModel
+            , Effect.changeNote updatedModel
             )
 
         NewNote ->
@@ -105,21 +111,30 @@ update msg model =
                 newIndex : Int
                 newIndex =
                     List.length model.notes + 1
+
+                updatedModel : Model
+                updatedModel =
+                    { model
+                        | notes = model.notes ++ [ { id = newIndex, content = "" } ]
+                        , currentIndex = newIndex
+                        , currentNote = ""
+                    }
             in
-            ( { model
-                | notes = model.notes ++ [ { id = newIndex, content = "" } ]
-                , currentIndex = newIndex
-                , currentNote = ""
-              }
-            , Effect.none
+            ( updatedModel
+            , Effect.changeNote updatedModel
             )
 
         SwitchNote selectedNote ->
-            ( { model
-                | currentIndex = selectedNote.id
-                , currentNote = selectedNote.content
-              }
-            , Effect.none
+            let
+                updatedModel : Model
+                updatedModel =
+                    { model
+                        | currentIndex = selectedNote.id
+                        , currentNote = selectedNote.content
+                    }
+            in
+            ( updatedModel
+            , Effect.changeNote updatedModel
             )
 
 

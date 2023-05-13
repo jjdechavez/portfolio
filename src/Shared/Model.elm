@@ -1,9 +1,11 @@
 module Shared.Model exposing
     ( Model
+    , Note
     , Project
     , ProjectLinks
     , ProjectType(..)
     , filterProjectByType
+    , noteEncoder
     , projectDecoder
     , projectEncoder
     )
@@ -151,3 +153,33 @@ projectLinkDecoder =
 
 
 -- Notes
+
+
+type alias Note =
+    { id : Int
+    , content : String
+    }
+
+
+noteEncoder :
+    { notes : List Note
+    , currentNote : String
+    , currentIndex : Int
+    }
+    -> Json.Encode.Value
+noteEncoder noteData =
+    Json.Encode.object
+        [ ( "notes", Json.Encode.list encodeNote noteData.notes )
+        , ( "currentNote", Json.Encode.string noteData.currentNote )
+        , ( "currentIndex", Json.Encode.int noteData.currentIndex )
+        ]
+
+
+encodeNote :
+    Note
+    -> Json.Encode.Value
+encodeNote note =
+    Json.Encode.object
+        [ ( "id", Json.Encode.int note.id )
+        , ( "content", Json.Encode.string note.content )
+        ]

@@ -72,6 +72,11 @@ update route msg model =
             , Effect.saveProjects projects
             )
 
+        Shared.Msg.ChangeNote updatedNote ->
+            ( model
+            , Effect.saveNote updatedNote
+            )
+
 
 
 -- SUBSCRIPTIONS

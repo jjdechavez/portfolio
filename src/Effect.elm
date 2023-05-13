@@ -4,7 +4,7 @@ port module Effect exposing
     , sendCmd, sendMsg
     , pushRoute, replaceRoute, loadExternalUrl
     , map, toCmd
-    , clearProjects, fetchProjects, jumpToProjects, saveProjects
+    , changeNote, clearProjects, fetchProjects, jumpToProjects, saveNote, saveProjects
     )
 
 {-|
@@ -24,7 +24,7 @@ import Json.Encode
 import Route exposing (Route)
 import Route.Path
 import Route.Query
-import Shared.Model exposing (projectEncoder)
+import Shared.Model exposing (noteEncoder, projectEncoder)
 import Shared.Msg
 import Task
 import Url exposing (Url)
@@ -239,3 +239,27 @@ port scrollToProjects : Bool -> Cmd msg
 jumpToProjects : Bool -> Effect msg
 jumpToProjects jumping =
     ScrollToProjects jumping
+
+
+changeNote :
+    { notes : List Shared.Model.Note
+    , currentNote : String
+    , currentIndex : Int
+    }
+    -> Effect msg
+changeNote updatedNote =
+    SendSharedMsg (Shared.Msg.ChangeNote updatedNote)
+
+
+saveNote :
+    { notes : List Shared.Model.Note
+    , currentNote : String
+    , currentIndex : Int
+    }
+    -> Effect msg
+saveNote updatedNote =
+    SendToLocalStorage
+        { key = "x-notes"
+        , value =
+            noteEncoder updatedNote
+        }

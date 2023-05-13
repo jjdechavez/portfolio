@@ -7,14 +7,14 @@ import Html.Events as Evt
 import Page exposing (Page)
 import Route exposing (Route)
 import Shared
+import Shared.Model
 import View exposing (View)
-import Shared exposing (Flags)
 
 
 page : Shared.Model -> Route () -> Page Model Msg
-page shared route =
+page shared _ =
     Page.new
-        { init = init shared
+        { init = init shared.noteData
         , update = update
         , subscriptions = subscriptions
         , view = view
@@ -38,12 +38,22 @@ type alias Note =
     }
 
 
-init : Shared.Model -> () -> ( Model, Effect Msg )
+init : Maybe Shared.Model.NotePagePayload -> () -> ( Model, Effect Msg )
 init shared () =
-    ( { notes = []
-      , currentNote = ""
-      , currentIndex = 0
-      }
+    let
+        defaultModel : Model
+        defaultModel =
+            { notes = []
+            , currentNote = ""
+            , currentIndex = 0
+            }
+
+        maybeModel : Model
+        maybeModel =
+            shared
+                |> Maybe.withDefault defaultModel
+    in
+    ( maybeModel
     , Effect.none
     )
 
@@ -144,7 +154,7 @@ update msg model =
 
 
 subscriptions : Model -> Sub Msg
-subscriptions model =
+subscriptions _ =
     Sub.none
 
 

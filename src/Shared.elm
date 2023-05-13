@@ -16,7 +16,7 @@ import Effect exposing (Effect)
 import Json.Decode
 import Route exposing (Route)
 import Route.Path
-import Shared.Model exposing (ProjectType(..), projectDecoder)
+import Shared.Model exposing (ProjectType(..), noteDecoder, projectDecoder)
 import Shared.Msg
 
 
@@ -26,13 +26,15 @@ import Shared.Msg
 
 type alias Flags =
     { projects : Maybe (List Shared.Model.Project)
+    , noteData : Maybe Shared.Model.NotePagePayload
     }
 
 
 decoder : Json.Decode.Decoder Flags
 decoder =
-    Json.Decode.map Flags
+    Json.Decode.map2 Flags
         (Json.Decode.field "projects" (Json.Decode.maybe (Json.Decode.list projectDecoder)))
+        (Json.Decode.field "noteData" (Json.Decode.maybe noteDecoder))
 
 
 
@@ -49,9 +51,9 @@ init flagsResult route =
         flags : Flags
         flags =
             flagsResult
-                |> Result.withDefault { projects = Nothing }
+                |> Result.withDefault { projects = Nothing, noteData = Nothing }
     in
-    ( { projects = flags.projects }
+    ( { projects = flags.projects, noteData = flags.noteData }
     , Effect.none
     )
 
@@ -73,7 +75,7 @@ update route msg model =
             )
 
         Shared.Msg.ChangeNote updatedNote ->
-            ( model
+            ( { model | noteData = Just updatedNote }
             , Effect.saveNote updatedNote
             )
 

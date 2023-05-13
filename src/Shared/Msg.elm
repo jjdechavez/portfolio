@@ -1,6 +1,6 @@
 module Shared.Msg exposing (Msg(..))
 
-import Shared.Model exposing (Note, Project)
+import Shared.Model exposing (NotePagePayload, Project)
 
 
 {-| Normally, this value would live in "Shared.elm"
@@ -12,8 +12,4 @@ own file, so they can be imported by `Effect.elm`
 -}
 type Msg
     = FetchProjects (List Project)
-    | ChangeNote
-        { notes : List Note
-        , currentNote : String
-        , currentIndex : Int
-        }
+    | ChangeNote NotePagePayload

@@ -1,10 +1,12 @@
 module Shared.Model exposing
     ( Model
     , Note
+    , NotePagePayload
     , Project
     , ProjectLinks
     , ProjectType(..)
     , filterProjectByType
+    , noteDecoder
     , noteEncoder
     , projectDecoder
     , projectEncoder
@@ -23,7 +25,9 @@ import Json.Encode
 
 
 type alias Model =
-    { projects : Maybe (List Project) }
+    { projects : Maybe (List Project)
+    , noteData : Maybe NotePagePayload
+    }
 
 
 
@@ -155,6 +159,13 @@ projectLinkDecoder =
 -- Notes
 
 
+type alias NotePagePayload =
+    { notes : List Note
+    , currentNote : String
+    , currentIndex : Int
+    }
+
+
 type alias Note =
     { id : Int
     , content : String
@@ -162,10 +173,7 @@ type alias Note =
 
 
 noteEncoder :
-    { notes : List Note
-    , currentNote : String
-    , currentIndex : Int
-    }
+    NotePagePayload
     -> Json.Encode.Value
 noteEncoder noteData =
     Json.Encode.object
@@ -183,3 +191,18 @@ encodeNote note =
         [ ( "id", Json.Encode.int note.id )
         , ( "content", Json.Encode.string note.content )
         ]
+
+
+noteDecoder : Json.Decode.Decoder NotePagePayload
+noteDecoder =
+    Json.Decode.map3 NotePagePayload
+        (Json.Decode.field "notes" (Json.Decode.list decoderNote))
+        (Json.Decode.field "currentNote" Json.Decode.string)
+        (Json.Decode.field "currentIndex" Json.Decode.int)
+
+
+decoderNote : Json.Decode.Decoder Note
+decoderNote =
+    Json.Decode.map2 Note
+        (Json.Decode.field "id" Json.Decode.int)
+        (Json.Decode.field "content" Json.Decode.string)

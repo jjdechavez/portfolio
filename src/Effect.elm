@@ -242,20 +242,14 @@ jumpToProjects jumping =
 
 
 changeNote :
-    { notes : List Shared.Model.Note
-    , currentNote : String
-    , currentIndex : Int
-    }
+    Shared.Model.NotePagePayload
     -> Effect msg
 changeNote updatedNote =
     SendSharedMsg (Shared.Msg.ChangeNote updatedNote)
 
 
 saveNote :
-    { notes : List Shared.Model.Note
-    , currentNote : String
-    , currentIndex : Int
-    }
+    Shared.Model.NotePagePayload
     -> Effect msg
 saveNote updatedNote =
     SendToLocalStorage

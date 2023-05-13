@@ -4,7 +4,8 @@ import autosize from 'autosize'
 export const flags = ({ env }) => {
   // Called before our Elm application starts
   return {
-    projects: JSON.parse(window.localStorage["x-projects"] ?? null)
+    projects: JSON.parse(window.localStorage["x-projects"] ?? null),
+    noteData: JSON.parse(window.localStorage["x-notes"] ?? null),
   }
 }
 

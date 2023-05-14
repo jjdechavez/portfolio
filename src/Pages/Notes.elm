@@ -111,7 +111,59 @@ update msg model =
             let
                 updatedModel : Model
                 updatedModel =
-                    { model | notes = List.filter (\note -> noteId /= note.id) model.notes }
+                    let
+                        updatedNotes : List Note
+                        updatedNotes =
+                            List.filter (\note -> noteId /= note.id) model.notes
+
+                        previousIndex : Int
+                        previousIndex =
+                            let
+                                totalLength : Int
+                                totalLength =
+                                    List.length updatedNotes - 1
+
+                                defaultCurrentIndex : Int
+                                defaultCurrentIndex =
+                                    0
+                            in
+                            if totalLength < 0 then
+                                defaultCurrentIndex
+
+                            else
+                                totalLength
+
+                        previousNote : Note
+                        previousNote =
+                            let
+                                findPreviousList : List ( Int, Note ) -> Maybe Note
+                                findPreviousList list =
+                                    case list of
+                                        [] ->
+                                            Nothing
+
+                                        head :: [] ->
+                                            if Tuple.first head == previousIndex then
+                                                Just (Tuple.second head)
+
+                                            else
+                                                Nothing
+
+                                        head :: rest ->
+                                            if Tuple.first head == previousIndex then
+                                                Just (Tuple.second head)
+
+                                            else
+                                                findPreviousList rest
+                            in
+                            findPreviousList (List.indexedMap Tuple.pair updatedNotes)
+                                |> Maybe.withDefault { id = 0, content = "" }
+                    in
+                    { model
+                        | notes = updatedNotes
+                        , currentIndex = previousNote.id
+                        , currentNote = previousNote.content
+                    }
             in
             ( updatedModel
             , Effect.changeNote updatedModel
@@ -212,7 +264,6 @@ viewNoteCollection notes currentIndex =
                      else
                         "normal"
                     )
-                , Evt.onClick (SwitchNote note)
                 , Attr.class "note-item"
                 ]
                 [ Html.button
@@ -226,7 +277,10 @@ viewNoteCollection notes currentIndex =
                         ]
                         []
                     ]
-                , Html.span [] [ Html.text note.content ]
+                , Html.span
+                    [ Evt.onClick (SwitchNote note)
+                    ]
+                    [ Html.text note.content ]
                 ]
         )
         notes

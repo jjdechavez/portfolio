@@ -4,7 +4,7 @@ port module Effect exposing
     , sendCmd, sendMsg
     , pushRoute, replaceRoute, loadExternalUrl
     , map, toCmd
-    , changeNote, clearProjects, fetchProjects, jumpToProjects, saveNote, saveProjects
+    , changeNote, clearProjects, fetchProjects, jumpToProjects, resizeTextarea, saveNote, saveProjects
     )
 
 {-|
@@ -43,6 +43,7 @@ type Effect msg
     | SendSharedMsg Shared.Msg.Msg
     | SendToLocalStorage { key : String, value : Json.Encode.Value }
     | ScrollToProjects Bool
+    | ResizeTextarea
 
 
 
@@ -152,6 +153,9 @@ map fn effect =
         ScrollToProjects scrolling ->
             ScrollToProjects scrolling
 
+        ResizeTextarea ->
+            ResizeTextarea
+
 
 {-| Elm Land depends on this function to perform your effects.
 -}
@@ -194,6 +198,9 @@ toCmd options effect =
 
         ScrollToProjects scrolling ->
             scrollToProjects scrolling
+
+        ResizeTextarea ->
+            autosizeTextarea ()
 
 
 
@@ -257,3 +264,11 @@ saveNote updatedNote =
         , value =
             noteEncoder updatedNote
         }
+
+
+port autosizeTextarea : () -> Cmd msg
+
+
+resizeTextarea : Effect msg
+resizeTextarea =
+    ResizeTextarea

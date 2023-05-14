@@ -55,7 +55,7 @@ init shared () =
                 |> Maybe.withDefault defaultModel
     in
     ( maybeModel
-    , Effect.none
+    , Effect.resizeTextarea
     )
 
 

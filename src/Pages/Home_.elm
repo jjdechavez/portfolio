@@ -205,7 +205,7 @@ viewHeader =
                 , Html.h2 []
                     [ Html.text "Build & Design Websites" ]
                 ]
-            , Html.nav []
+            , Html.nav [ Attr.class "social-links" ]
                 [ viewCTA
                 ]
             , Html.small

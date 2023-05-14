@@ -7,12 +7,33 @@
 .sidebar {
   display: flex;
   flex-direction: column;
-  gap: 8px;
   padding-right: 1rem;
   padding-left: 1rem;
 
+  .note-item {
+    padding: .75rem 0;
+
+    span {
+      cursor: pointer;
+    }
+  }
+
   .add-note {
     width: 160px;
+    padding: .30rem .75rem;
+    color: rgb(17 24 39/var(--text-opacity));
+    background-color: rgb(255 255 255/var(--bg-opacity));
+    border-width: 1px;
+    border-color: rgb(243 244 246/var(--border-opacity));
+    border-radius: .375rem;
+    font-weight: 500;
+    cursor: pointer;
+
+    margin-bottom: 1rem;
+
+    &:hover {
+      background-color: rgba($primary-color, 0.2);
+    }
   }
 
   div {
@@ -21,8 +42,17 @@
     white-space: nowrap;
     text-overflow: ellipsis;
 
-    button {
+    .remove-note {
       margin-right: 1rem;
+      background-color: rgb(255 255 255/var(--bg-opacity));
+      border: 0;
+      cursor: pointer;
+
+      img {
+        height: 18px;
+        position: relative;
+        top: 3px;
+      }
     }
   }
 }
@@ -44,6 +74,8 @@
   border: none;
   resize: none;
   display : block;
+
+  padding: .75rem 0;
 
   &:focus {
     outline: none;

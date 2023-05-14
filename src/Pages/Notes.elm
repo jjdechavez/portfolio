@@ -213,13 +213,20 @@ viewNoteCollection notes currentIndex =
                         "normal"
                     )
                 , Evt.onClick (SwitchNote note)
+                , Attr.class "note-item"
                 ]
                 [ Html.button
                     [ Attr.type_ "button"
                     , Evt.onClick (DeleteNote note.id)
+                    , Attr.class "remove-note"
                     ]
-                    [ Html.text "Delete" ]
-                , Html.text note.content
+                    [ Html.img
+                        [ Attr.src "trash.svg"
+                        , Attr.alt "Delete note"
+                        ]
+                        []
+                    ]
+                , Html.span [] [ Html.text note.content ]
                 ]
         )
         notes

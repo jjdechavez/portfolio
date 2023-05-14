@@ -296,13 +296,28 @@ viewHeader =
         [ Html.h1
             []
             [ Html.text "Notes" ]
-        , Html.a [ Route.Path.href Route.Path.Home_ ]
-            [ Html.img
-                [ Attr.src "home.svg"
-                , Attr.alt "Refirect to home"
-                , Attr.class "img--svg"
-                , Attr.style "height" "24px"
+        , Html.nav []
+            [ Html.button
+                [ Attr.class "remove-note"
                 ]
-                []
+                [ Html.img
+                    [ Attr.src "menu.svg"
+                    , Attr.alt "Note collections"
+                    , Attr.class "img--svg"
+                    , Attr.style "height" "24px"
+                    , Attr.style "top" "2px"
+                    , Attr.style "margin-right" "2rem"
+                    ]
+                    []
+                ]
+            , Html.a [ Route.Path.href Route.Path.Home_ ]
+                [ Html.img
+                    [ Attr.src "home.svg"
+                    , Attr.alt "Refirect to home"
+                    , Attr.class "img--svg"
+                    , Attr.style "height" "24px"
+                    ]
+                    []
+                ]
             ]
         ]

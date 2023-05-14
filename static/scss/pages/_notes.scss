@@ -48,11 +48,6 @@
       border: 0;
       cursor: pointer;
 
-      img {
-        height: 18px;
-        position: relative;
-        top: 3px;
-      }
     }
   }
 }
@@ -63,6 +58,10 @@
 
 .note-header {
   margin-bottom: 1rem;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .note-content {
@@ -82,3 +81,8 @@
   }
 }
 
+img.img--svg {
+  height: 18px;
+  position: relative;
+  top: 3px;
+}

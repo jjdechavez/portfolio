@@ -6,6 +6,7 @@ import Html.Attributes as Attr
 import Html.Events as Evt
 import Page exposing (Page)
 import Route exposing (Route)
+import Route.Path
 import Shared
 import Shared.Model
 import View exposing (View)
@@ -274,6 +275,7 @@ viewNoteCollection notes currentIndex =
                     [ Html.img
                         [ Attr.src "trash.svg"
                         , Attr.alt "Delete note"
+                        , Attr.class "img--svg"
                         ]
                         []
                     ]
@@ -288,8 +290,19 @@ viewNoteCollection notes currentIndex =
 
 viewHeader : Html msg
 viewHeader =
-    Html.header []
+    Html.header
+        [ Attr.class "note-header"
+        ]
         [ Html.h1
-            [ Attr.class "note-header" ]
+            []
             [ Html.text "Notes" ]
+        , Html.a [ Route.Path.href Route.Path.Home_ ]
+            [ Html.img
+                [ Attr.src "home.svg"
+                , Attr.alt "Refirect to home"
+                , Attr.class "img--svg"
+                , Attr.style "height" "24px"
+                ]
+                []
+            ]
         ]

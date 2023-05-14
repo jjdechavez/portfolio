@@ -299,14 +299,13 @@ viewHeader =
         , Html.nav []
             [ Html.button
                 [ Attr.class "remove-note"
+                , Attr.style "margin-right" "2rem"
                 ]
                 [ Html.img
                     [ Attr.src "menu.svg"
                     , Attr.alt "Note collections"
-                    , Attr.class "img--svg"
-                    , Attr.style "height" "24px"
+                    , Attr.class "img--svg nav--svg"
                     , Attr.style "top" "2px"
-                    , Attr.style "margin-right" "2rem"
                     ]
                     []
                 ]
@@ -314,8 +313,7 @@ viewHeader =
                 [ Html.img
                     [ Attr.src "home.svg"
                     , Attr.alt "Refirect to home"
-                    , Attr.class "img--svg"
-                    , Attr.style "height" "24px"
+                    , Attr.class "img--svg nav--svg"
                     ]
                     []
                 ]

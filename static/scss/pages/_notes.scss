@@ -93,9 +93,14 @@ img.img--svg {
   top: 3px;
 }
 
+img.nav--svg {
+  height: 24px;
+}
+
 .remove-note {
   margin-right: 1rem;
   background-color: rgb(255 255 255/var(--bg-opacity));
   border: 0;
   cursor: pointer;
 }
+

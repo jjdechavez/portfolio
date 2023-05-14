@@ -75,16 +75,9 @@ nav {
     line-height: 1.25rem;
     margin-bottom: 0;
 
-    &:first-of-type {
-      margin-left: calc($nav-element-spacing-horizontal * -1);
-    }
-    &:last-of-type {
-      margin-right: calc($nav-element-spacing-horizontal * -1);
-    }
-
     li {
       list-style: none;
-      padding: $nav-element-spacing-vertical $nav-element-spacing-horizontal;
+      padding: $nav-element-spacing-vertical 0.5rem;
 
       a.nav-link {
         border-radius: .5rem;

@@ -10,7 +10,7 @@
 }
 
 .translate-x-0 {
-  --translate-x: 0px;
+  --translate-x: -20%;
 }
 
 .transform {
@@ -47,8 +47,7 @@
 .sidebar {
   display: flex;
   flex-direction: column;
-  padding-right: 1rem;
-  padding-left: 1rem;
+  padding: 1rem;
   background-color: #fff;
 
   // Toggle sidebar
@@ -111,6 +110,12 @@
 
   nav {
     margin: 0;
+
+    button.btn-svg {
+      @media (min-width: 768px) {
+        display: none;
+      }
+    }
   }
 }
 

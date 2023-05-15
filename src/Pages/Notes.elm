@@ -30,6 +30,7 @@ type alias Model =
     { notes : List Note
     , currentNote : String
     , currentIndex : Int
+    , toggleSidebar : Bool
     }
 
 
@@ -47,12 +48,21 @@ init shared () =
             { notes = []
             , currentNote = ""
             , currentIndex = 0
+            , toggleSidebar = False
             }
 
         maybeModel : Model
         maybeModel =
-            shared
-                |> Maybe.withDefault defaultModel
+            case shared of
+                Just noteFlags ->
+                    { notes = noteFlags.notes
+                    , currentIndex = noteFlags.currentIndex
+                    , currentNote = noteFlags.currentNote
+                    , toggleSidebar = False
+                    }
+
+                Nothing ->
+                    defaultModel
     in
     ( maybeModel
     , Effect.resizeTextarea
@@ -68,6 +78,7 @@ type Msg
     | DeleteNote Int
     | NewNote
     | SwitchNote Note
+    | ToggleSidebar Bool
 
 
 update : Msg -> Model -> ( Model, Effect Msg )
@@ -105,7 +116,11 @@ update msg model =
                     { model | currentNote = newContent, notes = entries }
             in
             ( updatedModel
-            , Effect.changeNote updatedModel
+            , Effect.changeNote
+                { notes = updatedModel.notes
+                , currentNote = updatedModel.currentNote
+                , currentIndex = updatedModel.currentIndex
+                }
             )
 
         DeleteNote noteId ->
@@ -167,7 +182,11 @@ update msg model =
                     }
             in
             ( updatedModel
-            , Effect.changeNote updatedModel
+            , Effect.changeNote
+                { notes = updatedModel.notes
+                , currentIndex = updatedModel.currentIndex
+                , currentNote = updatedModel.currentNote
+                }
             )
 
         NewNote ->
@@ -185,7 +204,11 @@ update msg model =
                     }
             in
             ( updatedModel
-            , Effect.changeNote updatedModel
+            , Effect.changeNote
+                { notes = updatedModel.notes
+                , currentIndex = updatedModel.currentIndex
+                , currentNote = updatedModel.currentNote
+                }
             )
 
         SwitchNote selectedNote ->
@@ -198,7 +221,16 @@ update msg model =
                     }
             in
             ( updatedModel
-            , Effect.changeNote updatedModel
+            , Effect.changeNote
+                { notes = updatedModel.notes
+                , currentIndex = updatedModel.currentIndex
+                , currentNote = updatedModel.currentNote
+                }
+            )
+
+        ToggleSidebar display ->
+            ( { model | toggleSidebar = display }
+            , Effect.none
             )
 
 
@@ -222,7 +254,7 @@ view model =
         [ Html.div [ Attr.class "layout" ]
             [ viewSidebar model
             , Html.div [ Attr.class "page" ]
-                [ viewHeader
+                [ viewHeader model.toggleSidebar
                 , Html.textarea
                     [ Attr.class "note-content"
                     , Attr.placeholder "Please write here"
@@ -239,7 +271,13 @@ view model =
 
 viewSidebar : Model -> Html Msg
 viewSidebar model =
-    Html.aside [ Attr.class "sidebar" ]
+    Html.aside
+        [ Attr.class "sidebar transform -translate-x-full"
+        , Attr.classList
+            [ ( "translate-x-0", model.toggleSidebar )
+            , ( "-translate-x-full", not model.toggleSidebar )
+            ]
+        ]
         (List.concat
             [ [ Html.button
                     [ Attr.type_ "button"
@@ -270,7 +308,7 @@ viewNoteCollection notes currentIndex =
                 [ Html.button
                     [ Attr.type_ "button"
                     , Evt.onClick (DeleteNote note.id)
-                    , Attr.class "remove-note"
+                    , Attr.class "btn-svg"
                     ]
                     [ Html.img
                         [ Attr.src "trash.svg"
@@ -288,8 +326,8 @@ viewNoteCollection notes currentIndex =
         notes
 
 
-viewHeader : Html msg
-viewHeader =
+viewHeader : Bool -> Html Msg
+viewHeader displaySidebar =
     Html.header
         [ Attr.class "note-header"
         ]
@@ -298,7 +336,7 @@ viewHeader =
             [ Html.text "Notes" ]
         , Html.nav []
             [ Html.button
-                [ Attr.class "remove-note"
+                [ Attr.class "btn-svg"
                 , Attr.style "margin-right" "2rem"
                 ]
                 [ Html.img
@@ -306,6 +344,7 @@ viewHeader =
                     , Attr.alt "Note collections"
                     , Attr.class "img--svg nav--svg"
                     , Attr.style "top" "2px"
+                    , Evt.onClick (ToggleSidebar (not displaySidebar))
                     ]
                     []
                 ]

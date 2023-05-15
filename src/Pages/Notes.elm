@@ -179,6 +179,7 @@ update msg model =
                         | notes = updatedNotes
                         , currentIndex = previousNote.id
                         , currentNote = previousNote.content
+                        , toggleSidebar = False
                     }
             in
             ( updatedModel
@@ -201,6 +202,7 @@ update msg model =
                         | notes = model.notes ++ [ { id = newIndex, content = "" } ]
                         , currentIndex = newIndex
                         , currentNote = ""
+                        , toggleSidebar = False
                     }
             in
             ( updatedModel
@@ -218,6 +220,7 @@ update msg model =
                     { model
                         | currentIndex = selectedNote.id
                         , currentNote = selectedNote.content
+                        , toggleSidebar = False
                     }
             in
             ( updatedModel

@@ -252,7 +252,19 @@ view model =
     { title = "Quick Notes"
     , body =
         [ Html.div [ Attr.class "layout" ]
-            [ viewSidebar model
+            [ Html.div
+                [ Attr.class "overlay inset-0"
+                , Attr.classList
+                    [ ( "hidden", not model.toggleSidebar )
+                    ]
+                ]
+                [ Html.div
+                    [ Attr.class "overlay__background inset-0"
+                    , Evt.onClick (ToggleSidebar False)
+                    ]
+                    []
+                ]
+            , viewSidebar model
             , Html.div [ Attr.class "page" ]
                 [ viewHeader model.toggleSidebar
                 , Html.textarea

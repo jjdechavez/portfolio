@@ -1,9 +1,11 @@
 import jump from 'jump.js'
+import autosize from 'autosize'
 
 export const flags = ({ env }) => {
   // Called before our Elm application starts
   return {
-    projects: JSON.parse(window.localStorage["x-projects"] ?? null)
+    projects: JSON.parse(window.localStorage["x-projects"] ?? null),
+    noteData: JSON.parse(window.localStorage["x-notes"] ?? null),
   }
 }
 
@@ -11,13 +13,13 @@ export const onReady = ({ env, app }) => {
   // Called after our Elm application starts
   const ports = app.ports;
   if (ports && ports.sendToLocalStorage) {
-    app.ports.sendToLocalStorage.subscribe(({ key, value }) => {
+    ports.sendToLocalStorage.subscribe(({ key, value }) => {
       window.localStorage[key] = JSON.stringify(value);
     })
   }
 
   if (ports && ports.scrollToProjects) {
-    app.ports.scrollToProjects.subscribe(jumping => {
+    ports.scrollToProjects.subscribe(jumping => {
       const jumpContainer = document.querySelector('main');
 
       if (jumping) {
@@ -30,5 +32,10 @@ export const onReady = ({ env, app }) => {
       }
     })
   }
-}
 
+  if (ports && ports.autosizeTextarea) {
+    ports.autosizeTextarea.subscribe(() => {
+      autosize(document.querySelectorAll('textarea'));
+    });
+  }
+}

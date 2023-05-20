@@ -1,4 +1,5 @@
 @import "variables";
+@import 'pages/notes';
 
 *,
 ::before,
@@ -50,7 +51,40 @@ body {
 
 a {
   text-decoration: none;
-  color: $seconday-color;
+  color: $tertiary-color;
+}
+
+
+nav {
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 0;
+  max-width: 105rem;
+  padding: 1rem;
+
+  display: flex;
+  justify-content: end;
+  align-items: center;
+
+  ul {
+    display: flex;
+    gap: .5rem;
+    font-weight: var(--font-size);
+    font-size: var(--font-size);
+    color: $tertiary-color;
+    line-height: 1.25rem;
+    margin-bottom: 0;
+
+    li {
+      list-style: none;
+      padding: $nav-element-spacing-vertical 0.5rem;
+
+      a.nav-link {
+        border-radius: .5rem;
+        padding: .75rem .5rem;
+      }
+    }
+  }
 }
 
 .container {
@@ -99,7 +133,7 @@ a {
   }
 }
 
-nav {
+nav.social-links {
   display: flex;
   justify-content: center;
 

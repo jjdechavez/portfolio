@@ -2,7 +2,7 @@ module Layouts.App exposing (Model, Msg, Settings, layout)
 
 import Effect exposing (Effect)
 import Html exposing (Html)
-import Html.Attributes exposing (class)
+import Html.Attributes as Attr
 import Layout exposing (Layout)
 import Route exposing (Route)
 import Route.Path
@@ -67,6 +67,35 @@ subscriptions _ =
 -- VIEW
 
 
+view : Settings -> { fromMsg : Msg -> mainMsg, content : View mainMsg, model : Model } -> View mainMsg
+view settings { content } =
+    { title = content.title
+    , body =
+        [ Html.nav []
+            [ Html.ul
+                []
+                [ Html.li []
+                    [ Html.a
+                        [ Route.Path.href Route.Path.Home_
+                        , Attr.class "nav-link"
+                        ]
+                        [ Html.text "Home" ]
+                    ]
+                , Html.li []
+                    [ Html.a
+                        [ Route.Path.href Route.Path.Notes
+                        , Attr.class "nav-link"
+                        ]
+                        [ Html.text "Notes" ]
+                    ]
+                ]
+            ]
+        , Html.div [ Attr.class "container" ] content.body
+        , viewFooter settings
+        ]
+    }
+
+
 viewFooter : Settings -> Html mainMsg
 viewFooter settings =
     let
@@ -78,13 +107,3 @@ viewFooter settings =
         [ Html.a [ Route.Path.href route ]
             [ Html.text settings.footerName ]
         ]
-
-
-view : Settings -> { fromMsg : Msg -> mainMsg, content : View mainMsg, model : Model } -> View mainMsg
-view settings { content } =
-    { title = content.title
-    , body =
-        [ Html.div [ class "container" ] content.body
-        , viewFooter settings
-        ]
-    }

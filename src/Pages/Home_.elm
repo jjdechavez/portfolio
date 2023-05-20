@@ -24,7 +24,7 @@ import View exposing (View)
 page : Shared.Model -> Route () -> Page Model Msg
 page shared _ =
     Page.new
-        { init = init shared
+        { init = init shared.projects
         , update = update shared
         , subscriptions = subscriptions
         , view = view
@@ -53,7 +53,7 @@ type alias Model =
     }
 
 
-init : Shared.Model -> () -> ( Model, Effect Msg )
+init : Maybe (List Shared.Model.Project) -> () -> ( Model, Effect Msg )
 init shared () =
     let
         showcase : ProjectType
@@ -62,15 +62,15 @@ init shared () =
 
         projects : Api.Data (List Project)
         projects =
-            case shared.projects of
-                Just resultProjects ->
+            case shared of
+                Just maybeProjects ->
                     Api.Success <|
                         case showcase of
                             All ->
-                                resultProjects
+                                maybeProjects
 
                             _ ->
-                                filterProjectByType resultProjects showcase
+                                filterProjectByType maybeProjects showcase
 
                 Nothing ->
                     Api.Loading
@@ -205,7 +205,7 @@ viewHeader =
                 , Html.h2 []
                     [ Html.text "Build & Design Websites" ]
                 ]
-            , Html.nav []
+            , Html.nav [ Attr.class "social-links" ]
                 [ viewCTA
                 ]
             , Html.small

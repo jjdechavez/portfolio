@@ -16,7 +16,7 @@ import Effect exposing (Effect)
 import Json.Decode
 import Route exposing (Route)
 import Route.Path
-import Shared.Model exposing (ProjectType(..))
+import Shared.Model exposing (ProjectType(..), noteDecoder, projectDecoder)
 import Shared.Msg
 
 
@@ -26,52 +26,15 @@ import Shared.Msg
 
 type alias Flags =
     { projects : Maybe (List Shared.Model.Project)
+    , noteData : Maybe Shared.Model.NotePagePayload
     }
 
 
 decoder : Json.Decode.Decoder Flags
 decoder =
-    Json.Decode.map Flags
+    Json.Decode.map2 Flags
         (Json.Decode.field "projects" (Json.Decode.maybe (Json.Decode.list projectDecoder)))
-
-
-initProjectType : String -> Shared.Model.ProjectType
-initProjectType projectType =
-    case projectType of
-        "EXPERCIENCE" ->
-            Shared.Model.Expercience
-
-        "PERSONAL" ->
-            Shared.Model.Personal
-
-        _ ->
-            Shared.Model.All
-
-
-projectTypeDecoder : Json.Decode.Decoder Shared.Model.ProjectType
-projectTypeDecoder =
-    Json.Decode.map initProjectType
-        (Json.Decode.field "type" Json.Decode.string)
-
-
-projectLinkDecoder : Json.Decode.Decoder Shared.Model.ProjectLinks
-projectLinkDecoder =
-    Json.Decode.map2 Shared.Model.ProjectLinks
-        (Json.Decode.maybe (Json.Decode.at [ "links", "website" ] Json.Decode.string))
-        (Json.Decode.maybe (Json.Decode.at [ "links", "sourceCode" ] Json.Decode.string))
-
-
-projectDecoder : Json.Decode.Decoder Shared.Model.Project
-projectDecoder =
-    Json.Decode.map8 Shared.Model.Project
-        (Json.Decode.field "slug" Json.Decode.string)
-        (Json.Decode.field "name" Json.Decode.string)
-        (Json.Decode.field "description" Json.Decode.string)
-        (Json.Decode.field "technologies" (Json.Decode.list Json.Decode.string))
-        projectLinkDecoder
-        (Json.Decode.field "coverImage" Json.Decode.string)
-        (Json.Decode.field "endedAt" Json.Decode.string)
-        projectTypeDecoder
+        (Json.Decode.field "noteData" (Json.Decode.maybe noteDecoder))
 
 
 
@@ -88,9 +51,9 @@ init flagsResult route =
         flags : Flags
         flags =
             flagsResult
-                |> Result.withDefault { projects = Nothing }
+                |> Result.withDefault { projects = Nothing, noteData = Nothing }
     in
-    ( { projects = flags.projects }
+    ( { projects = flags.projects, noteData = flags.noteData }
     , Effect.none
     )
 
@@ -109,6 +72,11 @@ update route msg model =
         Shared.Msg.FetchProjects projects ->
             ( { model | projects = Just projects }
             , Effect.saveProjects projects
+            )
+
+        Shared.Msg.ChangeNote updatedNote ->
+            ( { model | noteData = Just updatedNote }
+            , Effect.saveNote updatedNote
             )
 
 

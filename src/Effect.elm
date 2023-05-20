@@ -4,7 +4,7 @@ port module Effect exposing
     , sendCmd, sendMsg
     , pushRoute, replaceRoute, loadExternalUrl
     , map, toCmd
-    , clearProjects, fetchProjects, jumpToProjects, saveProjects
+    , changeNote, clearProjects, fetchProjects, jumpToProjects, resizeTextarea, saveNote, saveProjects
     )
 
 {-|
@@ -24,7 +24,7 @@ import Json.Encode
 import Route exposing (Route)
 import Route.Path
 import Route.Query
-import Shared.Model
+import Shared.Model exposing (noteEncoder, projectEncoder)
 import Shared.Msg
 import Task
 import Url exposing (Url)
@@ -43,6 +43,7 @@ type Effect msg
     | SendSharedMsg Shared.Msg.Msg
     | SendToLocalStorage { key : String, value : Json.Encode.Value }
     | ScrollToProjects Bool
+    | ResizeTextarea
 
 
 
@@ -152,6 +153,9 @@ map fn effect =
         ScrollToProjects scrolling ->
             ScrollToProjects scrolling
 
+        ResizeTextarea ->
+            ResizeTextarea
+
 
 {-| Elm Land depends on this function to perform your effects.
 -}
@@ -195,6 +199,9 @@ toCmd options effect =
         ScrollToProjects scrolling ->
             scrollToProjects scrolling
 
+        ResizeTextarea ->
+            autosizeTextarea ()
+
 
 
 -- SHARED
@@ -225,51 +232,6 @@ saveProjects projects =
         }
 
 
-projectTypeEncoder : Shared.Model.ProjectType -> Json.Encode.Value
-projectTypeEncoder projectType =
-    Json.Encode.string <|
-        case projectType of
-            Shared.Model.Expercience ->
-                "EXPERCIENCE"
-
-            Shared.Model.Personal ->
-                "PERSONAL"
-
-            _ ->
-                "ALL"
-
-
-projectLinkEncoder : Maybe String -> Json.Encode.Value
-projectLinkEncoder maybeLink =
-    case maybeLink of
-        Just link ->
-            Json.Encode.string link
-
-        Nothing ->
-            Json.Encode.null
-
-
-projectEncoder :
-    Shared.Model.Project
-    -> Json.Encode.Value
-projectEncoder project =
-    Json.Encode.object
-        [ ( "slug", Json.Encode.string project.slug )
-        , ( "name", Json.Encode.string project.name )
-        , ( "description", Json.Encode.string project.description )
-        , ( "technologies", Json.Encode.list Json.Encode.string project.technologies )
-        , ( "links"
-          , Json.Encode.object
-                [ ( "website", projectLinkEncoder project.links.website )
-                , ( "sourceCode", projectLinkEncoder project.links.sourceCode )
-                ]
-          )
-        , ( "coverImage", Json.Encode.string project.coverImage )
-        , ( "endedAt", Json.Encode.string project.endedAt )
-        , ( "projectType", projectTypeEncoder project.projectType )
-        ]
-
-
 clearProjects : Effect msg
 clearProjects =
     SendToLocalStorage
@@ -284,3 +246,29 @@ port scrollToProjects : Bool -> Cmd msg
 jumpToProjects : Bool -> Effect msg
 jumpToProjects jumping =
     ScrollToProjects jumping
+
+
+changeNote :
+    Shared.Model.NotePagePayload
+    -> Effect msg
+changeNote updatedNote =
+    SendSharedMsg (Shared.Msg.ChangeNote updatedNote)
+
+
+saveNote :
+    Shared.Model.NotePagePayload
+    -> Effect msg
+saveNote updatedNote =
+    SendToLocalStorage
+        { key = "x-notes"
+        , value =
+            noteEncoder updatedNote
+        }
+
+
+port autosizeTextarea : () -> Cmd msg
+
+
+resizeTextarea : Effect msg
+resizeTextarea =
+    ResizeTextarea

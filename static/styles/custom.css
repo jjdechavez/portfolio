@@ -1,0 +1,21 @@
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+nav > ul {
+  display: flex;
+  gap: .75rem;
+}
+
+nav > ul > li {
+  list-style: none;
+}
+
+.ul-nested {
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+}

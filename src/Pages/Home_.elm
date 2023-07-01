@@ -4,11 +4,9 @@ import Api
 import Api.ProjectList
 import Browser.Dom as Dom
 import Components.LoadingPulse exposing (loadingPulse)
-import Components.ProjectCard exposing (viewProjectCard)
 import Effect exposing (Effect)
 import Html exposing (Html)
 import Html.Attributes as Attr
-import Html.Events as Event
 import Http
 import Layouts
 import List
@@ -58,7 +56,7 @@ init shared () =
     let
         showcase : ProjectType
         showcase =
-            All
+            Expercience
 
         projects : Api.Data (List Project)
         projects =
@@ -185,148 +183,195 @@ view : Model -> View Msg
 view model =
     { title = "John Jerald De Chavez"
     , body =
-        [ viewHeader
-        , viewBody model
+        [ viewHeading
+        , viewWorks model.projects
+        , viewOffers
+        , viewExperciences
+        , viewContact
         ]
     }
 
 
-viewHeader : Html Msg
-viewHeader =
-    Html.header
-        []
-        [ Html.div
-            [ Attr.class "landing headline"
-            ]
-            [ Html.node "hgroup"
-                []
-                [ Html.h1 []
-                    [ Html.text "John Jerald De Chavez" ]
-                , Html.h2 []
-                    [ Html.text "Build & Design Websites" ]
-                ]
-            , Html.nav [ Attr.class "social-links" ]
-                [ viewCTA
-                ]
-            , Html.small
-                [ Attr.class "scroll-down"
-                , Event.onClick GotoProjects
-                ]
-                [ Html.text "↓ Scroll Down" ]
+viewHeading : Html msg
+viewHeading =
+    Html.header []
+        [ Html.h1 []
+            [ Html.text "John Jerald De Chavez / Software Developer" ]
+        , Html.p []
+            [ Html.text "As a software developer, my mission has been clear: to make websites easy to use for people. "
+            , Html.text "So, join me on this exciting journey as we work together to simplify technology for people."
             ]
         ]
 
 
-viewLink : String -> String -> Html msg
-viewLink text link =
-    Html.li []
-        [ Html.a
-            [ Attr.href link
-            , Attr.target "_blank"
-            ]
-            [ Html.text text ]
-        ]
-
-
-viewCTA : Html msg
-viewCTA =
-    Html.ul []
-        [ viewLink "Resume" "./John-Jerald-De-Chavez-Resume.pdf"
-        , viewLink "Gmail" "mailto:dechavezjohnjerald029@gmail.com"
-        , viewLink "Github" "https://github.com/jjdechavez"
-        ]
-
-
-viewBody : Model -> Html Msg
-viewBody model =
-    Html.main_ []
-        [ Html.h2
-            [ Attr.style "padding" "1.75rem 0" ]
-            [ Html.text "Projects" ]
-        , projectTypeFilter model.projectTypes model.showcase
-        , viewProjects model.projects
-        ]
-
-
-projectTypeFilter : List String -> ProjectType -> Html Msg
-projectTypeFilter projectTypes showcase =
-    Html.fieldset
-        []
-        (List.concat
-            [ [ Html.legend
-                    [ Attr.class "sr-only"
-                    ]
-                    [ Html.text "Project Type" ]
-              ]
-            , List.map (\option -> viewProjectTypeOption option showcase) projectTypes
-            ]
-        )
-
-
-viewProjectTypeOption : String -> ProjectType -> Html Msg
-viewProjectTypeOption option currentProjectType =
+viewWork : Project -> Html msg
+viewWork project =
     let
-        stringFromProjectType : String
-        stringFromProjectType =
-            case currentProjectType of
-                Expercience ->
-                    "Expercience"
+        yearFromString : String -> String
+        yearFromString string =
+            let
+                result : Maybe String
+                result =
+                    String.split "-" string
+                        |> List.head
+            in
+            case result of
+                Just value ->
+                    value
 
-                Personal ->
-                    "Personal"
+                Nothing ->
+                    "Current"
 
-                _ ->
-                    "All"
+        getProjectName : Html msg
+        getProjectName =
+            case project.links.website of
+                Just urlLink ->
+                    Html.a
+                        [ Attr.href urlLink
+                        , Attr.target "_blank"
+                        ]
+                        [ Html.text project.name ]
 
-        projectTypeFromString : ProjectType
-        projectTypeFromString =
-            case option of
-                "Expercience" ->
-                    Expercience
-
-                "Personal" ->
-                    Personal
-
-                _ ->
-                    All
-
-        isChecked : Bool
-        isChecked =
-            option == stringFromProjectType
+                Nothing ->
+                    Html.text project.name
     in
-    Html.div []
-        [ Html.input
-            [ Attr.type_ "radio"
-            , Attr.name option
-            , Attr.value option
-            , Attr.id option
-            , Attr.class "peer"
-            , Attr.checked isChecked
-            , Event.onClick (FilterProject projectTypeFromString)
-            ]
-            []
-        , Html.label
-            [ Attr.for option
-            ]
-            [ Html.p
-                []
-                [ Html.text option ]
+    Html.li []
+        [ Html.div []
+            [ getProjectName
+            , Html.text " - "
+            , Html.text (yearFromString project.endedAt)
+            , Html.p [] [ Html.text project.description ]
             ]
         ]
 
 
-viewProjects : Api.Data (List Project) -> Html msg
-viewProjects projectData =
+listWorks : List Project -> Html msg
+listWorks projects =
+    Html.section []
+        [ Html.h2 [ Attr.id "works" ]
+            [ Html.text "Works" ]
+        , Html.p []
+            [ Html.text "Browse through my portfolio to see how I create websites. I prioritize simplicity and intuitive interactions to empower users."
+            ]
+        , Html.ol []
+            (List.map viewWork projects)
+        ]
+
+
+viewWorks : Api.Data (List Project) -> Html msg
+viewWorks projectData =
     case projectData of
         Api.Loading ->
             loadingPulse
 
-        Api.Success listOfProjects ->
-            Html.div
-                [ Attr.id "projects"
-                , Attr.class "grid"
-                ]
-                (List.map viewProjectCard listOfProjects)
-
         Api.Failure httpError ->
             Html.div [] [ Html.text (Api.toUserFriendlyMessage httpError) ]
+
+        Api.Success projects ->
+            listWorks projects
+
+
+viewOffers : Html msg
+viewOffers =
+    Html.section []
+        [ Html.h2 [ Attr.id "start" ]
+            [ Html.text "Here's what I can help you with:" ]
+        , Html.ul []
+            [ Html.li []
+                [ Html.div []
+                    [ Html.p [] [ Html.text "Website Development" ]
+                    , Html.p [] [ Html.text "From user-friendly interfaces to efficient functionality, I bring a passion for simplicity to every project." ]
+                    ]
+                ]
+            , Html.li []
+                [ Html.div []
+                    [ Html.p [] [ Html.text "Expert React Development" ]
+                    , Html.p [] [ Html.text "Component development, Application architecture, Styles and design" ]
+                    ]
+                ]
+            , Html.li []
+                [ Html.div []
+                    [ Html.p [] [ Html.text "Expert Node.js Development" ]
+                    , Html.p [] [ Html.text "Web services, APIs, Testing solutions." ]
+                    ]
+                ]
+            ]
+        ]
+
+
+viewExperciences : Html msg
+viewExperciences =
+    Html.section []
+        [ Html.h2 [ Attr.id "start" ]
+            [ Html.text "Experciences" ]
+        , Html.ul [ Attr.class "ul-nested" ]
+            [ Html.li []
+                [ Html.div []
+                    [ Html.a
+                        [ Attr.href "https://www.digiteer.digital/"
+                        , Attr.target "_blank"
+                        ]
+                        [ Html.text "Digiteer" ]
+                    , Html.text " - Software Developer (June 2021 - August 2022)"
+                    ]
+                , Html.ul []
+                    [ Html.li []
+                        [ Html.text "Developed, maintained, and enchanced Digiteer’s Full Stack Applications."
+                        ]
+                    , Html.li []
+                        [ Html.text "Supported production issues and escaled concerns as needed."
+                        ]
+                    , Html.li []
+                        [ Html.text "Managed and monitored AWS cloud services."
+                        ]
+                    ]
+                ]
+            , Html.li []
+                [ Html.div []
+                    [ Html.a
+                        [ Attr.href "https://www.techmaker.ph/"
+                        , Attr.target "_blank"
+                        ]
+                        [ Html.text "Techmaker" ]
+                    , Html.text " - Software Developer (November 2019 – June 2021)"
+                    ]
+                , Html.ul []
+                    [ Html.li []
+                        [ Html.text "Delivered improvements on Techmaker’s Full Stack Applications."
+                        ]
+                    , Html.li []
+                        [ Html.text "Turned design prototypes into single page apps."
+                        ]
+                    , Html.li []
+                        [ Html.text "Documented all supported systems to effectively train the new and existing team members."
+                        ]
+                    ]
+                ]
+            ]
+        ]
+
+
+viewContact : Html msg
+viewContact =
+    Html.footer []
+        [ Html.h2 []
+            [ Html.text "Contact"
+            ]
+        , Html.p []
+            [ Html.text "Mail: "
+            , Html.a
+                [ Attr.href "mailto:dechavezjohnjerald029@gmail.com"
+                ]
+                [ Html.text "dechavezjohnjerald029@gmail.com"
+                ]
+            ]
+        , Html.p []
+            [ Html.text "Github: "
+            , Html.a
+                [ Attr.href "https://github.com/jjdechavez"
+                , Attr.target "_blank"
+                ]
+                [ Html.text "jjdechavez"
+                ]
+            ]
+        ]

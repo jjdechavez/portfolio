@@ -61,7 +61,8 @@
         }
       ],
       "link": [
-        { "rel": "stylesheet", "href": "/dist/main.css", "type": "text/css" },
+        { "rel": "stylesheet", "href": "/styles/neat.css", "type": "text/css" },
+        { "rel": "stylesheet", "href": "/styles/custom.css", "type": "text/css" },
         { "rel": "shorcut icon", "href": "/logo.png", "type": "image/x-icon" }
       ]
     },

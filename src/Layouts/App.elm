@@ -72,14 +72,19 @@ view settings { content } =
     { title = content.title
     , body =
         [ Html.nav []
-            [ Html.ul
+            [ Html.a
+                [ Attr.class "home"
+                , Route.Path.href Route.Path.Home_
+                ]
+                [ Html.text "↖" ]
+            , Html.ul
                 []
                 [ Html.li []
                     [ Html.a
-                        [ Route.Path.href Route.Path.Home_
-                        , Attr.class "nav-link"
+                        [ Attr.href "./John-Jerald-De-Chavez-Resume.pdf"
+                        , Attr.target "_blank"
                         ]
-                        [ Html.text "Home" ]
+                        [ Html.text "Resume" ]
                     ]
                 , Html.li []
                     [ Html.a
@@ -91,7 +96,6 @@ view settings { content } =
                 ]
             ]
         , Html.div [ Attr.class "container" ] content.body
-        , viewFooter settings
         ]
     }
 

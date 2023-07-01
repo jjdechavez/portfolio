@@ -262,7 +262,7 @@ viewWorks : Api.Data (List Project) -> Html msg
 viewWorks projectData =
     case projectData of
         Api.Loading ->
-            loadingPulse
+            Html.p [ Attr.class "center" ] [ Html.text "Fetching works..." ]
 
         Api.Failure httpError ->
             Html.div [] [ Html.text (Api.toUserFriendlyMessage httpError) ]

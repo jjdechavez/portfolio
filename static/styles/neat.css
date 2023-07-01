@@ -8,6 +8,7 @@
     line-height: 1.5em; /* This causes wrapping h1's to collapse too small */
     font-family: sans-serif;
     font-size: 16px;
+    --flex-gap: .75rem;
 }
 
 * {

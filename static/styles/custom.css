@@ -7,7 +7,7 @@ nav {
 
 nav > ul {
   display: flex;
-  gap: .75rem;
+  gap: var(--flex-gap);
 }
 
 nav > ul > li {
@@ -17,5 +17,5 @@ nav > ul > li {
 .ul-nested {
   display: flex;
   flex-direction: column;
-  gap: .75rem;
+  gap: var(--flex-gap);
 }

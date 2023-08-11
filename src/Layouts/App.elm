@@ -81,11 +81,18 @@ view settings { content } =
                 []
                 [ Html.li []
                     [ Html.a
+                        [ Attr.href "mailto:dechavezjohnjerald029@gmail.com"
+                        ]
+                        [ Html.text "Mail" ]
+                    ]
+                , Html.li []
+                    [ Html.a
                         [ Attr.href "./John-Jerald-De-Chavez-Resume.pdf"
                         , Attr.target "_blank"
                         ]
                         [ Html.text "Resume" ]
                     ]
+
                 -- , Html.li []
                 --     [ Html.a
                 --         [ Route.Path.href Route.Path.Notes

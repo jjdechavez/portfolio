@@ -1,5 +1,22 @@
 [
   {
+    "name": "SFMBlue",
+    "slug": "sfmblue",
+    "description": "Buy & Sell wholesale seafood online.",
+    "technologies": ["ReactJs", "NodeJs", "SQL"],
+    "websiteLink": "https://app.sfmblue.com.au",
+    "coverImage": "/Santi.webp",
+    "startedAt": "2023-09-05",
+    "endedAt": "Ongoing",
+    "type": "EXPERCIENCE",
+    "contributions": [
+      "Implemented negotiation functionality into the system, enabling buyers to engage in listing negotiations",
+      "Introduced and improved the developer experience by implementing types through JSDoc in a legacy system, thereby modernizing and enhancing the codebase's maintainability.",
+      "Enhanced email templates to ensure compatibility with a broader range of email clients, resulting in improved communication and engagement",
+      "Provided timely resolution to production issues, offering swift and effective problem-solving support",
+    ]
+  },
+  {
     "name": "Santi",
     "slug": "santi",
     "description": "E-learning platform for Donbosco.",

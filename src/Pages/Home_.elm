@@ -307,12 +307,35 @@ viewExperciences =
         , Html.ul [ Attr.class "ul-nested" ]
             [ Html.li []
                 [ Html.div []
-                    [ Html.a
+                    [ Html.text "Software Developer at "
+                    , Html.a
+                        [ Attr.href "https://www.adaca.io/"
+                        , Attr.target "_blank"
+                        ]
+                        [ Html.text "Adaca" ]
+                    , Html.text " (September 2022 - Current)"
+                    ]
+                , Html.ul []
+                    [ Html.li []
+                        [ Html.text "Implemented negotiation functionality into the system, enabling buyers to engage in listing negotiations."
+                        ]
+                    , Html.li []
+                        [ Html.text "Introduced and improved the developer experience by implementing types through JSDoc in a legacy system, thereby modernizing and enhancing the codebase's maintainability."
+                        ]
+                    , Html.li []
+                        [ Html.text "Enhanced email templates to ensure compatibility with a broader range of email clients, resulting in improved communication and engagement."
+                        ]
+                    ]
+                ]
+            , Html.li []
+                [ Html.div []
+                    [ Html.text "Software Developer at "
+                    , Html.a
                         [ Attr.href "https://www.digiteer.digital/"
                         , Attr.target "_blank"
                         ]
                         [ Html.text "Digiteer" ]
-                    , Html.text " - Software Developer (June 2021 - August 2022)"
+                    , Html.text " (June 2021 - August 2022)"
                     ]
                 , Html.ul []
                     [ Html.li []
@@ -328,12 +351,13 @@ viewExperciences =
                 ]
             , Html.li []
                 [ Html.div []
-                    [ Html.a
+                    [ Html.text "Software Developer at "
+                    , Html.a
                         [ Attr.href "https://www.techmaker.ph/"
                         , Attr.target "_blank"
                         ]
                         [ Html.text "Techmaker" ]
-                    , Html.text " - Software Developer (November 2019 – June 2021)"
+                    , Html.text " (November 2019 – June 2021)"
                     ]
                 , Html.ul []
                     [ Html.li []

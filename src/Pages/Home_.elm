@@ -379,7 +379,7 @@ viewContact : Html msg
 viewContact =
     Html.footer []
         [ Html.h2 []
-            [ Html.text "Contact"
+            [ Html.text "Contacts"
             ]
         , Html.p []
             [ Html.text "Mail: "
@@ -387,6 +387,15 @@ viewContact =
                 [ Attr.href "mailto:dechavezjohnjerald029@gmail.com"
                 ]
                 [ Html.text "dechavezjohnjerald029@gmail.com"
+                ]
+            ]
+        , Html.p []
+            [ Html.text "Linkedin: "
+            , Html.a
+                [ Attr.href "https://www.linkedin.com/in/john-jerald-de-chavez-462291181"
+                , Attr.target "_blank"
+                ]
+                [ Html.text "John Jerald De Chavez"
                 ]
             ]
         , Html.p []

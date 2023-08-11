@@ -8,13 +8,7 @@
     "coverImage": "/Santi.webp",
     "startedAt": "2023-09-05",
     "endedAt": "Ongoing",
-    "type": "EXPERCIENCE",
-    "contributions": [
-      "Implemented negotiation functionality into the system, enabling buyers to engage in listing negotiations",
-      "Introduced and improved the developer experience by implementing types through JSDoc in a legacy system, thereby modernizing and enhancing the codebase's maintainability.",
-      "Enhanced email templates to ensure compatibility with a broader range of email clients, resulting in improved communication and engagement",
-      "Provided timely resolution to production issues, offering swift and effective problem-solving support",
-    ]
+    "type": "EXPERCIENCE"
   },
   {
     "name": "Santi",
@@ -25,13 +19,7 @@
     "coverImage": "/Santi.webp",
     "startedAt": "2021-06-01",
     "endedAt": "2022-01-01",
-    "type": "EXPERCIENCE",
-    "contributions": [
-      "Applied the AWS infrastructure to Frontend and Backend like Lambda Functions, DynamoDb, and SQS",
-      "Continued Single Table Design with DynamoDb",
-      "Worked on CMS from scratch with ReactJs",
-      "API integration on frontend, worked mostly on Quizzes, Bulletin, and more.",
-    ]
+    "type": "EXPERCIENCE"
   },
   {
     "name": "Arsenal",

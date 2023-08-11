@@ -25,7 +25,13 @@
     "coverImage": "/Santi.webp",
     "startedAt": "2021-06-01",
     "endedAt": "2022-01-01",
-    "type": "EXPERCIENCE"
+    "type": "EXPERCIENCE",
+    "contributions": [
+      "Applied the AWS infrastructure to Frontend and Backend like Lambda Functions, DynamoDb, and SQS",
+      "Continued Single Table Design with DynamoDb",
+      "Worked on CMS from scratch with ReactJs",
+      "API integration on frontend, worked mostly on Quizzes, Bulletin, and more.",
+    ]
   },
   {
     "name": "Arsenal",

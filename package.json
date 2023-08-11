@@ -13,7 +13,7 @@
     "dev:elm-land": "elm-land server",
     "build": "npm run build:sass && npm run build:elm-land",
     "build:sass": "sass static/scss/main.scss static/dist/main.css",
-    "build:elm-land": "npx elm-land build"
+    "build:elm-land": "npx elm-land@0.18.1 build"
   },
   "keywords": [
     "Portfolio",

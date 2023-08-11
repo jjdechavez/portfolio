@@ -86,13 +86,13 @@ view settings { content } =
                         ]
                         [ Html.text "Resume" ]
                     ]
-                , Html.li []
-                    [ Html.a
-                        [ Route.Path.href Route.Path.Notes
-                        , Attr.class "nav-link"
-                        ]
-                        [ Html.text "Notes" ]
-                    ]
+                -- , Html.li []
+                --     [ Html.a
+                --         [ Route.Path.href Route.Path.Notes
+                --         , Attr.class "nav-link"
+                --         ]
+                --         [ Html.text "Notes" ]
+                --     ]
                 ]
             ]
         , Html.div [ Attr.class "container" ] content.body

@@ -72,26 +72,37 @@ view settings { content } =
     { title = content.title
     , body =
         [ Html.nav []
-            [ Html.ul
+            [ Html.a
+                [ Attr.class "home"
+                , Route.Path.href Route.Path.Home_
+                ]
+                [ Html.text "↖" ]
+            , Html.ul
                 []
                 [ Html.li []
                     [ Html.a
-                        [ Route.Path.href Route.Path.Home_
-                        , Attr.class "nav-link"
+                        [ Attr.href "mailto:dechavezjohnjerald029@gmail.com"
                         ]
-                        [ Html.text "Home" ]
+                        [ Html.text "Mail" ]
                     ]
                 , Html.li []
                     [ Html.a
-                        [ Route.Path.href Route.Path.Notes
-                        , Attr.class "nav-link"
+                        [ Attr.href "./John-Jerald-De-Chavez-Resume.pdf"
+                        , Attr.target "_blank"
                         ]
-                        [ Html.text "Notes" ]
+                        [ Html.text "Resume" ]
                     ]
+
+                -- , Html.li []
+                --     [ Html.a
+                --         [ Route.Path.href Route.Path.Notes
+                --         , Attr.class "nav-link"
+                --         ]
+                --         [ Html.text "Notes" ]
+                --     ]
                 ]
             ]
         , Html.div [ Attr.class "container" ] content.body
-        , viewFooter settings
         ]
     }
 

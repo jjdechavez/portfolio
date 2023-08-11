@@ -1,5 +1,16 @@
 [
   {
+    "name": "SFMBlue",
+    "slug": "sfmblue",
+    "description": "Buy & Sell wholesale seafood online.",
+    "technologies": ["ReactJs", "NodeJs", "SQL"],
+    "websiteLink": "https://app.sfmblue.com.au",
+    "coverImage": "/Santi.webp",
+    "startedAt": "2023-09-05",
+    "endedAt": "Ongoing",
+    "type": "EXPERCIENCE"
+  },
+  {
     "name": "Santi",
     "slug": "santi",
     "description": "E-learning platform for Donbosco.",

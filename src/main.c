@@ -70,7 +70,7 @@ fpedited(FILE *f, char *path)
 {
 	struct stat attr;
 	stat(path, &attr);
-	fputs("<span style='float:right'>", f);
+	fputs("<span>", f);
 	fprintf(f, "Edited on %s ", ctime(&attr.st_mtime));
 	fprintf(f, "<a href='" SOURCE "/%s'>[edit]</a><br/>", path);
 	fputs("</span>", f);
@@ -174,11 +174,12 @@ build(FILE *f, Lexicon *l, char *name, char *srcpath)
 		"<meta charset='utf-8'>"
 		"<meta name='thumbnail' content='" DOMAIN "media/services/rss.jpg' />"
 		"<meta name='viewport' content='width=device-width,initial-scale=1'>"
+		"<meta name='description' content='I am a Software Engineer at Adaca, specialising in Backend Development. I excel in creating scalable applications and delivering clean code that exceeds expectations. In my free time, I like to play around with Functional Programming; at the moment, I'm learning about Elm, Linux, and more on Backend stuff.'>"
 		"<link rel='alternate' type='application/rss+xml' title='RSS Feed' "
 		"href='../links/rss.xml' />"
 		"<link rel='stylesheet' type='text/css' href='../links/main.css'>"
 		"<link rel='shortcut icon' type='image/png' "
-		"href='../media/services/shortcut.png'>"
+		"href='../media/interface/logo.png'>"
 		"<title>" NAME " &mdash; %s</title>",
 		name);
 	fputs("</head>", f);
@@ -201,9 +202,9 @@ build(FILE *f, Lexicon *l, char *name, char *srcpath)
 		printf(">>> Building failed: %s\n", name);
 	fputs("\n\n</main>", f);
 	/* footer */
-	fputs("<footer><hr />", f);
+	fputs("<footer>", f);
+	fputs("<span><b>Jerald's Laboratory</b> © 2023</span>", f);
 	fpedited(f, srcpath);
-	fputs("<b>Jerald's Laboratory</b> © 2023", f);
 	fputs("</footer>", f);
 	/* end */
 	fputs("</body></html>\n", f);

@@ -1,0 +1,43 @@
+---
+permalink: /404.html
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="I am a Software Engineer at Adaca, specialising in Backend Development. I excel in creating scalable applications and delivering clean code that exceeds expectations. In my free time, I like to play around with Functional Programming; at the moment, I'm learning about Elm, Linux, and more on Backend stuff.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Redirect -->
+  <meta http-equiv="refresh" content="10; url=https://jjdechavez.netlify.app/site/home.html" />
+  <link rel="stylesheet" type="text/css" href="https://jjdechavez.netlify.app/links/main.css"/>
+  <link rel='alternate' type='application/rss+xml' title='RSS Feed' href='links/rss.xml' />
+  <title>GrimGrains</title>
+</head>
+<body>
+  <p>The page you were looking for does not exist, if you think this was a mistake, please report the broken link <a href='https://github.com/jjdechavez/portfolio' target='_blank'>here</a>, or go back to the <a href='/site/home.html'>home</a>.</p>
+
+  <script>
+    'use strict'
+
+    const parts = window.location.pathname.split("/")
+    const target = parts.slice(-1)
+    const filename = toFilename(target[0])
+    const filepath = `https:/grimgrains.com/site/${filename}.html`
+
+    if(UrlExists(filepath)){
+      window.location.replace(filepath)
+    }
+
+    function UrlExists(url) {
+      const http = new XMLHttpRequest()
+      http.open('HEAD', url, false)
+      http.send()
+      return http.status!=404
+    }
+
+    function toFilename(str){
+      return `${str}`.replace('#','').replace(/[\W_]+/g,"_").toLowerCase().trim()
+    }
+  </script>
+</body>
+</html>

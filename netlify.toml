@@ -1,14 +1,14 @@
 [build]
-  command = "npm run build"
-  publish = "dist"
+  command = "./src/build.sh"
+  publish = "site"
 
 [[redirects]]
   from = "/*"
-  to = "/index.html"
-  status = 200
-
-
-[[redirects]]
-  from = "/index.html"
-  to = "/"
+  to = "/home.html"
   status = 301
+
+
+# [[redirects]]
+#   from = "/index.html"
+#   to = "/"
+#   status = 301

@@ -177,9 +177,9 @@ build(FILE *f, Lexicon *l, char *name, char *srcpath)
 		"<meta name='description' content='I am a Software Engineer at Adaca, specialising in Backend Development. I excel in creating scalable applications and delivering clean code that exceeds expectations. In my free time, I like to play around with Functional Programming; at the moment, I'm learning about Elm, Linux, and more on Backend stuff.'>"
 		"<link rel='alternate' type='application/rss+xml' title='RSS Feed' "
 		"href='../links/rss.xml' />"
-		"<link rel='stylesheet' type='text/css' href='../links/main.css'>"
+		"<link rel='stylesheet' type='text/css' href='./links/main.css'>"
 		"<link rel='shortcut icon' type='image/png' "
-		"href='../media/interface/logo.png'>"
+		"href='./media/interface/logo.png'>"
 		"<title>" NAME " &mdash; %s</title>",
 		name);
 	fputs("</head>", f);
@@ -235,6 +235,7 @@ generate(Lexicon *l)
 	return 1;
 }
 
+// List of routes then append on index.html
 int
 index(Lexicon *l, DIR *d)
 {

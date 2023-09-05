@@ -11,7 +11,7 @@ fi
 mkdir -p bin
 mkdir -p site
 rm -f bin/main
-rm -f site/*
+rm -fr site/*
 
 # Linux(debug)
 cc -std=c99 -DDEBUG -Wall -Wno-unknown-pragmas -Wpedantic -Wshadow -Wuninitialized -Wextra -Werror=implicit-int -Werror=incompatible-pointer-types -Werror=int-conversion -Wvla -g -Og -fsanitize=address -fsanitize=undefined src/main.c -o bin/main
@@ -27,5 +27,10 @@ cc -std=c99 -DDEBUG -Wall -Wno-unknown-pragmas -Wpedantic -Wshadow -Wuninitializ
 
 # Run
 ./bin/main
+
+# Moved static files
+cp -r ./links/ site/
+cp -r ./media/ site/
+cp -r ./404.html site/
 
 # Cleanup

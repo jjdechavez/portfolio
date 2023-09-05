@@ -235,9 +235,9 @@ generate(Lexicon *l)
 	return 1;
 }
 
-// List of routes then append on index.html
+// List of pages then append on pages.html
 int
-index(Lexicon *l, DIR *d)
+pages(Lexicon *l, DIR *d)
 {
 	FILE *f;
 	struct dirent *dir;
@@ -249,8 +249,8 @@ index(Lexicon *l, DIR *d)
 	closedir(d);
 	printf("Indexed %d terms\n", l->len);
 	l->refs[l->len] = 0;
-	scpy("index.htm", l->files[l->len++], 128);
-	f = fopen("src/inc/index.htm", "w");
+	scpy("pages.htm", l->files[l->len++], 128);
+	f = fopen("src/inc/pages.htm", "w");
 	fpindex(f);
 	fclose(f);
 	return 1;
@@ -273,7 +273,7 @@ main(void)
 	lex.len = 0;
 	if(!(d = opendir("src/inc")))
 		return error("Open", "Missing src/inc/ folder. ");
-	if(!index(&lex, d))
+	if(!pages(&lex, d))
 		return error("Indexing", "Failed");
 	if(!generate(&lex))
 		return error("Generating", "Failed");

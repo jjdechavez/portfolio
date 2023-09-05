@@ -1,6 +1,6 @@
 [build]
   command = "./src/build.sh"
-  # publish = "site"
+  publish = "/"
 
 [[redirects]]
   from = "/*"

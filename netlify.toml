@@ -1,11 +1,11 @@
 [build]
   command = "./src/build.sh"
-  publish = "site"
+  # publish = "site"
 
-# [[redirects]]
-#   from = "/*"
-#   to = "/index.html"
-#   status = 200
+[[redirects]]
+  from = "/*"
+  to = "/home.html"
+  status = 301
 
 
 # [[redirects]]

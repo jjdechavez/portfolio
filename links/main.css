@@ -101,6 +101,7 @@ body.home nav ul li.home, body.about nav ul li.about, body.tools nav ul li.tools
   main dl.ingredients dt b { display: inline !important; margin:0;padding:0px 10px 0px 0px }
   main dl.ingredients dt img { display: none !important }
   main dl.ingredients dt u { display: inline-block; font-size:12px }
+  footer { flex-direction: column-reverse; row-gap: 1rem; align-items: normal; }
   }
 
 @media (prefers-color-scheme: dark){

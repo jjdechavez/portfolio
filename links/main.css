@@ -87,8 +87,11 @@ main > table.col tr > *:first-child { padding-left: 0px }
 main > table.col b { font-weight: bold }
 
 main img.characters {max-width: 100px;}
-main > code { font-family: monospace; font-size:12px; margin-bottom: 30px; display: block; background:black; color:white; padding:15px; white-space: pre}
-main > code comment { color:#777 }
+/* main > code { font-family: monospace; font-size:12px; margin-bottom: 30px; display: block; background:black; color:white; padding:15px; white-space: pre} */
+/* main > code comment { color:#777 } */
+
+main > pre { font-family: monospace; font-size:12px; margin-bottom: 30px; display: block; background:black; color:white; padding:15px; overflow-x: scroll; }
+main > pre comment { color:#777 }
 
 body.home nav ul li.home, body.about nav ul li.about, body.tools nav ul li.tools, body.nutrition nav ul li.nutrition, body.sprouting nav ul li.sprouting, body.lactofermentation nav ul li.lactofermentation { border-bottom-color: black }
 
@@ -115,5 +118,5 @@ body.home nav ul li.home, body.about nav ul li.about, body.tools nav ul li.tools
   main > p.notice {background: #111;color:white;}
   main ul.instructions u { border: 2px solid white;}
   main h3 { border-bottom:2px solid white;}
-  main > code { background:white; color:#000 }
+  main > pre { background:white; color:#000 }
 }

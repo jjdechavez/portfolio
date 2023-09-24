@@ -37,8 +37,8 @@ main > div > p a { font-weight: bold; cursor: pointer; text-decoration: underlin
 main > div > p a:hover { text-decoration: none }
 main > div > p a:focus { text-decoration: dotted underline }
 main > div > p a.external:after { content:"*"; color:#999 }
-main > div > p b { font-weight: bold }
-main > p b { font-weight: bold }
+main > div > p b, strong { font-weight: bold }
+main > p b, strong { font-weight: bold }
 main > div > p b.head { text-transform: capitalize;font-size: 24px;line-height: 45px;display: block;margin: 30px 0px }
 main > ul.col2 { columns: 2; margin-bottom:30px; position: relative }
 main > ul { display: block; margin-bottom:30px; position: relative }
@@ -87,6 +87,8 @@ main > table.col tr > *:first-child { padding-left: 0px }
 main > table.col b { font-weight: bold }
 
 main img.characters {max-width: 100px;}
+main > code { font-family: monospace; font-size:12px; margin-bottom: 30px; display: block; background:black; color:white; padding:15px; white-space: pre}
+main > code comment { color:#777 }
 
 body.home nav ul li.home, body.about nav ul li.about, body.tools nav ul li.tools, body.nutrition nav ul li.nutrition, body.sprouting nav ul li.sprouting, body.lactofermentation nav ul li.lactofermentation { border-bottom-color: black }
 
@@ -113,4 +115,5 @@ body.home nav ul li.home, body.about nav ul li.about, body.tools nav ul li.tools
   main > p.notice {background: #111;color:white;}
   main ul.instructions u { border: 2px solid white;}
   main h3 { border-bottom:2px solid white;}
+  main > code { background:white; color:#000 }
 }

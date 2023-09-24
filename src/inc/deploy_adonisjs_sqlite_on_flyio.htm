@@ -114,9 +114,16 @@ fly secrets set APP_KEY=generated-key SOME_ENV=some-env OTHER_KEYS=other-keys
 
 <p>You can monitor your application on fly.io dashboard, and you can check if there's an error or success. I hope this guide help you to deploy your AdonisJS with SQLite on fly.io. You can check some common issue section that I also encountered during the experiment.</p>
 
-<h3>Common Issue</h3>
+<h3>Common Issues</h3>
 
 <p>If you're encounter some problem like this:</p>
 
 <p>`error umounting /data: EBUSY: Device or resource busy, retrying in a bit`</p>
 <p>Solution: <strong>fly apps restart app-name</strong></p>
+
+<h3>References</h3>
+
+<ul>
+  <li><a href="https://docs.adonisjs.com/cookbooks/deploy-to-heroku#adding-the-procfile">AdonisJS Cookbook: Deployment Heroku</a></li>
+  <li><a href="https://fly.io/docs/hands-on/">Hands-on with Fly.io</a></li>
+</ul>

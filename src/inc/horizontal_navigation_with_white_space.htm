@@ -1,0 +1,73 @@
+<h2>Horizontal Navigation With White-Space</h2>
+
+<img src="./media/images/solution_navigation_white_space.png" alt="Solution for navigation white-space problem">
+
+<p>Are you wondering on how to achieve a navigation links that align straight and does not wrap the content?</p>
+
+<p>This guide provides instructions to achieve with <strong>white-space</strong> css property.</p>
+
+<h3>Initial setup</h3>
+
+<p>For our initial setup, we need to create <strong>index.html</strong></p>
+
+<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+  &lt;/head&gt;
+  &lt;body style="width: 640px; margin: auto;"&gt;
+
+    &lt;nav&gt;
+      &lt;ul style="display: flex; gap: 1.5rem;"&gt;
+        &lt;li&gt;Home&lt;/li&gt;
+        &lt;li&gt;About&lt;/li&gt;
+        &lt;li&gt;Social Medias&lt;/li&gt;
+        &lt;li&gt;Etc.&lt;/li&gt;
+        &lt;li&gt;Random Long Words&lt;/li&gt;
+        &lt;li&gt;Example For Reference&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/nav&gt;
+
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<p>When we open the <strong>index.html</strong>, it should look like this:</p>
+
+<img src="./media/images/problem_navigation_white_space.png" alt="Initial navigation white-space problem">
+
+<h3>Solution</h3>
+
+<p>The solution for this problem is to add <u>white-space</u> css property with <strong>nowrap</strong> on the <strong>ul</strong> element.</p>
+
+<pre>
+&lt;ul style="display: flex; gap: 1.5rem; white-space: nowrap;"&gt;
+  ...
+&lt;/ul&gt;
+</pre>
+
+<p>Result:</p>
+
+<img src="./media/images/solution_navigation_white_space.png" alt="Solution for navigation white-space problem">
+
+<h3>Bonus</h3>
+
+<p>Here some bonus section, let say we have limited space on our screen and our navigation has property <u>white-space</u> set to <strong>nowrap</strong>. As a result, the navigation causes horizontal scrolling throughout the entire screen.</p>
+
+<p><strong>Solution</strong>: add a parent element to wrap your navigation links. On parent element, add <u>overflow-x</u> CSS property with a value of <strong>scroll</strong>.</p>
+
+<p>With our example, we already wrap our navigation links with <strong>nav</strong> tag.</p>
+
+<pre>
+&lt;nav style="overflow-x: scroll;"&gt;
+  &lt;ul style="display: flex; gap: 1.5rem;"&gt;
+    ...
+  &lt;/ul&gt;
+&lt;/nav&gt;
+</pre>
+
+<p><strong>Result</strong>: Instead of scrolling horizontally through our entire screen, we can apply horizontal scrolling specifically to our navigation links.</p>
+
+<p>I hope this guide helps you in your <strong>Frontend Journey</strong>!</p>

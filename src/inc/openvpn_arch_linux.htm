@@ -1,0 +1,82 @@
+<h2>OpenVPN on Arch Linux</h2>
+
+<p>Today, I found myself in need of connecting to a VPN using OpenVPN on my Arch Linux system. This inspired me to create a guide to help you set up OpenVPN on your own machine. In the following steps, I'll walk you through the process of establishing a VPN connection on your Arch Linux system. Let's get started!</p>
+
+<h3>Requirements</h3>
+
+<p>To establish a VPN connection, you'll need the <strong>openvpn3</strong> binary. To install <strong>openvpn3</strong> using package manager <strong>yay</strong>, simply run the following command:</p>
+
+<code>yay openvpn3</code>
+
+<p>After installing <strong>openvpn3</strong> try to run <strong>openvpn3 --help</strong> to ensure <strong>openvpn3</strong> binary installed on your system.</p>
+
+<h3>Acess Openvpn Access Server</h3>
+
+<p>Ensure that you are logged in to your OpenVPN Access Server. Once logged in, click on <strong>"Yourself" (autologin profile)</strong>, and this action will trigger the automatic download of the "client.ovpn" configuration file.</p>
+
+<h3>Connect to Openvpn</h3>
+
+<p>Once you have downloaded the <strong>client.ovpn</strong> file, you can import it using the following command:</p>
+
+<code>openvpn3 config-import --config /path-to-your-client/client.opvpn</code>
+
+<p>You can start a new VPN session:</p>
+
+<code>openvpn3 session-start --config /path-to-your-client/client.opvpn</code>
+
+<p>Congrats you are already connected on your vpn. In order to check your VPN session:</p>
+
+<code>openvpn3 sessions-list</code>
+
+<p>Result:</p>
+
+<pre>
+-----------------------------------------------------------------------------
+        Path: /net/openvpn/v3/sessions/[session-name]
+     Created: Thu Oct  5 16:06:41 2023                  PID: 70487
+       Owner: user                                   Device: tun0
+ Config name: ./path-to-your-client/client.ovpn
+Session name: 13.236.220.186
+      Status: Connection, Client connected
+</pre>
+
+<h3>Disconnect on Openvpn</h3>
+
+<p>It's important to remember to disconnect from your VPN. To do so, use the following command:</p>
+
+<pre>openvpn3 session-manage --session-path /net/openvpn/v3/sessions/[session-name] --disconnect</pre>
+
+<p>To determine the flag <strong>--session-path</strong>, you can use the <strong>openvpn3 sessions-list</strong> command. After executing this command, examine the specific <strong>Path</strong> field to find the session-path information.</p>
+
+<h3>Reconnect to last session</h3>
+
+<p>To reconnect to your last session, you should already be familiar with your configuration paths. You can use the <strong>openvpn3 configs-list</strong> command to help identify the configurations available on your system. Here's an example of what the results may look like:</p>
+
+<pre>
+Configuration path
+Imported                        Last used                 Used
+Name                                                      Owner
+------------------------------------------------------------------------------
+/net/openvpn/v3/configuration/[config-name]
+Thu Oct  5 15:14:16 2023        Thu Oct  5 15:20:14 2023  4
+./path-to-your-client/client.ovpn                                   user
+</pre>
+
+<p>After knowing the configuration path, you can already reconnect to the session by <strong></strong> command. Then check your session-list to confirm that your connected on the session by <strong>openvpn3 sessions-list</strong></p>
+
+<p>Once you have identified the configuration path, you can reconnect to the session using the following command:</p>
+
+<code>openvpn3 session-start --config-path /net/openvpn/v3/configuration/[config-name]</code>
+
+<p>Afterward, you can verify that you are connected to the session by running:</p>
+
+<code>openvpn3 sessions-list</code>
+
+<p>This will confirm your connection status within the session.</p>
+
+<h3>References</h3>
+
+<ul>
+  <li><a href="https://openvpn.net/vpn-server-resources/connecting-to-access-server-with-linux/" target="_blank">Connecting to Access server with Linux</a></li>
+  <li><a href="https://community.openvpn.net/openvpn/wiki/OpenVPN3Linux#Usingopenvpn3" target="_blank">Using openvpn3</a></li>
+</ul>

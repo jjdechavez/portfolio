@@ -18,11 +18,11 @@
 
 <p>Once you have downloaded the <strong>client.ovpn</strong> file, you can import it using the following command:</p>
 
-<code>openvpn3 config-import --config /path-to-your-client/client.opvpn</code>
+<pre>openvpn3 config-import --config /path-to-your-client/client.opvpn</pre>
 
 <p>You can start a new VPN session:</p>
 
-<code>openvpn3 session-start --config /path-to-your-client/client.opvpn</code>
+<pre>openvpn3 session-start --config /path-to-your-client/client.opvpn</pre>
 
 <p>Congrats you are already connected on your vpn. In order to check your VPN session:</p>
 
@@ -64,7 +64,7 @@ Thu Oct  5 15:14:16 2023        Thu Oct  5 15:20:14 2023  4
 
 <p>Once you have identified the configuration path, you can reconnect to the session using the following command:</p>
 
-<code>openvpn3 session-start --config-path /net/openvpn/v3/configuration/[config-name]</code>
+<pre>openvpn3 session-start --config-path /net/openvpn/v3/configuration/[config-name]</pre>
 
 <p>Afterward, you can verify that you are connected to the session by running:</p>
 

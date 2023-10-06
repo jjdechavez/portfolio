@@ -1,0 +1,50 @@
+<h2>AWS Cheatsheet</h2>
+
+<p>My personal cheatsheet on AWS or common I used on cli</p>
+
+<h3>CLI</h3>
+
+<p>Getting tired opening new tab for commands. So, I decided to collect the common commands on AWS CLI.</p>
+
+<p><a href="https://docs.aws.amazon.com/cli/latest/reference/cognito-idp/list-users.html" target="_blank">List Users</a></p>
+
+<pre>aws cognito-idp list-users --profile your-aws-profile --region us-east-1 --user-pool-id us-east-1_your-pool-id</pre>
+
+<p><a href="https://docs.aws.amazon.com/cli/latest/reference/cognito-idp/list-users.html#options" target="_blank">List Users with Filters</a></p>
+
+<pre>aws cognito-idp list-users --profile your-aws-profile --region us-east-1 --user-pool-id us-east-1_your-pool-id --filter 'cognito:user_status = "FORCE_CHANGE_PASSWORD"</pre>
+
+<p><a href="https://docs.aws.amazon.com/cli/latest/reference/cognito-idp/admin-get-user.html" target="_blank">Get User</a></p>
+
+<pre>aws cognito-idp admin-get-user --profile your-aws-profile --region us-east-1 --user-pool-id us-east-1_your-pool-id --username johndoe@mail.com</pre>
+
+<p><a href="https://docs.aws.amazon.com/cli/latest/reference/cognito-idp/admin-create-user.html">Resend temporary Password</a></p>
+
+<pre>aws cognito-idp admin-create-user --profile your-aws-profile --region us-east-1 --user-pool-id us-east-1_your-pool-id --username johndoe@mail.com --message-action RESEND</pre>
+
+<p><a href="https://docs.aws.amazon.com/cli/latest/reference/cognito-idp/sign-up.html" target="_blank">Signup User with email and password</a></p>
+
+<pre>aws cognito-idp sign-up --profile your-aws-profile --region us-east-1 --client-id us-east-1_your-pool-id --username admin@example.com --password Passw0rd!</pre>
+
+<p><a href="https://docs.aws.amazon.com/cli/latest/reference/cognito-idp/admin-confirm-sign-up.html" target="_blank">Verify Email</a></p>
+
+<pre>aws cognito-idp admin-confirm-sign-up --profile your-aws-profile --region us-east-1 --user-pool-id your-user-pool-id --username admin@example.com</pre>
+
+<h3>Definitions</h3>
+
+<p>Refresher for definations of AWS services.</p>
+
+<h4>Cognito User Pool</h4>
+
+<p>To manage sign up and login functionality for our users, we’ll be using an AWS service called, <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html" target="_blank">Amazon Cognito User Pool</a>. It’ll store our user’s login info. It’ll also be managing user sessions in our React app.</p>
+
+<h4>Cognito Indentity Pool</h4>
+
+<p>To manage access control to our AWS infrastructure we use another service called <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-identity.html" target="_blank">Amazon Cognito Identity Pools</a>. This service decides if our previously authenticated user has access to the resources he/she is trying to connect to. Identity Pools can have different authentication providers (like Cognito User Pools, Facebook, Google etc.). In our case, our Identity Pool will be connected to our User Pool.</p>
+
+<h3>References</h3>
+
+<ul>
+  <li><a href="https://docs.aws.amazon.com/cli/latest/" target="_blank">AWS CLI Command Reference</a></li>
+  <li><a href="https://sst.dev/chapters/auth-in-serverless-apps.html" target="_blank">Auth Serverless Apps</a></li>
+</ul>

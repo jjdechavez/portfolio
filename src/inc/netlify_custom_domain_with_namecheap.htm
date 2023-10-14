@@ -1,0 +1,43 @@
+<h2>Netlify Custom Domain with Namecheap</h2>
+
+<p>This guide will assist you in setting up your custom domain on Netlify.</p>
+
+<p>When purchasing a domain on Namecheap, you don't need to buy an SSL certificate separately because Netlify provide free SSL.</p>
+
+<p>The only requirement is to have a purchased domain in order to set it up on Netlify.</p>
+
+<h3>Netlify</h3>
+
+<p>In the Netlify dashboard, navigate to the application to which you want to add a custom domain. Then, proceed to <strong>Domain Management</strong> nav.</p>
+
+<p>Within the <strong>Production Domain</strong> section, click <strong>"Add Domain"</strong>. Enter the domain you purchased on Namecheap and verify its ownership.</p>
+
+<p>Next, click the Options dropdown and select <strong>"Setup Netlify DNS"</strong>.</p>
+
+<p>First Add domain step, click <strong>verify</strong> and click <strong>Add domain</strong> to began delegating it to Netlify.</p>
+
+<p>In the initial <strong>"Add Domain"</strong> step, click <strong>"Verify"</strong> and then <strong>"Add Domain" </strong> to begin delegating it to Netlify.</p>
+
+<p>Second Add DNS record step, click <strong>Continue</strong>. The DNS records for your Netlify sites will be configured automatically. Are you using your domain for other services, such as email? No problem! You can add DNS records for those services at any time.</p>
+
+<p>For the second step <strong>Add DNS record</strong>, <strong>"Add DNS Record"</strong> click <strong>"Continue"</strong>. The DNS records for your Netlify sites will be automatically configured. If you're using your domain for other services like email, don't worry! You can add DNS records for those services at any time.</p>
+
+<p>In the final step, <strong>"Activate Netlify DNS"</strong>: log in to your domain provider, which is Namecheap, and change your name servers to something like:</p>
+
+<ul>
+  <li>yourdns2.something.toyourdomain.net</li>
+  <li>yourdns3.something.toyourdomain.net</li>
+  <li>etc..</li>
+</ul>
+
+<h3>Namecheap</h3>
+
+<p>Log in to <strong>Namecheap</strong> dashboard, proceed to <strong>"Domain List"</strong> tab and select your domain. On the <strong>"Domain"</strong> tab, locate the <strong>"Nameserver"</strong> section. Change <strong>Namecheap Basic DNS</strong> to <strong>Custom DNS</strong>.</p>
+
+<p>Enter the nameservers provided by Netlify, then save the changes by clicking the check button.</p>
+
+<p>Following this, return to Netlify dashboard and, in the <strong>"Activate Netlify DNS" </strong> step, click the <strong>"Done" </strong> button.</p>
+
+<p>Allow time for your DNS to propagate and enable the SSL/TLS certificate in the <strong>"HTTPS"</strong> section.</p>
+
+<p>Once this process is complete, you can enjoy your new custom domain!</p>

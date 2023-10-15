@@ -171,8 +171,13 @@ build(FILE *f, Lexicon *l, char *name, char *srcpath)
 		"<link rel='alternate' type='application/rss+xml' title='RSS Feed' "
 		"href='../links/rss.xml' />"
 		"<link rel='stylesheet' type='text/css' href='./links/main.css'>"
-		"<link rel='shortcut icon' type='image/png' "
-		"href='./media/interface/logo.png'>"
+    "<link rel='apple-touch-icon' sizes='76x76' href='./media/interface/apple-touch-icon.png'>"
+    "<link rel='icon' type='image/png' sizes='32x32' href='./media/interface/favicon-32x32.png'>"
+    "<link rel='icon' type='image/png' sizes='16x16' href='./media/interface/favicon-16x16.png'>"
+    "<link rel='manifest' href='./media/interface/site.webmanifest'>"
+    "<link rel='mask-icon' href='./media/interface/safari-pinned-tab.svg' color='#5bbad5'>"
+    "<meta name='msapplication-TileColor' content='#da532c'>"
+    "<meta name='theme-color' content='#ffffff'>"
 		"<title>" NAME " &mdash; %s</title>",
 		name);
 	fputs("</head>", f);

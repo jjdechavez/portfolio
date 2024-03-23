@@ -113,17 +113,17 @@ fpinject(FILE *f, Lexicon *l, char *filepath)
 		return error("Missing include", filepath);
 	s[0] = 0;
 	while((c = fgetc(inc)) != EOF) {
-		if(c == '}') {
-			t = 0;
-			if(!fptemplate(f, l, s))
-				return 0;
-			continue;
-		}
-		if(c == '{') {
-			s[0] = 0;
-			t = 1;
-			continue;
-		}
+		// if(c == '}') {
+		// 	t = 0;
+		// 	if(!fptemplate(f, l, s))
+		// 		return 0;
+		// 	continue;
+		// }
+		// if(c == '{') {
+		// 	s[0] = 0;
+		// 	t = 1;
+		// 	continue;
+		// }
 		if(slen(s) > 1023)
 			return error("Templating error", filepath);
 		if(t)

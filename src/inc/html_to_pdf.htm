@@ -1,0 +1,55 @@
+<h2>HTML to PDF</h2>
+
+<p>I'll be showing some tips on how to work with HTML to PDF</p>
+
+<h3>Every new page add space</h3>
+
+<p>We can use the psuedo class to filter the not first-child when we are trying to add padding-top.</p>
+
+<pre>
+.perpage:not(:first-child) {
+  padding-top: 2cm;
+}
+</pre>
+
+<h3>Break page after when is not last child</h3>
+
+<p>Imagine we need to render multiple pages of pdf. Currently what I implement that I need to return a new html that separate from the page. Something like this:</p>
+
+<pre>
+&lt;html&gt; ... &lt;/html&gt;
+
+&lt;html&gt; ... &lt;/html&gt;
+</pre>
+
+<p>What we can do is by adding <u>page-break-after</u> with value of <strong>always !important;</strong> and implement when child is not last with css psuedo class.</p>
+
+<pre>
+.pagebreakafter:not(:last-child) {
+  page-break-after: always !important;
+}
+</pre>
+
+<h3>Styling your footer</h3>
+
+<p>Add fixed footer style by adding <u>position</u> value <strong>fixed;</strong> and add some padding for your preference.</p>
+
+<pre>
+@media print {
+  .footer {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    text-align: right;
+    padding: 1rem;
+  }
+}
+</pre>
+
+
+<h3>References</h3>
+
+<ul>
+  <li><a href="https://www.npmjs.com/package/html-pdf?activeTab=readme" target="_blank">html-to-pdf</a></li>
+</ul>

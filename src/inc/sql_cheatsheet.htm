@@ -1,0 +1,100 @@
+<h2>SQL Cheatsheet</h2>
+
+<h3>Postgres</h3>
+
+<p>Access property from json object with "->" and "->>"</p>
+
+<ul>
+  <li><strong>-&gt;</strong> operator returns JSON object field by key.</li>
+    <li><strong>-&gt;&gt;</strong> operator returns JSON object field by text.</li>
+</ul>
+
+<pre>
+-- get stakeholder on courier, get nested object
+SELECT
+  c."courierName",
+  c."data"->'stakeholder'->>'primaryEmail' as "courierEmail"
+FROM couriers c
+WHERE c.id = '891e6dc3-141a-4bf6-bbcf-5407009ecefc'
+</pre>
+
+<p>Query from json column that has array of object value</p>
+
+<pre>
+SELECT q.id, j
+FROM quotes q
+   CROSS JOIN LATERAL JSON_ARRAY_ELEMENTS(q."jsonResponse") as j
+WHERE j->>'shipmentMode' LIKE 'Roa%';
+</pre>
+
+<p>Working with enums</p>
+
+<pre>
+-- Query oid of enum_listing_packaging_type
+SELECT oid FROM pg_type WHERE typname = 'enum_listing_box_packaging_type'
+
+-- Query all data about enum
+SELECT * FROM pg_type WHERE typname = 'enum_listing_packaging_type'
+
+-- List of enum values with oid from pg_type
+SELECT * FROM pg_enum pe WHERE pe.enumtypid = 94076
+</pre>
+
+<p>Get latest left join row</p>
+
+<pre>
+...
+LEFT JOIN
+  order_adjustment oa ON o.id = oa.order_id
+  AND oa.created_at = (
+    SELECT MAX(created_at) -- Filter with latest created_at
+    FROM order_adjustment oa2
+    WHERE oa2.order_id  = o.id
+  )
+...
+</pre>
+
+<p>Append array of object on array of object column</p>
+
+<pre>
+-- Append new delta_listing_boxes
+UPDATE order_line_item
+SET delta_listing_boxes = (
+  CASE
+    WHEN delta_listing_boxes IS NULL THEN '[]'::JSONB
+    ELSE delta_listing_boxes
+  END
+) || '[{"id": "d9923cc3-dd17-44f7-9f9b-ce4740725ed9","count": null,"weight": 5,"quantity": 4}]'::JSONB
+WHERE id = '1e7db4b9-658f-4322-9115-a685b3e1946d';
+</pre>
+
+<p>Working with duplicate data and how to update the recent/latest row</p>
+
+<pre>
+-- Common Table Expression or CTE
+WITH LatestSubscriptions AS (
+  SELECT
+    ROW_NUMBER() OVER (PARTITION BY cs.company_id, cs.subscription_plan_id ORDER BY cs.starts_at DESC) AS row_num,
+	c.name as company_name, sc.stripe_customer, sp.alias as plan_name, cs.*
+  FROM
+    stripe_customer sc
+    LEFT JOIN company_subscription cs ON cs.company_id = sc.company_id
+    LEFT JOIN subscription_plan sp ON sp.id = cs.subscription_plan_id
+    LEFT JOIN company c ON cs.company_id = c.id
+  WHERE
+    sp.alias IN ('BASE', 'FEATURE_REVERSED_MARKETPLACE', 'FEATURE_REVERSED_MARKETPLACE_SELLER')
+)
+SELECT * FROM LatestSubscriptions;
+
+-- Use this when trying to update the rows
+UPDATE company_subscription
+SET renews_at = NULL
+FROM LatestSubscriptions
+WHERE LatestSubscriptions.row_num > 1 and company_subscription.id = LatestSubscriptions.id;
+</pre>
+
+<h3>References</h3>
+
+<ul>
+  <li><a href="https://stackoverflow.com/questions/40706435/how-can-i-search-object-values-inside-an-array-with-postgres-jsonb" target="_blank">Postgres: search object values inside an array of object</a></li>
+</ul>

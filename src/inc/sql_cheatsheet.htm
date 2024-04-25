@@ -27,18 +27,6 @@ FROM quotes q
 WHERE j->>'shipmentMode' LIKE 'Roa%';
 </pre>
 
-<p>Working with enums</p>
-
-<pre>
--- Query oid of enum_listing_packaging_type
-SELECT oid FROM pg_type WHERE typname = 'enum_listing_box_packaging_type'
-
--- Query all data about enum
-SELECT * FROM pg_type WHERE typname = 'enum_listing_packaging_type'
-
--- List of enum values with oid from pg_type
-SELECT * FROM pg_enum pe WHERE pe.enumtypid = 94076
-</pre>
 
 <p>Get latest left join row</p>
 
@@ -93,7 +81,35 @@ FROM LatestSubscriptions
 WHERE LatestSubscriptions.row_num > 1 and company_subscription.id = LatestSubscriptions.id;
 </pre>
 
-<p>Aggregation patterns:</p>
+<p>Enums</p>
+
+<p>Common pattern when working with types or Enum</p>
+
+<pre>
+-- Create enum packaging_type
+CREATE TYPE packaging_type AS ENUM ('BOX', 'CARTON', 'TRAY');
+
+-- Adding value on enum
+ALTER TYPE packaging_type ADD VALUE IF NOT EXISTS 'PACKET';
+
+-- Rename carton enum
+ALTER TYPE packaging_type RENAME VALUE 'CARTON' TO 'CARTONS';
+</pre>
+
+<p>Enums with pg_type</p>
+
+<pre>
+-- Query oid of enum_listing_packaging_type
+SELECT oid FROM pg_type WHERE typname = 'enum_listing_box_packaging_type'
+
+-- Query all data about enum
+SELECT * FROM pg_type WHERE typname = 'enum_listing_packaging_type'
+
+-- List of enum values with oid from pg_type
+SELECT * FROM pg_enum pe WHERE pe.enumtypid = 94076
+</pre>
+
+<p>Aggregation patterns</p>
 
 <p>Group by column and aggregate all results</p>
 

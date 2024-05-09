@@ -1,0 +1,94 @@
+<h2>Managing Multiple SSH Accounts</h2>
+
+<p>I'll be showing some tips on how to manage multiple ssh accounts with ssh config.</p>
+
+<h3 id="problem"><a href="#problem">Problem</a></h3>
+
+<p>Let say we have personal and work accounts on hosting platforms like Github or Bitbucket and etc. First thing we need to setup our ssh keys.</p>
+
+<p>Creating ssh key based on your hosting platform. Kindly follow the instruction below:</p>
+
+<ul>
+  <li>Github: <a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">Generating a new SSH key and adding it to the ssh-agent</a></li>
+  <li>Bitbucket: <a href="https://support.atlassian.com/bitbucket-cloud/docs/configure-ssh-and-two-step-verification/">Configure SSH and two step verification</a></li>
+</ul>
+
+<p>At your <strong>~/.ssh/config</strong>:</p>
+
+<pre>
+Host bitbucket.org
+  HostName bitbucket.org
+  User git
+  AddKeysToAgent yes
+  IdentityFile ~/.ssh/personal
+
+Host bitbucket.org
+  HostName bitbucket.org
+  User git
+  AddKeysToAgent yes
+  IdentityFile ~/.ssh/work
+</pre>
+
+<p>Then whenever we make a git command from the work version control it would throw an error. The reason we are having conflict with our personal and work ssh config.</p>
+
+<h3 id="solution"><a href="#solution">Solution</a></h3>
+
+<p>We can rename our <strong>Host</strong> on our <strong>~/.ssh/config</strong> because this can be anything based on your prefrence</p>
+
+<pre>
+Host bitbucket.org-personal
+  HostName bitbucket.org
+  User git
+  AddKeysToAgent yes
+  IdentityFile ~/.ssh/personal
+
+Host bitbucket.org-work
+  HostName bitbucket.org
+  User git
+  AddKeysToAgent yes
+  IdentityFile ~/.ssh/work
+</pre>
+
+<p>But when you try to <strong>git pull</strong> on your work account. It shows invalid url or you dont have authorize to pull from the repository.</p>
+
+<p>Let say you already have the repository on your development machine. What we can do is to check the remote url of the repository.</p>
+
+<pre>
+git remote -v
+origin  git@bitbucket.org:workspace/work-repo.git (fetch)
+origin  git@bitbucket.org:workspace/work-repo.git (push)
+</pre>
+
+<p>We need to update the remote url based on your <strong>~/.ssh/config</strong> for your work:</p>
+
+<pre>
+git remote set-url origin git@bitbucket.org-work:workspace/work-repo.git
+
+# Check the changes
+git remote -v
+origin  git@bitbucket.org-work:workspace/work-repo.git (fetch)
+origin  git@bitbucket.org-work:workspace/work-repo.git (push)
+</pre>
+
+<p>After updating your repository remote url, now you can execute some git commands like <strong>pull</strong>, <strong>push</strong>, and etc.</p>
+
+<p>Let say you haven't clone the repo; what you can do before cloning the repository you should update the host of repository url based on your work ssh config host.</p>
+
+<pre>
+# from
+# git clone git@bitbucket.org:workspace/work-repo.git
+
+# to
+git clone git@bitbucket.org-work:workspace/work-repo.git
+</pre>
+
+<p>Now you're succesfully clone your work repository based on your work ssh config. You can implement this on your personal account.</p>
+
+<p>With this solution I hope this helps you to manage your ssh accounts with ease.</p>
+
+<h3 id="reference"><a href="#reference">Reference</a></h3>
+
+<ul>
+  <li>Github: <a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">Generating a new SSH key and adding it to the ssh-agent</a></li>
+  <li>Bitbucket: <a href="https://support.atlassian.com/bitbucket-cloud/docs/configure-ssh-and-two-step-verification/">Configure SSH and two step verification</a></li>
+</ul>

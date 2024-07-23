@@ -94,6 +94,12 @@ ALTER TYPE packaging_type ADD VALUE IF NOT EXISTS 'PACKET';
 
 -- Rename carton enum
 ALTER TYPE packaging_type RENAME VALUE 'CARTON' TO 'CARTONS';
+
+-- List value by array
+select enum_range(null::packaging_type);
+
+-- List value by rows
+select unnest(enum_range(null, null::packaging_type));
 </pre>
 
 <p>Enums with pg_type</p>

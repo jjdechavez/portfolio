@@ -86,6 +86,39 @@ git clone git@bitbucket.org-work:workspace/work-repo.git
 
 <p>With this solution I hope this helps you to manage your ssh accounts with ease.</p>
 
+<h3 id="manage-with-gitconfig"><a href="#manage-with-gitconfig">Managing with GitConfig</a></h3>
+
+<p>You can set up different Git configurations for your work and personal projects by defining separate gitconfig files for each environment.</p>
+
+<p>For example, if you have a personal folder, you can create a <strong>personal.gitconfig</strong> file with the following content:</p>
+
+<pre>
+[user]
+  name = John Doe Personal
+  email = john@doe.personal.com
+
+[core]
+  sshCommand = "ssh -i ~/.ssh/personal"
+</pre>
+
+<p>Then, in your <strong>~/.gitconfig</strong> file, use <strong>includeFile</strong> to manage the configuration based on directory:</p>
+
+<pre>
+[user]
+  name = John Doe Personal
+  email = john@doe.personal.com
+
+[includeIf "gitdir:~/personal/"]
+  path = ~/applications/.personal.gitconfig
+
+[includeIf "gitdir:~/work/"]
+  path = ~/work/.work.gitconfig
+</pre>
+
+<p>This way, whenever navigate to a subfolder within your <strong>personal</strong> directory, your git user.email and git user.name will automatically be set based on the <strong>.personal.gitconfig</strong> file.</p>
+
+<p>You can apply the same approach to your work projects by creating a <strong>.work.gitconfig</strong> file and including it in your root gitconfig using <strong>includeIf</strong>.</p>
+
 <h3 id="reference"><a href="#reference">Reference</a></h3>
 
 <ul>

@@ -1,0 +1,199 @@
+<h2>Connect Two Docker Compose</h2>
+
+<p>Let say you have a global/dev docker-compose on your machine with postgres, redis, and etc. You decided to use your dev docker-compose(postgres) on your new project that also running with docker-compose. On this article we're going to takcle on how to connect the two docker-compose.</p>
+
+<h3><a href="#create_a_docker_network">Create a Docker Network</a></h3>
+
+<p>To have a connection with your two docker-compose, what we need is to create <u>docker network</u>. The command that we need:</p>
+
+<pre>docker network create your-network-name</pre>
+
+<p>For this article we're going to create a network with <u>dev_network</u>.</p>
+
+<pre>docker network create dev_network</pre>
+
+<h3><a href="#update_docker_compose_files">Update Docker Compose files</a></h3>
+
+<p>We need to attached the network on each docker-compose, with this:</p>
+
+<pre>
+# On each containers
+services:
+  postgres_db
+    networks:
+      - dev_network # Link the network
+
+# Below of your docker-compose.yml
+networks:
+  dev_network:
+    name: dev_network
+    external: true
+</pre>
+
+<p>So on your dev docker-compose.yml, add the <u>dev_network</u></p>
+
+<pre>
+version: '3.9'
+
+services:
+  postgres_db:
+    image: 'postgres:16.3-alpine3.20'
+    container_name: postgres-db
+    ports:
+      - 5432:5432
+
+    environment:
+      POSTGRES_USER: postgres # The PostgreSQL user (useful to connect to the database)
+      POSTGRES_PASSWORD: password # The PostgreSQL password (useful to connect to the database)
+      # POSTGRES_DB: default_database # The PostgreSQL default database (automatically created at first launch)
+    volumes:
+      - ./postgres/:/database/
+    networks:
+      - dev_network # Link the network
+
+  redis_db:
+    image: 'redis:7.4.0-alpine'
+    container_name: redis-db
+    ports:
+      - 6379:6379
+
+networks:
+  dev_network:
+    name: dev_network
+    external: true
+</pre>
+
+<p>To determine if our dev docker-compose.yml is connected to <u>dev_network</u>. We could use docker command with <u>docker network inspect</u>. Make it sure that we <u>docker-compose stop</u> and <pre>docker-compose up -d</pre> our dev docker-compose.</p>
+
+<pre>
+johndoe@mycomputer % docker network inspect dev_network
+[
+    {
+        "Name": "dev_network",
+        "Id": "1f1b67ad88da5f1011e9ce7b5284312104b0ea01fb451e026ce42cbd17da616b",
+        "Created": "2024-11-14T09:04:07.653805582+08:00",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": {},
+            "Config": [
+                {
+                    "Subnet": "192.168.97.0/24",
+                    "Gateway": "192.168.97.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {
+            "a0ed9c39e85b5a1bf6c07fc976c0550c8f0f95ce1ffeea8ffe18c99fe6870d2b": {
+                "Name": "postgres-db",
+                "EndpointID": "bc4e3de6a18552a55fdfe90cf9c74d588768b83fe91cce66e62d0908650b8a3f",
+                "MacAddress": "02:42:c0:a8:61:02",
+                "IPv4Address": "192.168.97.2/24",
+                "IPv6Address": ""
+            }
+        },
+        "Options": {},
+        "Labels": {}
+    }
+]
+</pre>
+
+<p>Update our second docker-compose.yml with <u>dev_network</u></p>
+
+<pre>
+version: "3.9"
+
+services:
+  web:
+    container_name: ror-starter
+    image: ror/heroku-ror:2.7.3
+    ports:
+      - "3000:3000"
+    environment:
+      RAILS_ENV: development
+    volumes:
+      - ./:/app/user
+    networks:
+      - dev_network
+    extra_hosts:
+      host.docker.internal: host-gateway
+
+networks:
+  dev_network:
+    name: dev_network
+    external: true
+</pre>
+
+<p>Again, we make it sure we <u>docker-compose stop</u> and <pre>docker-compose up -d</pre> our second docker-compose. Lastly, to confirm our second docker-compose.yml is connected to <u>dev_network</u> we need to run the command <u>docker network inspect dev_network</u></p>
+
+<p>So it should look like this:</p>
+
+<pre>
+johndoe@mycomputer % docker network inspect dev_network
+[
+    {
+        "Name": "dev_network",
+        "Id": "1f1b67ad88da5f1011e9ce7b5284312104b0ea01fb451e026ce42cbd17da616b",
+        "Created": "2024-11-14T09:04:07.653805582+08:00",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": {},
+            "Config": [
+                {
+                    "Subnet": "192.168.97.0/24",
+                    "Gateway": "192.168.97.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {
+            "8d77c05ddd533340716a2a702cf71f61d2f1f09f94e7d364c90b99e822ddfe83": {
+                "Name": "ror-starter",
+                "EndpointID": "0b5bf2d88a9d336ddb094461c3cdc19eea46d3c1c7c727e0ab082466aba0af55",
+                "MacAddress": "02:42:c0:a8:61:03",
+                "IPv4Address": "192.168.97.3/24",
+                "IPv6Address": ""
+            },
+            "a0ed9c39e85b5a1bf6c07fc976c0550c8f0f95ce1ffeea8ffe18c99fe6870d2b": {
+                "Name": "postgres-db",
+                "EndpointID": "bc4e3de6a18552a55fdfe90cf9c74d588768b83fe91cce66e62d0908650b8a3f",
+                "MacAddress": "02:42:c0:a8:61:02",
+                "IPv4Address": "192.168.97.2/24",
+                "IPv6Address": ""
+            }
+        },
+        "Options": {},
+        "Labels": {}
+    }
+]
+</pre>
+
+<h3><a href="#bonus_tips">Bonus Tips</a></h3>
+
+<ul>
+  <li>On our application code, you're probably thinking how are we going to use the dev docker-compose.yml postgres URL. Update your env <b>DATABASE_URL</b> with <u>postgresql://postgres:password@postgres-db/ror_dev</u>, we update the URI from "localhost" to "postgres-db" or the container name of your postgres.</li>
+</ul>
+
+<h3><a href="#references">References</a></h3>
+
+<ul>
+  <li><a href="https://docs.docker.com/compose/how-tos/networking/" target="_blank">Networking in Compose</a></li>
+</ul>

@@ -1,8 +1,10 @@
 <h2>SQL Cheatsheet</h2>
 
-<h3>Postgres</h3>
+<h3><a href="#postgres">Postgres</a></h3>
 
-<p>Access property from json object with "->" and "->>"</p>
+<h3><a href="#postgres_json">JSON</a></h3>
+
+<h3><a href="#postgres_json_access">Access property from json object with "->" and "->>"</a></h3>
 
 <ul>
   <li><strong>-&gt;</strong> operator returns JSON object field by key.</li>
@@ -18,7 +20,7 @@ FROM couriers c
 WHERE c.id = '891e6dc3-141a-4bf6-bbcf-5407009ecefc'
 </pre>
 
-<p>Query from json column that has array of object value</p>
+<h3><a href="#postgres_query_json_column">Query from json column that has array of object value</a></h3>
 
 <pre>
 SELECT q.id, j
@@ -27,22 +29,7 @@ FROM quotes q
 WHERE j->>'shipmentMode' LIKE 'Roa%';
 </pre>
 
-
-<p>Get latest left join row</p>
-
-<pre>
-...
-LEFT JOIN
-  order_adjustment oa ON o.id = oa.order_id
-  AND oa.created_at = (
-    SELECT MAX(created_at) -- Filter with latest created_at
-    FROM order_adjustment oa2
-    WHERE oa2.order_id  = o.id
-  )
-...
-</pre>
-
-<p>Append array of object on array of object column</p>
+<h3><a href="#postgres_append_array_of_object">Append array of object on array of object column</a></h3>
 
 <pre>
 -- Append new delta_listing_boxes
@@ -56,7 +43,69 @@ SET delta_listing_boxes = (
 WHERE id = '1e7db4b9-658f-4322-9115-a685b3e1946d';
 </pre>
 
-<p>Working with duplicate data and how to update the recent/latest row</p>
+<h3><a href="#postgres_relations">Relations</a></h3>
+
+<h3><a href="relations_get_latest_left_join">Get latest left join row</a></h3>
+
+<pre>
+...
+LEFT JOIN
+  order_adjustment oa ON o.id = oa.order_id
+  AND oa.created_at = (
+    SELECT MAX(created_at) -- Filter with latest created_at
+    FROM order_adjustment oa2
+    WHERE oa2.order_id  = o.id
+  )
+...
+</pre>
+
+<h3><a href="#postgres_filtering">Filtering</a></h3>
+
+<h3><a href="#postgres_filter_with_exists">Filter with EXISTS</a></h3>
+
+<pre>
+EXISTS (
+  SELECT 1 FROM product_variant pv 
+  WHERE pv.product_id = product.id 
+  AND (
+    pv.title ILIKE $3 OR 
+    pv.sku ILIKE $3
+  )
+)
+</pre>
+
+<p>This is a SQL <strong>EXISTS</strong> subquery that:</p>
+
+<ol>
+  <li>Checks if there are any product variants (product_variant) associated with the current product that match the search criteria</li>
+  <li>Returns true if at least one variant is found that matches either:</li>
+  <ul>
+    <li>The variant's title matches the search query (case-insensitive)</li>
+    <li>The variant's SKU matches the search query (case-insensitive)</li>
+  </ul>
+</ol>
+
+<p>The <strong>EXISTS</strong> operator is particulary useful because:</p>
+
+<ul>
+  <li>It stops searching as soon as it finds a single matching record (more efficient than counting all matches)</li>
+  <li>Returns a boolean value (true/false)</li>
+  <li>Is commonly used for checking relationships without needing to return the actual matching records</li>
+</ul>
+
+<p>In the context of your search, this means a product will be included in the results if either:</p>
+
+<ul>
+  <li>The product's title matches the search query</li>
+  <li>The product's description matches the search query</li>
+  <li>OR any of its variants' titles or SKUs match the search query</li>
+</ul>
+
+<p>The SELECT 1 inside the EXISTS clause is just a convention - it could be any value since EXISTS only cares whether any rows are returned, not what values those rows contain.</p>
+
+<h3><a href="#postgres_relations">Tips</a></h3>
+
+<h3><a href="#update_duplicate_recent_row">Working with duplicate data and how to update the recent/latest row</a></h3>
 
 <pre>
 -- Common Table Expression or CTE
@@ -81,7 +130,7 @@ FROM LatestSubscriptions
 WHERE LatestSubscriptions.row_num > 1 and company_subscription.id = LatestSubscriptions.id;
 </pre>
 
-<p>Enums</p>
+<h3><a href="#postgres_filtering">Enums</a></h3>
 
 <p>Common pattern when working with types or Enum</p>
 
@@ -102,7 +151,7 @@ select enum_range(null::packaging_type);
 select unnest(enum_range(null, null::packaging_type));
 </pre>
 
-<p>Enums with pg_type</p>
+<h3><a href="#postgres_listing_enums_with_pg_type">Listing Enums with pg_type</a></h3>
 
 <pre>
 -- Query oid of enum_listing_packaging_type
@@ -115,9 +164,9 @@ SELECT * FROM pg_type WHERE typname = 'enum_listing_packaging_type'
 SELECT * FROM pg_enum pe WHERE pe.enumtypid = 94076
 </pre>
 
-<p>Aggregation patterns</p>
+<h3><a href="#postgres_enums_aggregation_patterns">Enums Aggregation Patterns</a></h3>
 
-<p>Group by column and aggregate all results</p>
+<h4><a href="#postgres_enums_group_by_type_with_list">Group by column and aggregate all results</a></h4>
 
 <pre>
 -- Create ENUM Type
@@ -147,7 +196,7 @@ GROUP BY lp.type;
 |TRAY   |{"18L Tray"}               |
 </pre>
 
-<p>Group by column and aggregate if column has value</p>
+<h4><a href="#postgres_enums_group_by_type_check_has_value">Group by column and aggregate if column has value</a></h4>
 
 <pre>
 -- Group by type and aggregate has custom packaging by sum() and case

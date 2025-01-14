@@ -1,8 +1,8 @@
 <h2>PostgreSQL Cheatsheet</h2>
 
-<h3><a href="#json">JSON</a></h3>
+<h3 id="json"><a href="#json">JSON</a></h3>
 
-<h4>
+<h4 id="json_access">
   <a href="#json_access"
     >Access property from json object with "->" and "->>"</a
   >
@@ -24,7 +24,7 @@ FROM couriers c
 WHERE c.id = '891e6dc3-141a-4bf6-bbcf-5407009ecefc'
 </pre>
 
-<h4>
+<h4 id="query_json_column">
   <a href="#query_json_column"
     >Query from json column that has array of object value</a
   >
@@ -37,7 +37,7 @@ FROM quotes q
 WHERE j->>'shipmentMode' LIKE 'Roa%';
 </pre>
 
-<h4>
+<h4 id="append_array_of_object">
   <a href="#append_array_of_object"
     >Append array of object on array of object column</a
   >
@@ -55,9 +55,11 @@ SET delta_listing_boxes = (
 WHERE id = '1e7db4b9-658f-4322-9115-a685b3e1946d';
 </pre>
 
-<h3><a href="#relations">Relations</a></h3>
+<h3 id="relations"><a href="#relations">Relations</a></h3>
 
-<h4><a href="#relations_get_latest_left_join">Get latest left join row</a></h4>
+<h4 id="relations_get_latest_left_join">
+  <a href="#relations_get_latest_left_join">Get latest left join row</a>
+</h4>
 
 <pre>
 ...
@@ -71,9 +73,11 @@ LEFT JOIN
 ...
 </pre>
 
-<h3><a href="#filtering">Filtering</a></h3>
+<h3 id="filtering"><a href="#filtering">Filtering</a></h3>
 
-<h4><a href="#filter_with_exists">Filter with EXISTS</a></h4>
+<h4 id="filter_with_exists">
+  <a href="#filter_with_exists">Filter with EXISTS</a>
+</h4>
 
 <pre>
 EXISTS (
@@ -131,9 +135,9 @@ EXISTS (
   those rows contain.
 </p>
 
-<h3><a href="#tips">Tips</a></h3>
+<h3 id="tips"><a href="#tips">Tips</a></h3>
 
-<h4>
+<h4 id="update_duplicate_recent_row">
   <a href="#update_duplicate_recent_row"
     >Working with duplicate data and how to update the recent/latest row</a
   >
@@ -162,7 +166,7 @@ FROM LatestSubscriptions
 WHERE LatestSubscriptions.row_num > 1 and company_subscription.id = LatestSubscriptions.id;
 </pre>
 
-<h3><a href="#types_enums">Types/Enums</a></h3>
+<h3 id="types_enums"><a href="#types_enums">Types/Enums</a></h3>
 
 <p>Common pattern when working with types or Enum</p>
 
@@ -183,7 +187,7 @@ select enum_range(null::packaging_type);
 select unnest(enum_range(null, null::packaging_type));
 </pre>
 
-<h4>
+<h4 id="listing_enums_with_pg_type">
   <a href="#listing_enums_with_pg_type">Listing Enums with pg_type</a>
 </h4>
 
@@ -198,11 +202,11 @@ SELECT * FROM pg_type WHERE typname = 'enum_listing_packaging_type'
 SELECT * FROM pg_enum pe WHERE pe.enumtypid = 94076
 </pre>
 
-<h3>
+<h3 id="enums_aggregation_patterns">
   <a href="#enums_aggregation_patterns">Enums Aggregation Patterns</a>
 </h3>
 
-<h4>
+<h4 id="enums_group_by_type_with_list">
   <a href="#enums_group_by_type_with_list"
     >Group by column and aggregate all results</a
   >
@@ -236,7 +240,7 @@ GROUP BY lp.type;
 |TRAY   |{"18L Tray"}               |
 </pre>
 
-<h4>
+<h4 id="postgres_enums_group_by_type_check_has_value">
   <a href="#postgres_enums_group_by_type_check_has_value"
     >Group by column and aggregate if column has value</a
   >
@@ -260,7 +264,9 @@ GROUP BY lp.type;
 
 </pre>
 
-<h3><a href="#dumping_and_restore">Dump and Restore</a></h3>
+<h3 id="dumping_and_restore">
+  <a href="#dumping_and_restore">Dump and Restore</a>
+</h3>
 
 <p>How to create a copy of your database with <strong>pg_dump</strong>.</p>
 
@@ -274,7 +280,7 @@ pg_dump --verbose --host=0.0.0.0 --port=5432 --username=postgres -f /database/du
 psql -U postgres -h 0.0.0.0 -d my_new_db -f ./dump.sql
 </pre>
 
-<h3><a href="#psql">psql</a></h3>
+<h3 id="psql"><a href="#psql">psql</a></h3>
 
 <p><strong>psql</strong> is the PostgreSQL interactive terminal.</p>
 
@@ -291,7 +297,7 @@ psql -U postgres -h 0.0.0.0 -d my_new_db -f ./dump.sql
   </li>
 </ul>
 
-<h3><a href="#references">References</a></h3>
+<h3 id="references"><a href="#references">References</a></h3>
 
 <ul>
   <li>

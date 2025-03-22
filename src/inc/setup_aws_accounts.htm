@@ -1,0 +1,374 @@
+<h2>Setup AWS Accounts</h2>
+
+<p>This guide would help you on how to setup your AWS account</p>
+
+<h3 id="create_aws_account">
+  <a href="#create_aws_account">Create AWS Account</a>
+</h3>
+
+<p>The first thing you need to do on your AWS is to create an AWS account.</p>
+
+<p>Here are the steps:</p>
+
+<ul>
+  <li>
+    Navigate to <a href="aws.amazon.com">aws.amazon.com</a> and click
+    <strong>create an AWS account</strong>.
+  </li>
+  <li>
+    For your root, use your email address. You could use aliases or set up
+    arbitrary forwarding for emails to go to a specific inbox.
+  </li>
+  <li>
+    Next, choose an account name. This can be changed later but you can name it
+    "management account" for now.
+  </li>
+  <li>
+    Verify your email address by entering the verification code sent to your
+    email into the provided field.
+  </li>
+  <li>
+    After email verification, set a root user password following the password
+    requirements provided.
+  </li>
+  <li>
+    Continue by selecting the type of account you are creating (business or
+    personal) then input your name and other personal information as required.
+  </li>
+  <li>
+    Next, provide your credit card details. No worries about any charges,
+    everything you will do is within the free tier.
+  </li>
+  <li>Verify your phone number.</li>
+  <li>
+    The last step is to select a support plan. For starters, the Basic free
+    support would suffice. Then, complete the signup.
+  </li>
+  <li>
+    After successfully creating your AWS account, sign in to the AWS Management
+    Console.
+  </li>
+</ul>
+
+<p>
+  The next important step is to set up spend alerts within the console. You want
+  to be alerted when you spend on AWS. To set this up:
+</p>
+
+<ul>
+  <li>
+    Navigate to billing and cost management. You will see that the budget status
+    requires setup.
+  </li>
+  <li>
+    Click on <strong>budgets</strong> on the left-hand side then select
+    <strong>create a budget</strong>.
+  </li>
+  <li>
+    Using the <strong>zero spending budget template</strong>, set up the budget
+    so that you receive an email if there's any spending outside the free tier.
+  </li>
+  <li>Enter your email address and create the budget.</li>
+</ul>
+
+<p>
+  Now you will now get an email alert every time you start to accrue any
+  spending!
+</p>
+
+<h3 id="aws_organization">
+  <a href="#aws_organization">Manage AWS Accounts with AWS Organization</a>
+</h3>
+
+<p>
+  AWS Organizations is a container that allows you to govern and manage multiple
+  AWS accounts. You may be wondering why you would need multiple AWS accounts.
+  It's generally a good idea to set up all of your production resources in an
+  isolated AWS account. This way, you can limit access to production resources
+  and prevent people from accidentally deploying to production when they meant
+  to deploy to their development account.
+</p>
+
+<p>For this guide, we'll have three AWS accounts inside of AWS Organization:</p>
+
+<ul>
+  <li>
+    <strong>Production Account</strong>: This account will be used to isolate
+    production resources.
+  </li>
+  <li>
+    <strong>Development Account</strong>: This will be a general-purpose
+    development account. If you have multiple developers on your team, you can
+    share this development account. If you're an individual, this will be your
+    primary account for day-to-day development.
+  </li>
+  <li>
+    <strong>Management Account</strong>: This is the account we set up earlier.
+    The management account is only used for high-level setup, such as setting up
+    the AWS Organization and configuring access through IAM Identity Center. No
+    application-related resources should be deployed in the management account.
+  </li>
+</ul>
+
+<h3 id="create_aws_organization">
+  <a href="#create_aws_organization">Create AWS Organization</a>
+</h3>
+
+<p>
+  To create the AWS Organization, search for "Organizations" in the AWS
+  Management Console and click "Create an Organization." This will place your
+  management account in an Organizational Unit (OU) within the root of the
+  organization.
+</p>
+
+<p>
+  Organizational Units are a way to structure your AWS accounts like a file tree
+  and set up granular permissions for individual groups of accounts. For our
+  simple setup, we'll keep all our accounts in the root OU.
+</p>
+
+<h3 id="adding_accounts_to_the_organization">
+  <a href="#adding_accounts_to_the_organization"
+    >Adding Accounts to the Organization</a
+  >
+</h3>
+
+<p>
+  Next, we need to create our development and production accounts within the
+  organization.
+</p>
+
+<ul>
+  <li>Click "Add an AWS Account" and select "Create an AWS Account."</li>
+  <li>
+    Name the account "development" and provide an email address (e.g.,
+    <strong>aws+dev@example.com</strong>).
+  </li>
+  <li>Leave the IAM role name as the default and create the account.</li>
+  <li>
+    Repeat the process to create a "production" account with a different email
+    address (e.g., <strong>aws+prod@example.com</strong>).
+  </li>
+</ul>
+
+<p>
+  You should now see the management account, development account, and production
+  account within your AWS Organization.
+</p>
+
+<h3 id="iam_indentify_center">
+  <a href="#iam_identify_center">IAM Identify Center</a>
+</h3>
+
+<p>
+  With multiple AWS accounts, managing access can be tricky. IAM Identity Center
+  makes it easier to log in to the console and access your accounts from your
+  development machine. It's also a more secure approach than using long-lived
+  IAM user access keys.
+</p>
+
+<p>
+  In the AWS Management Console, search for
+  <strong>IAM Identity Center</strong> and click <strong>Enable</strong> set it
+  up.
+</p>
+
+<h3 id="create_iam_user">
+  <a href="#create_iam_user">Create IAM User</a>
+</h3>
+
+<p>
+  Once enabled, create a new user by clicking <strong>Add user</strong> under
+  the <strong>Users</strong>
+  section. Use your email address as the username and have AWS send you a
+  one-time password setup email.
+</p>
+
+<p>
+  After accepting the invitation and setting a new password, you'll be prompted
+  to set up multi-factor authentication (MFA). Use an authenticator app or a
+  security key.
+</p>
+
+<p>
+  As you can see the dashboard of your user doesn't have any functionality.
+  That's why we need to setup <strong>Permission Set</strong>
+</p>
+
+<h3 id="create_iam_permission_set">
+  <a href="#create_iam_permission_set">Create IAM Permission Set</a>
+</h3>
+
+<p>
+  Next, create a permission set, which defines the permissions a user has in an
+  AWS account. For this example, create an
+  <strong>Administrator Access</strong> permission set with a 12-hour session
+  duration.
+</p>
+
+<h3 id="assign_user_permission_set">
+  <a href="#assign_user_permission_set">Assign User Permission Set</a>
+</h3>
+
+<p>
+  Assign your user the <strong>Administrator Access</strong> permission set for
+  each of your three AWS accounts (management, development, and production).
+</p>
+
+<ul>
+  <li>
+    Go to "AWS accounts" under Multi-account permissions and select your
+    management account.
+  </li>
+  <li>
+    Under "Assign users or groups," select your user and the "Administrator
+    Access" permission set.
+  </li>
+  <li>Repeat for the development and production accounts.</li>
+</ul>
+
+<p>
+  After assigning access, refresh the page, and you'll see all three accounts
+  listed with the "Administrator Access" permission set.
+</p>
+
+<h3 id="customize_access_portal_url">
+  <a href="#customize_access_portal_url">Customize the Access Portal URL</a>
+</h3>
+
+<p>
+  To make the IAM Identity Center URL more friendly, go to the dashboard and
+  edit the "Access Portal URL" under "Settings Summary." Choose a unique
+  subdomain (e.g., jerald.dev).
+</p>
+
+<p>
+  Now, you can access the IAM Identity Center portal at
+  jerald.dev.awsapps.com.start.
+</p>
+
+<h3 id="aws_cli">
+  <a href="#aws_cli">AWS CLI</a>
+</h3>
+
+<p>
+  First we need to intall AWS CLI on your local machine based on your operating
+  system.
+</p>
+
+<p>
+  After installing the CLI, you'll need to configure it to connect to your AWS
+  accounts through Identity Center. Run the following command to check your
+  current credentials:
+</p>
+
+<pre>
+aws sts get-caller-identity
+</pre>
+
+<p>
+  This will likely return an error saying "unable to locate credentials" since
+  you haven't set up connectivity yet.
+</p>
+
+<p>
+  To configure the CLI, you'll need to create an AWS config file. This file will
+  contain the necessary information to connect to your accounts through Identity
+  Center.
+</p>
+
+<h3 id="create_aws_config_file">
+  <a href="#create_aws_config_file">Create AWS Config File</a>
+</h3>
+
+<ul>
+  <li>
+    Open your text editor and create a new file called config in the .aws
+    directory within your user's home directory (e.g., ~/.aws/config on
+    macOS/Linux or %UserProfile%\.aws\config on Windows).
+  </li>
+  <li>
+    Copy the provided template from the AWS documentation and paste it into the
+    config file.
+    <pre>
+[profile dev]
+sso_session = my-sso
+sso_account_id = 111122223333
+sso_role_name = SampleRole
+
+[profile prod]
+sso_session = my-sso
+sso_account_id = 111122223333
+sso_role_name = SampleRole2
+
+[sso-session my-sso]
+sso_region = us-east-1
+sso_start_url = https://my-sso-portal.awsapps.com/start
+    </pre>
+  </li>
+  <li>Customize the file with your specific details:</li>
+</ul>
+
+<ul>
+  <li>
+    Change the sso_start_url to your custom subdomain URL (e.g.,
+    jerald.dev.awsapps.com/start).
+  </li>
+  <li>
+    Set the sso_region to the AWS region closest to you (e.g., us-east-1).
+  </li>
+  <li>
+    Replace the account_id and role_name values for the dev, prod, and
+    management profiles with your actual account IDs and role names.
+  </li>
+</ul>
+
+<h3 id="login_with_aws_sso">
+  <a href="#login_with_aws_sso">Login with AWS SSO</a>
+</h3>
+
+<p>
+  After saving the config file, you can log in to your accounts using the AWS
+  SSO login command:
+</p>
+
+<pre>
+aws sso login --profile &lt;profile_name&gt;
+</pre>
+
+<p>
+  Replace &lt;profile_name&gt; with dev, prod, or management depending on which
+  account you want to access.
+</p>
+
+<p>
+  This command will open a browser window where you can authenticate with your
+  Identity Center credentials. Once authenticated, you'll have short-term
+  credentials to interact with the specified AWS account using the CLI.
+</p>
+
+<h3 id="verify_aws_sso">
+  <a href="#verify_aws_sso">Verify AWS SSO</a>
+</h3>
+
+<p>
+  To verify that you have access to the account, run the get-caller-identity
+  command with the appropriate profile:
+</p>
+
+<pre>
+aws sts get-caller-identity --profile &lt;profile_name&gt;
+</pre>
+
+<p>
+  This should return the account ID and other details, confirming that you have
+  successfully configured the CLI to access your AWS accounts through Identity
+  Center.
+</p>
+
+<p>
+  With the AWS CLI configured, you can now execute various AWS commands and
+  interact with your accounts directly from your local machine. This setup
+  allows you to deploy applications, manage resources, and perform other AWS
+  operations seamlessly.
+</p>

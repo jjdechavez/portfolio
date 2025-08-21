@@ -6,15 +6,24 @@
 
 <ul>
   <li><a href="https://sdkman.io/install">sdkman</a></li>
-  <li><a href="https://developer.android.com/studio#command-line-tools-only">commandline-tools</a></li>
+  <li>
+    <a href="https://developer.android.com/studio#command-line-tools-only"
+      >commandline-tools</a
+    >
+  </li>
 </ul>
-
 
 <h3>Install Java with SDKMan</h3>
 
-<p>First thing todo we need to install sdkman on our machine. You can follow this <a href="https://sdkman.io/install">guide</a> to install sdkman.</p>
+<p>
+  First thing todo we need to install sdkman on our machine. You can follow this
+  <a href="https://sdkman.io/install">guide</a> to install sdkman.
+</p>
 
-<p>After installing sdkman, we need to install java by <strong>sdk install java</strong> command.</p>
+<p>
+  After installing sdkman, we need to install java by
+  <strong>sdk install java</strong> command.
+</p>
 
 <pre>
 Downloading: java 21.0.1-tem
@@ -31,28 +40,48 @@ Done installing!
 
 <pre>Do you want java 21.0.1-tem to be set as default? (Y/n):</pre>
 
-<p>Answering yes (or hitting enter) will ensure that all subsequent shells opened will have this version of the SDK in use by default.</p>
+<p>
+  Answering yes (or hitting enter) will ensure that all subsequent shells opened
+  will have this version of the SDK in use by default.
+</p>
 
 <p>Great we have installed java on our machine.</p>
 
-
 <h3>Setup Android SDK</h3>
 
-<p>Before we download commandline-tools, we need to create a <strong>"Android"</strong> folder on our root directory.</p>
+<p>
+  Before we download commandline-tools, we need to create a
+  <strong>"Android"</strong> folder on our root directory.
+</p>
 
 <code>mkdir ~/Android</code>
 
-<p>Create a folder <strong>Sdk</strong> inside of <strong>Android</strong> folder.</p>
+<p>
+  Create a folder <strong>Sdk</strong> inside of
+  <strong>Android</strong> folder.
+</p>
 
 <code>mkdir ~/Android/Sdk</code>
 
-<p>We need to download commandline-tools from <a href="https://developer.android.com/studio#command-line-tools-only">Android Developer</a> and download Linux platform.</p>
+<p>
+  We need to download commandline-tools from
+  <a href="https://developer.android.com/studio#command-line-tools-only"
+    >Android Developer</a
+  >
+  and download Linux platform.
+</p>
 
-<p>Go to the path to our downloaded <strong>commandlinetools-linux-*.zip</strong> file and unzip to get <strong>cmdline-tools</strong> folder.</p>
+<p>
+  Go to the path to our downloaded
+  <strong>commandlinetools-linux-*.zip</strong> file and unzip to get
+  <strong>cmdline-tools</strong> folder.
+</p>
 
 <code>unzip commandlinetools-linux-*.zip</code>
 
-<p>After unzipping the file, <strong>cmdline-tools</strong> folder must contains:</p>
+<p>
+  After unzipping the file, <strong>cmdline-tools</strong> folder must contains:
+</p>
 
 <pre>
 drwxr-xr-x  2 jerald jerald   4096 Ene  4 16:06 bin
@@ -61,7 +90,12 @@ drwxr-xr-x 17 jerald jerald   4096 Ene  4 14:21 lib
 -rwxr-xr-x  1 jerald jerald     86 Ene  1  2010 source.properties
 </pre>
 
-<p>Redirect to the <strong>cmdline-tools</strong> folder and make a folder name <strong>latest</strong> and move everything on cmdline-tools into <strong>latest</strong> folder. So <strong>cmdline-tools</strong> folder should look like this:</p>
+<p>
+  Redirect to the <strong>cmdline-tools</strong> folder and make a folder name
+  <strong>latest</strong> and move everything on cmdline-tools into
+  <strong>latest</strong> folder. So <strong>cmdline-tools</strong> folder
+  should look like this:
+</p>
 
 <pre>
 drwxr-xr-x 3 jerald jerald 4096 Ene  4 14:48 .
@@ -69,7 +103,11 @@ drwxr-xr-x 4 jerald jerald 4096 Ene  4 16:12 ..
 drwxr-xr-x 4 jerald jerald 4096 Ene  4 14:48 latest
 </pre>
 
-<p>Redirect on <strong>./latest/bin</strong> folder and execute <strong>sdkmanager</strong> with a command of <strong>./sdkmanager --list</strong></p>
+<p>
+  Redirect on <strong>./latest/bin</strong> folder and execute
+  <strong>sdkmanager</strong> with a command of
+  <strong>./sdkmanager --list</strong>
+</p>
 
 <p>The result should look like this:</p>
 
@@ -85,16 +123,32 @@ Available Packages:
   --others--
 </pre>
 
-<p>Here we can install the packages that we needed; Run the command <strong>./sdkmanager "platform-tools" "build-tools;34.0.0"</strong> to install platform-tools and Android SDK packages. <strong>Android</strong> folder should contains:</p>
+<p>
+  Here we can install the packages that we needed; Run the command
+  <strong>./sdkmanager "platform-tools" "build-tools;34.0.0"</strong> to install
+  platform-tools and Android SDK packages. On <strong>Mac</strong>, I have
+  experience that downloaded packages are stored on
+  <strong>Downloads</strong> folder, so you need to moved them into your
+  <strong>Android</strong> folder. <strong>Android</strong> folder should
+  contains:
+</p>
 
 <pre>
 [jerald@cassini Android]$ ls
 build-tools  cmdline-tools  emulator  licenses  platform-tools  Sdk  tools
 </pre>
 
-<p>Move <strong>build-tools</strong>, <strong>emulator</strong>, <strong>licences</strong>, <strong>platform-tools</strong>, <strong>tools</strong>, and <strong>.temp</strong> folders to <strong>Sdk</strong> folder.</p>
+<p>
+  Move <strong>build-tools</strong>, <strong>emulator</strong>,
+  <strong>licences</strong>, <strong>platform-tools</strong>,
+  <strong>tools</strong>, and <strong>.temp</strong> folders to
+  <strong>Sdk</strong> folder.
+</p>
 
-<p>Finally we need to update our <strong>.bashrc</strong> to register the path of our sdk.</p>
+<p>
+  Finally we need to update our <strong>.bashrc</strong> to register the path of
+  our sdk.
+</p>
 
 <pre>
 # android sdk, command-line-tools
@@ -102,12 +156,18 @@ export ANDROID_HOME="$HOME/Android/Sdk"
 export PATH="$HOME/Android/platform-tools:$PATH"
 </pre>
 
-<p>Now you already setup Android SDK without Android Studio. I hope this guide help you to setup. You can check some common issue section that I also encountered during the experiment.</p>
-
+<p>
+  Now you already setup Android SDK without Android Studio. I hope this guide
+  help you to setup. You can check some common issue section that I also
+  encountered during the experiment.
+</p>
 
 <h3>Common Issues</h3>
 
-<p>Currently, I'm working on React-Native apps and I encounter something like this:</p>
+<p>
+  Currently, I'm working on React-Native apps and I encounter something like
+  this:
+</p>
 
 <pre>
 > react-native run-android
@@ -117,12 +177,17 @@ Jetifier found 1376 file(s) to forward-jetify. Using 4 workers...
 info JS server already running.
 /bin/sh: line 1: /home/jerald/Android/Sdk:/bin/platform-tools/adb: No such file or directory
 </pre>
-<p>Solution: Make sure <strong>PATH</strong> of <strong>platform-tools</strong> is exist.</p>
-
+<p>
+  Solution: Make sure <strong>PATH</strong> of
+  <strong>platform-tools</strong> is exist.
+</p>
 
 <h3>Bonus: Guide working on Physical Device</h3>
 
-<p>To connect your physical device on your backend server we need to know the device name by <strong>adb devices</strong> command.</p>
+<p>
+  To connect your physical device on your backend server we need to know the
+  device name by <strong>adb devices</strong> command.
+</p>
 
 <pre>
 > adb devices
@@ -130,13 +195,24 @@ List of devices attached
 1c273304        device
 </pre>
 
-<p>After knowing the device name we can run <strong>adb -s 1c273304 reverse tcp:3000 tcp:3000</strong> command (Note the 3000 is your development server port).</p>
-
+<p>
+  After knowing the device name we can run
+  <strong>adb -s 1c273304 reverse tcp:3000 tcp:3000</strong> command (Note the
+  3000 is your development server port).
+</p>
 
 <h3>References</h3>
 
 <ul>
-  <li><a href="https://reactnative.dev/docs/running-on-device">Running On Device</a></li>
-  <li><a href="https://developer.android.com/studio#command-line-tools-only">Android: Command Line Tools</a></li>
+  <li>
+    <a href="https://reactnative.dev/docs/running-on-device"
+      >Running On Device</a
+    >
+  </li>
+  <li>
+    <a href="https://developer.android.com/studio#command-line-tools-only"
+      >Android: Command Line Tools</a
+    >
+  </li>
   <li><a href="https://sdkman.io/usage">Install SDKMan</a></li>
 </ul>

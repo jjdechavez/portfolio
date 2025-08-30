@@ -1,0 +1,143 @@
+<h2>Build Expo Application Locally</h2>
+
+<p>
+  Creating a production app for local installation on your phone without
+  publishing to an app store involves different processes for Android. This is
+  often called "sideloading" and requires you to generate a signed build of your
+  app
+</p>
+
+<p>
+  Here is a comprehensive guide on how to create a production app for local
+  installation on your phone.
+</p>
+
+<h3 id="build_android"><a href="#build_android">Build Android</a></h3>
+
+<p>
+  The process for Android involves generating a keystore, configuring your
+  project, and then building and installing a signed <strong>.apk</strong> or
+  <strong>.aab</strong> file.
+</p>
+
+<h3 id="generate_a_signing_key">
+  <a href="#generate_a_signing_key">Generate a Signing Key</a>
+</h3>
+
+<p>
+  You need a private signing key to securely sign your app. This can be created
+  using the keytool utility, which is part of the Java Development Kit (JDK).
+</p>
+
+<p>
+  Open your terminal and run the following command. Remember to replace the
+  placeholders with your own information.
+</p>
+
+<pre>
+keytool -genkey -v -keystore my-release-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000
+</pre>
+
+<p>
+  This command will prompt you to create a password for the keystore and the key
+  alias. Remember these passwords, as you will need them later.
+</p>
+
+<h3 id="place_the_keystore">
+  <a href="#place_the_keystore">Place the Keystore</a>
+</h3>
+
+<p>
+  Copy the newly created <strong>my-release-key.leystore</strong> file and place
+  it in the <strong>android/app</strong> directory of your React Native project.
+</p>
+
+<h3 id="configure_gradle">
+  <a href="#configure_gradle">Configure Gradle</a>
+</h3>
+
+<p>You need to tell Gradle where to find your keystore.</p>
+
+<ul>
+  <li>
+    Open the <strong>android/gradle.properties</strong> file in your project.
+  </li>
+  <li>
+    Add the following lines at the end of the file, replacing the placeholder
+    text with your actual keystore details. It's recommended to store these
+    details here to keep them seperate from your source code.
+  </li>
+</ul>
+
+<pre>
+  MYAPP_RELEASE_STORE_FILE=my-release-key.keystore
+  MYAPP_RELEASE_KEY_ALIAS=my-key-alias
+  MYAPP_RELEASE_STORE_PASSWORD=*****
+  MYAPP_RELEASE_KEY_PASSWORD=*****
+</pre>
+
+<ul>
+  <li>
+    Next, open the <strong>android/app/build.gradle</strong> file and add the
+    signing configuration to the <strong>android</strong> block
+  </li>
+</ul>
+
+<pre>
+...
+android {
+  defaultConfig { ... } 
+  signingConfigs {
+    release {
+      if (project.hasProperty('MYAPP_RELEASE_STORE_FILE')) {
+        storeFile file(MYAPP_RELEASE_STORE_FILE)
+        storePassword MYAPP_RELEASE_STORE_PASSWORD
+        keyAlias MYAPP_RELEASE_KEY_ALIAS
+        keyPassword MYAPP_RELEASE_KEY_PASSWORD
+      }
+    }
+  }
+  buildTypes {
+    release {
+      ...
+      signingConfig signingConfigs.release
+    }
+  } 
+}
+</pre>
+
+<h3 id="generate_the_release_apk">
+  <a href="#generate_the_release_apk">Generate the Release APK</a>
+</h3>
+
+<p>
+  Navigate to the <strong>android</strong> directory in your terminal and run
+  the following command to build the signed release APK.
+</p>
+
+<pre>
+cd android && ./gradlew assembleRelease
+</pre>
+
+<p>
+  Once the process is complete, you will find the
+  <strong>app-release.apk</strong> file in the
+  <strong>android/app/build/outputs/apk/release/</strong> directory.
+</p>
+
+<h3 id="install_the_apk_on_your_phone">
+  <a href="#install_the_apk_on_your_phone">Install the APK on Your Phone</a>
+</h3>
+
+<p>
+  To install the app on your phone, you need to enable
+  <strong>Developer Options</strong> and <strong>USB Debugging</strong> on your
+  Android device. Then connect your phone to your computer via USB and use the
+  follwing command.
+</p>
+
+<pre>
+adb install android/app/build/outputs/apk/release/app-release.apk
+</pre>
+
+<p>Now you can use your application on your Android device.</p>

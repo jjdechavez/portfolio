@@ -4,7 +4,7 @@
 body { font-family: 'Helvetica Neue', Helvetica, Arial; margin: 0px;padding: 45px 30px;background: white; border-top:45px solid black; margin-top:-40px }
 hr { clear:both }
 ul { display: block }
-img { max-width: 100% }
+img { max-width: 100%; height: auto }
 p { margin-bottom: 25px; font-size: 18px; line-height: 30px; max-width: 600px }
 p a { font-weight: bold; cursor: pointer; text-decoration: underline }
 p a:hover { text-decoration: none }
@@ -17,9 +17,9 @@ header a:hover { opacity: 0.7 }
 header a:focus { opacity: 0.7 }
 header a img { max-width: 240px; display: block; margin:0px auto; margin-bottom:30px }
 nav { margin-bottom: 30px }
-nav ul { display: block;line-height: 40px; border-bottom: 2px solid black;  overflow: hidden;min-height: 40px; max-width: 800px; margin: 0px auto }
+nav ul { display: block;line-height: 40px; border-bottom: 2px solid black; overflow: visible; min-height: 40px; max-width: 800px; margin: 0px auto; white-space: normal; overflow-wrap: anywhere }
 nav ul li { display: inline-block; margin-right:15px; margin-bottom: -2px; line-height: 40px; border-bottom: 5px solid transparent }
-nav ul li a { display: inline-block; font-family: 'alte_haas_grotesk_bold'; font-size:14px; line-height: 40px; border-bottom:2px solid transparent }
+nav ul li a { display: inline-block; font-family: 'alte_haas_grotesk_bold'; font-size:14px; line-height: 40px; border-bottom:2px solid transparent; overflow-wrap: anywhere; word-break: break-word }
 nav ul li.right { float: right;margin-right:0px;margin-left:10px }
 main { max-width: 800px; margin: 0px auto }
 main h1 { text-transform: capitalize; font-size:36px; max-width:400px; max-width: 600px; margin-bottom:30px }
@@ -29,7 +29,7 @@ main h3 { text-transform: capitalize; font-size:24px; border-bottom:2px solid bl
 main h4 { text-transform: capitalize; font-size:20px; line-height: 45px }
 main > p.notice { background: #eee;padding: 20px;line-height: 20px;font-size: 14px }
 main > div { margin-bottom: 45px }
-main > div > p { margin-bottom: 25px; font-size: 18px; line-height: 30px; max-width: 600px }
+main > div > p { margin-bottom: 25px; font-size: 18px; line-height: 30px; max-width: 600px; overflow-wrap: break-word; hyphens: auto }
 main > div > p.small { font-size:14px; line-height: 22px; max-width: 500px }
 main > div.col2 { columns: 2; max-width: 800px; column-gap: 45px }
 main > div > p > img { display: inline-block }
@@ -43,7 +43,7 @@ main > p b, strong { font-weight: bold }
 main > div > p b.head { text-transform: capitalize;font-size: 24px;line-height: 45px;display: block;margin: 30px 0px }
 main > ul.col2 { columns: 2; margin-bottom:30px; position: relative }
 main > ul { display: block; margin-bottom:30px; position: relative }
-main > ul > li { max-width:550px; margin-bottom:15px; font-size:18px; padding-left:30px; line-height: 24px; font-size:18px; position: relative;}
+main > ul > li { max-width:550px; margin-bottom:15px; font-size:18px; padding-left:30px; line-height: 24px; font-size:18px; position: relative; overflow-wrap: break-word; hyphens: auto }
 main > ul > li:before { content:"•"; position: absolute; margin-left:-30px }
 main > ul > li > b { font-weight: bold }
 main > ul > li > a { font-weight: bold; cursor: pointer; text-decoration: underline }
@@ -61,7 +61,7 @@ main dl.ingredients dt img { max-width: 100%; display: block;}
 main dl.ingredients dt b { display: block; font-family: 'alte_haas_grotesk_bold'; font-size:14px; margin-bottom: 5px;padding:0px 10px }
 main dl.ingredients dt u { display: block; font-size:12px }
 main ul.instructions { margin-bottom:30px; position: relative;}
-main ul.instructions li { max-width:600px; margin-bottom:15px; font-size:18px; padding-left:30px; line-height: 30px}
+main ul.instructions li { max-width:600px; margin-bottom:15px; font-size:18px; padding-left:30px; line-height: 30px; overflow-wrap: break-word; hyphens: auto }
 main ul.instructions li:before { content:"•"; position: absolute; margin-left:-30px }
 main ul.instructions li a { font-weight: bold }
 main ul.instructions note { max-width:700px; margin-bottom:15px; font-size:18px; padding-left:30px; display: block; font-style: italic; font-size:14px; margin-bottom:30px }
@@ -80,6 +80,14 @@ main sub {vertical-align: sub; font-size: 10px;}
 footer { max-width: 800px; margin: 0px auto; padding:15px 0px;font-family: 'alte_haas_grotesk_bold'; font-size:14px; margin-top:60px; display: flex; justify-content: space-between; align-items: center; }
 footer a:hover { text-decoration: underline; cursor: pointer }
 footer a:focus { text-decoration: underline; cursor: pointer }
+
+main, header, nav, footer { overflow-wrap: break-word; hyphens: auto }
+
+a:focus-visible { outline: 2px dotted currentColor; outline-offset: 2px }
+
+.truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap }
+.line-clamp { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden }
+.wrap { word-wrap: break-word; overflow-wrap: break-word; hyphens: auto }
 main > table.col tr th { text-align: left}
 main > table.col tr td { border-right:1.5px solid white}
 main > table.col tr > * { padding:5px 20px}
@@ -100,6 +108,7 @@ body.home nav ul li.home, body.about nav ul li.about, body.tools nav ul li.tools
   main ul.recipes { columns:1 }
   main p.col2 { columns:1 }
   main > div.col2 { columns: 1 }
+  main > ul.col2 { columns: 1 }
   header a img { max-width: 200px }
   main dl.ingredients { display: block }
   main dl.ingredients dt { display:block; min-height: auto;text-align: left;border: 0; width: auto; line-height: 20px }

@@ -173,7 +173,7 @@ build(FILE *f, Lexicon *l, char *name, char *srcpath)
 		"<link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Serif:wght@500;700&display=swap'>"
 		"<link rel='alternate' type='application/rss+xml' title='RSS Feed' "
 		"href='../links/rss.xml' />"
-		"<link rel='stylesheet' type='text/css' href='./main.css'>"
+		"<link rel='stylesheet' type='text/css' href='./links/main.css'>"
     "<link rel='apple-touch-icon' sizes='76x76' href='./media/interface/apple-touch-icon.png'>"
     "<link rel='icon' type='image/png' sizes='32x32' href='./media/interface/favicon-32x32.png'>"
     "<link rel='icon' type='image/png' sizes='16x16' href='./media/interface/favicon-16x16.png'>"

@@ -168,6 +168,9 @@ build(FILE *f, Lexicon *l, char *name, char *srcpath)
 		"<meta name='thumbnail' content='" DOMAIN "media/services/rss.jpg' />"
 		"<meta name='viewport' content='width=device-width,initial-scale=1'>"
 		"<meta name='description' content='I am a Software Engineer at Adaca, specialising in Backend Development. I excel in creating scalable applications and delivering clean code that exceeds expectations. In my free time, I like to play around with Functional Programming; at the moment, Im learning about Elm, Linux, and more on Backend stuff.'>"
+		"<link rel='preconnect' href='https://fonts.googleapis.com'>"
+		"<link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>"
+		"<link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Serif:wght@500;700&display=swap'>"
 		"<link rel='alternate' type='application/rss+xml' title='RSS Feed' "
 		"href='../links/rss.xml' />"
 		"<link rel='stylesheet' type='text/css' href='./links/main.css'>"
@@ -204,6 +207,8 @@ build(FILE *f, Lexicon *l, char *name, char *srcpath)
 	fputs("<span><b>Jerald's Laboratory</b> © 2023</span>", f);
 	fpedited(f, srcpath);
 	fputs("</footer>", f);
+	/* theme toggle */
+	fputs("<script>(function(){var storageKey='theme';var root=document.documentElement;var select=document.querySelector('[data-theme-select]');var stored=null;try{stored=localStorage.getItem(storageKey);}catch(e){stored=null;}function applyTheme(value){if(value==='light'||value==='dark'){root.setAttribute('data-theme',value);}else{root.removeAttribute('data-theme');}}applyTheme(stored);if(select){select.value=stored||'system';select.addEventListener('change',function(){var value=select.value;if(value==='system'){try{localStorage.removeItem(storageKey);}catch(e){}applyTheme(null);}else{try{localStorage.setItem(storageKey,value);}catch(e){}applyTheme(value);}});} })();</script>", f);
 	/* end */
 	fputs("</body></html>\n", f);
 	return f;

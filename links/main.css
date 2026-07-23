@@ -39,6 +39,12 @@
   --display: "IBM Plex Serif", Georgia, serif;
   --gutter: clamp(1.1rem, 3.5vw, 4rem);
   --gap: clamp(0.9rem, 2vw, 2rem);
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 2rem;
+  --space-xl: 4rem;
+  --space-2xl: 6rem;
   --page-width: 92rem;
 }
 
@@ -118,27 +124,32 @@ main > table th, main > table td { border-bottom: 1px solid var(--rule); padding
 
 .portfolio-home { grid-column: 1 / -1; }
 .portfolio-home, .hero, .work, .capabilities, .experience, .contact { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gap); }
-.portfolio-home { row-gap: clamp(6rem, 14vw, 12rem); }
-.hero { grid-column: 1 / -1; min-height: min(48rem, 75vh); align-content: start; }
+.portfolio-home { row-gap: clamp(5rem, 10vw, 9rem); }
+.hero { grid-column: 1 / -1; min-height: clamp(34rem, 62vh, 44rem); align-content: start; }
 .eyebrow, .project-index, .experience-period, .capability-grid span { margin: 0; color: var(--muted); font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.09em; text-transform: uppercase; }
-.hero > .eyebrow { grid-column: 1 / span 4; margin-top: 0.4rem; }
-.hero h2 { grid-column: 1 / span 10; max-width: 12ch; margin: clamp(3rem, 9vw, 7rem) 0 0; font-family: var(--display); font-size: clamp(3.6rem, 8.6vw, 8.6rem); font-weight: 500; letter-spacing: -0.065em; line-height: 0.85; }
-.hero-copy { grid-column: 8 / span 5; align-self: end; max-width: 29rem; margin: clamp(3rem, 8vw, 8rem) 0 0; font-size: clamp(1.1rem, 1.7vw, 1.45rem); line-height: 1.38; }
-.hero-actions { grid-column: 1 / span 7; display: flex; flex-wrap: wrap; gap: 0.5rem 1.2rem; margin-top: clamp(2.5rem, 6vw, 5rem); }
+.hero > .eyebrow { grid-column: 1 / span 4; grid-row: 1; margin-top: 0.4rem; }
+.hero h2 { grid-column: 1 / span 10; grid-row: 2; max-width: 10ch; margin: clamp(2.5rem, 6vw, 5rem) 0 0; font-family: var(--display); font-size: clamp(3.6rem, 7.6vw, 7.6rem); font-weight: 500; letter-spacing: -0.065em; line-height: 0.85; }
+.hero-copy { grid-column: 8 / span 5; grid-row: 2; align-self: start; max-width: 29rem; margin: clamp(5rem, 9vw, 7rem) 0 0; font-size: clamp(1.1rem, 1.7vw, 1.45rem); line-height: 1.38; }
+.hero-actions { grid-column: 1 / span 7; grid-row: 3; display: flex; flex-wrap: wrap; gap: 0.5rem 1.2rem; margin-top: clamp(2rem, 4vw, 4rem); }
 .button { display: inline-flex; align-items: center; gap: 0.7rem; border-bottom: 1px solid currentColor; padding: 0.75rem 0; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.06em; text-decoration: none; text-transform: uppercase; transition: background-color 180ms ease, color 180ms ease, padding 180ms ease; }
 .button-solid { border: 1px solid var(--signal); background: var(--signal); color: var(--signal-ink); padding-inline: 1rem; }
 .button-solid:hover { background: transparent; color: var(--signal); }
 .button-text { color: var(--ink); }
 .button-text:hover { color: var(--signal); padding-left: 0.3rem; }
-.hero-note { grid-column: 8 / span 5; margin: clamp(1.3rem, 3vw, 3rem) 0 0; color: var(--muted); font-size: 0.86rem; }
+.hero-note { grid-column: 8 / span 5; grid-row: 3; align-self: start; margin: clamp(2rem, 4vw, 4rem) 0 0; color: var(--muted); font-size: 0.86rem; }
 .hero-note a { color: var(--ink); }
 
 .work, .capabilities, .experience, .contact { grid-column: 1 / -1; }
 .section-heading { grid-column: 1 / span 5; }
-.section-heading h3, .contact h3 { max-width: 9ch; margin: 1rem 0 1.4rem; font-family: var(--display); font-size: clamp(2.5rem, 5vw, 5rem); font-weight: 500; letter-spacing: -0.06em; line-height: 0.9; }
+.section-heading h3, .contact h3 { max-width: 9ch; margin: 1rem 0 1.4rem; font-family: var(--display); font-size: clamp(2.5rem, 4.6vw, 4.6rem); font-weight: 500; letter-spacing: -0.06em; line-height: 0.9; }
+.work .section-heading h3 { max-width: 13ch; }
+.capabilities .section-heading h3 { max-width: 12ch; }
+.experience .section-heading h3 { max-width: 18ch; }
+.contact h3 { max-width: 12ch; }
 .section-heading > p:last-child { max-width: 26rem; margin: 0; font-size: 1.03rem; }
-.project-grid { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 0 var(--gap); margin-top: clamp(3rem, 7vw, 7rem); border-top: 1px solid var(--rule); }
+.project-grid { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 0 var(--gap); margin-top: clamp(2.5rem, 5vw, 4.5rem); border-top: 1px solid var(--rule); }
 .project { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--gap); align-items: start; padding: clamp(1rem, 2vw, 1.45rem) 0 clamp(2rem, 4vw, 3.25rem); border-bottom: 1px solid var(--rule); transition: background-color 180ms ease; }
+.project:first-child { padding-top: clamp(1.5rem, 3vw, 2.5rem); padding-bottom: clamp(2.5rem, 5vw, 4rem); }
 .project:hover { background: color-mix(in oklch, var(--panel) 48%, transparent); }
 .project-index { grid-column: 1 / span 2; padding-top: 0.32rem; }
 .project-copy { grid-column: 3 / span 3; }
@@ -155,8 +166,8 @@ main > table th, main > table td { border-bottom: 1px solid var(--rule); padding
 .capabilities { align-items: start; }
 .capabilities .section-heading { grid-column: 1 / span 4; }
 .capability-grid { grid-column: 5 / -1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gap); border-top: 1px solid var(--rule); }
-.capability-grid article { min-height: 18rem; padding-top: 0.7rem; }
-.capability-grid h4 { margin: 3.8rem 0 0.85rem; font-size: clamp(1.2rem, 1.8vw, 1.6rem); letter-spacing: -0.04em; line-height: 1; }
+.capability-grid article { min-height: 15rem; padding-top: 0.7rem; }
+.capability-grid h4 { margin: 2.8rem 0 0.85rem; font-size: clamp(1.2rem, 1.8vw, 1.6rem); letter-spacing: -0.04em; line-height: 1; }
 .capability-grid article > p { margin: 0; font-size: 0.93rem; line-height: 1.43; }
 .capability-grid .capability-tools { margin-top: 1.3rem; color: var(--muted); font-family: var(--mono); font-size: 0.62rem; line-height: 1.5; letter-spacing: 0.035em; text-transform: uppercase; }
 
@@ -195,10 +206,11 @@ footer > span:last-child { grid-column: 7 / -1; text-align: right; }
   main > ul.col2 { columns: 1; }
   .hero { min-height: auto; }
   .hero > .eyebrow, .hero h2, .hero-copy, .hero-actions, .hero-note, .section-heading, .capabilities .section-heading, .experience .section-heading, .contact > .eyebrow, .contact h3, .contact-email, .contact-links { grid-column: 1 / -1; }
-  .hero h2 { margin-top: 3rem; font-size: clamp(3.35rem, 15vw, 5.2rem); }
+  .hero > .eyebrow, .hero h2, .hero-copy, .hero-actions, .hero-note { grid-row: auto; }
+  .hero h2 { max-width: 9ch; margin-top: 3rem; font-size: clamp(3.35rem, 15vw, 5.2rem); }
   .hero-copy { margin-top: 3rem; }
   .hero-note { margin-top: 1.2rem; }
-  .section-heading h3, .contact h3 { font-size: clamp(2.8rem, 13vw, 4.2rem); }
+  .section-heading h3, .contact h3 { max-width: 11ch; font-size: clamp(2.8rem, 13vw, 4.2rem); }
   .project-grid { margin-top: 3rem; }
   .project { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem var(--gap); padding: 1rem 0 2rem; }
   .project-index, .project-copy, .project-description, .project-meta { grid-column: 1 / -1; }
@@ -208,7 +220,7 @@ footer > span:last-child { grid-column: 7 / -1; text-align: right; }
   .project-meta .tags { margin-top: 0.7rem; }
   .capability-grid { grid-column: 1 / -1; grid-template-columns: 1fr; gap: 0; margin-top: 3rem; }
   .capability-grid article { min-height: 0; padding: 0.75rem 0 2rem; border-bottom: 1px solid var(--rule); }
-  .capability-grid h4 { margin-top: 2.6rem; }
+  .capability-grid h4 { margin-top: 2.2rem; }
   .experience-list li { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .experience-period, .experience-list li > div { grid-column: 1 / -1; }
   .experience-list li > div { margin-top: 1.4rem; }

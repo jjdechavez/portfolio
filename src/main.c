@@ -108,6 +108,7 @@ fpinject(FILE *f, Lexicon *l, char *filepath)
 	FILE *inc;
 	char c, s[1024];
 	unsigned char t = 0;
+	(void)l;
 	scsw(filepath, ' ', '_');
 	if(!(inc = fopen(filepath, "r")))
 		return error("Missing include", filepath);
@@ -158,6 +159,7 @@ fpindex(FILE *f)
 FILE *
 build(FILE *f, Lexicon *l, char *name, char *srcpath)
 {
+	char pageclass[64];
 	if(!f)
 		return f;
 	/* begin */
@@ -184,7 +186,7 @@ build(FILE *f, Lexicon *l, char *name, char *srcpath)
 		"<title>" NAME " &mdash; %s</title>",
 		name);
 	fputs("</head>", f);
-	fputs("<body>", f);
+	fprintf(f, "<body class='%s'>", stlc(scsw(scpy(name, pageclass, 64), ' ', '_')));
 	/* header */
 	fputs("<header>", f);
 	// fputs("<a href='home.html'><img src='../media/interface/logo.png' alt='" NAME "' ></a>", f);

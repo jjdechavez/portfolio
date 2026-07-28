@@ -28,9 +28,10 @@ cc -std=c99 -DDEBUG -Wall -Wno-unknown-pragmas -Wpedantic -Wshadow -Wuninitializ
 # Run
 ./bin/main
 
-# Moved static files
-cp -r ./links/ site/
-cp -r ./media/ site/
-cp -r ./404.html site/
+# Move static files while preserving the paths referenced by generated pages.
+mkdir -p site/links site/media
+cp -R ./links/. site/links/
+cp -R ./media/. site/media/
+cp ./404.html site/
 
 # Cleanup

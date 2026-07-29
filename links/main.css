@@ -937,6 +937,59 @@ footer > span:last-child {
   text-align: right;
 }
 
+.not-found {
+  min-height: clamp(32rem, 68vh, 46rem);
+  align-items: center;
+  row-gap: 2rem;
+}
+main.not-found > .not-found-mark {
+  grid-column: 1 / span 7;
+  margin: 0;
+  color: var(--signal);
+  font-family: var(--display);
+  font-size: clamp(8rem, 23vw, 22rem);
+  font-weight: 500;
+  letter-spacing: -0.1em;
+  line-height: 0.7;
+  transform: translateX(-0.08em);
+}
+main.not-found > .not-found-message {
+  grid-column: 8 / span 5;
+  max-width: 31rem;
+  padding-top: 2rem;
+}
+.not-found-message h2 {
+  max-width: 9ch;
+  margin: 2.4rem 0 1.2rem;
+  font-family: var(--display);
+  font-size: clamp(2.6rem, 5vw, 5.2rem);
+  font-weight: 500;
+  letter-spacing: -0.06em;
+  line-height: 0.88;
+}
+.not-found-message > p:not(.eyebrow):not(.not-found-status) {
+  max-width: 25rem;
+  margin: 0;
+  color: var(--muted);
+  font-size: clamp(1rem, 1.4vw, 1.2rem);
+  line-height: 1.45;
+}
+.not-found-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  align-items: center;
+  margin-top: 2rem;
+}
+.not-found-status {
+  margin: 4.5rem 0 0;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
 @media (max-width: 760px) {
   body::before {
     background-size: calc((100vw - (2 * var(--gutter))) / 4) 100%;
@@ -1151,6 +1204,27 @@ footer > span:last-child {
     padding-top: 2rem;
   }
   .contact-email {
+    margin-top: 3rem;
+  }
+  .not-found {
+    min-height: 34rem;
+    align-content: center;
+  }
+  main.not-found > .not-found-mark,
+  main.not-found > .not-found-message {
+    grid-column: 1 / -1;
+  }
+  .not-found-mark {
+    font-size: clamp(7rem, 30vw, 11rem);
+  }
+  .not-found-message {
+    padding-top: 0;
+  }
+  .not-found-message h2 {
+    margin-top: 2rem;
+    font-size: clamp(2.8rem, 13vw, 4.5rem);
+  }
+  .not-found-status {
     margin-top: 3rem;
   }
   footer span,

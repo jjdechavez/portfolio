@@ -1,43 +1,141 @@
 ---
 permalink: /404.html
 ---
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="description" content="I am a Software Engineer at Adaca, specialising in Backend Development. I excel in creating scalable applications and delivering clean code that exceeds expectations. In my free time, I like to play around with Functional Programming; at the moment, I'm learning about Elm, Linux, and more on Backend stuff.">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Redirect -->
-  <meta http-equiv="refresh" content="10; url=https://jjdechavez.netlify.app/site/index.html" />
-  <link rel="stylesheet" type="text/css" href="./links/main.css" />
-  <link rel='alternate' type='application/rss+xml' title='RSS Feed' href='links/rss.xml' />
-  <title>John Jerald De Chavez</title>
-</head>
-<body>
-  <p>The page you were looking for does not exist, if you think this was a mistake, please report the broken link <a href='https://github.com/jjdechavez/portfolio' target='_blank'>here</a>, or go back to the <a href='./index.html'>home</a>.</p>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="description"
+      content="This page could not be found. Return to Jerald De Chavez's portfolio."
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="refresh"
+      content="10; url=https://jjdechavez.netlify.app/"
+    />
+    <link rel="stylesheet" type="text/css" href="./links/main.css" />
+    <link
+      rel="apple-touch-icon"
+      sizes="76x76"
+      href="./media/interface/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./media/interface/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="./media/interface/favicon-16x16.png"
+    />
+    <link rel="manifest" href="./media/interface/site.webmanifest" />
+    <meta name="theme-color" content="#ffffff" />
+    <title>Page not found — John Jerald De Chavez</title>
+  </head>
+  <body class="not-found-page">
+    <header>
+      <h1><a href="index.html">John Jerald De Chavez</a></h1>
+    </header>
 
-  <script>
-    'use strict'
+    <nav aria-label="Primary navigation">
+      <ul>
+        <li><a href="index.html#works">Work</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="laboratory.html">Laboratory</a></li>
+        <li class="right">
+          <a href="mailto:dechavezjohnjerald029@gmail.com">Contact</a>
+          <span class="sep" aria-hidden="true">|</span>
+          <a
+            href="./media/files/john_jerald_de_chavez_resume.pdf"
+            target="_blank"
+            rel="noopener"
+            >Résumé</a
+          >
+          <span class="theme-toggle">
+            <label for="theme-select">Theme</label>
+            <select id="theme-select" data-theme-select>
+              <option value="system">System</option>
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
+            </select>
+          </span>
+        </li>
+      </ul>
+    </nav>
 
-    const parts = window.location.pathname.split("/")
-    const target = parts.slice(-1)
-    const filename = toFilename(target[0])
-    const filepath = `https://jjdechavez.netlify.app/site/${filename}.html`
+    <main>
+      <p class="not-found-mark" aria-hidden="true">404</p>
+      <section class="not-found-message" aria-labelledby="not-found-title">
+        <p class="eyebrow">Route not found / The trail ends here</p>
+        <h2 id="not-found-title">This page took a wrong turn.</h2>
+        <p>
+          The address may be outdated, private, or simply mistyped. The rest of
+          the portfolio is still right this way.
+        </p>
+        <div class="not-found-actions">
+          <a class="button button-solid" href="index.html"
+            >Return home <span aria-hidden="true">↗</span></a
+          >
+          <a class="button button-text" href="javascript:history.back()"
+            >Go back <span aria-hidden="true">←</span></a
+          >
+        </div>
+        <p class="not-found-status" aria-live="polite">
+          Returning to the homepage in <span data-countdown>10</span> seconds.
+        </p>
+      </section>
+    </main>
 
-    if(UrlExists(filepath)){
-      window.location.replace(filepath)
-    }
+    <footer>
+      <span><b>Jerald's Laboratory</b> © 2026</span>
+      <span>Page not found</span>
+    </footer>
 
-    function UrlExists(url) {
-      const http = new XMLHttpRequest()
-      http.open('HEAD', url, false)
-      http.send()
-      return http.status!=404
-    }
+    <script>
+      (function () {
+        var storageKey = "theme";
+        var root = document.documentElement;
+        var select = document.querySelector("[data-theme-select]");
+        var countdown = document.querySelector("[data-countdown]");
+        var seconds = 10;
 
-    function toFilename(str){
-      return `${str}`.replace('#','').replace(/[\W_]+/g,"_").toLowerCase().trim()
-    }
-  </script>
-</body>
+        function applyTheme(value) {
+          if (value === "light" || value === "dark") {
+            root.setAttribute("data-theme", value);
+          } else {
+            root.removeAttribute("data-theme");
+          }
+        }
+
+        try {
+          var stored = localStorage.getItem(storageKey);
+          applyTheme(stored);
+          if (select) select.value = stored || "system";
+        } catch (error) {
+          applyTheme(null);
+        }
+
+        if (select) {
+          select.addEventListener("change", function () {
+            var value = select.value;
+            try {
+              if (value === "system") localStorage.removeItem(storageKey);
+              else localStorage.setItem(storageKey, value);
+            } catch (error) {}
+            applyTheme(value);
+          });
+        }
+
+        window.setInterval(function () {
+          seconds -= 1;
+          if (countdown) countdown.textContent = seconds;
+        }, 1000);
+      })();
+    </script>
+  </body>
 </html>

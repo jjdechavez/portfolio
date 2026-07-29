@@ -13,6 +13,7 @@
 #define NAME "John Jerald De Chavez"
 #define DOMAIN "https://jjdechavez.netlify.app/"
 #define SOURCE "https://github.com/jjdechavez/portfolio/edit/master"
+#define DESCRIPTION "Full-stack developer building clear interfaces, dependable APIs, and maintainable systems for marketplaces and operational teams."
 #define STR_BUF_LEN 64
 
 typedef struct Lexicon {
@@ -159,22 +160,37 @@ fpindex(FILE *f)
 FILE *
 build(FILE *f, Lexicon *l, char *name, char *srcpath)
 {
-	char pageclass[64];
+	char pageclass[64], canonical[128];
 	if(!f)
 		return f;
 	/* begin */
 	fputs("<!DOCTYPE html><html lang='en'>", f);
 	fputs("<head>", f);
+	pageclass[0] = 0;
+	scat(pageclass, name);
+	scsw(pageclass, ' ', '_');
+	stlc(pageclass);
+	canonical[0] = 0;
+	scat(canonical, DOMAIN);
+	if(!scmp(pageclass, "index"))
+		scat(canonical, pageclass), scat(canonical, ".html");
 	fprintf(f,
 		"<meta charset='utf-8'>"
-		"<meta name='thumbnail' content='" DOMAIN "media/services/rss.jpg' />"
 		"<meta name='viewport' content='width=device-width,initial-scale=1'>"
-		"<meta name='description' content='I am a Software Engineer at Adaca, specialising in Backend Development. I excel in creating scalable applications and delivering clean code that exceeds expectations. In my free time, I like to play around with Functional Programming; at the moment, Im learning about Elm, Linux, and more on Backend stuff.'>"
+		"<meta name='description' content='" DESCRIPTION "'>"
+		"<link rel='canonical' href='%s'>"
+		"<meta property='og:type' content='website'>"
+		"<meta property='og:title' content='" NAME " &mdash; %s'>"
+		"<meta property='og:description' content='" DESCRIPTION "'>"
+		"<meta property='og:url' content='%s'>"
+		"<meta property='og:image' content='" DOMAIN "media/interface/logo.png'>"
+		"<meta name='twitter:card' content='summary'>"
+		"<meta name='twitter:title' content='" NAME " &mdash; %s'>"
+		"<meta name='twitter:description' content='" DESCRIPTION "'>"
+		"<meta name='twitter:image' content='" DOMAIN "media/interface/logo.png'>"
 		"<link rel='preconnect' href='https://fonts.googleapis.com'>"
 		"<link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>"
 		"<link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Serif:wght@500;700&display=swap'>"
-		"<link rel='alternate' type='application/rss+xml' title='RSS Feed' "
-		"href='../links/rss.xml' />"
 		"<link rel='stylesheet' type='text/css' href='./links/main.css'>"
     "<link rel='apple-touch-icon' sizes='76x76' href='./media/interface/apple-touch-icon.png'>"
     "<link rel='icon' type='image/png' sizes='32x32' href='./media/interface/favicon-32x32.png'>"
@@ -184,9 +200,9 @@ build(FILE *f, Lexicon *l, char *name, char *srcpath)
     "<meta name='msapplication-TileColor' content='#da532c'>"
     "<meta name='theme-color' content='#ffffff'>"
 		"<title>" NAME " &mdash; %s</title>",
-		name);
+		canonical, name, canonical, name, name);
 	fputs("</head>", f);
-	fprintf(f, "<body class='%s'>", stlc(scsw(scpy(name, pageclass, 64), ' ', '_')));
+	fprintf(f, "<body class='%s'>", pageclass);
 	/* header */
 	fputs("<header>", f);
 	// fputs("<a href='home.html'><img src='../media/interface/logo.png' alt='" NAME "' ></a>", f);
